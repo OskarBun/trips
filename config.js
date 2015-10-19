@@ -21,6 +21,9 @@ System.config({
     "css": "github:systemjs/plugin-css@0.1.18",
     "firebase": "npm:firebase@2.3.1",
     "font-awesome": "npm:font-awesome@4.4.0",
+    "google-maps-api-loader": "npm:google-maps-api-loader@0.0.4",
+    "map": "npm:google-maps-api-loader@0.0.4",
+    "maps": "npm:google-maps-api-loader@0.0.4",
     "scss": "github:screendriver/plugin-sass@0.0.5",
     "skeleton": "npm:skeleton-css@2.0.4",
     "text": "github:systemjs/plugin-text@0.0.2",
@@ -264,6 +267,11 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "through": "npm:through@2.3.8"
     },
+    "npm:es6-promise@2.3.0": {
+      "assert": "github:jspm/nodelibs-assert@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "util": "github:jspm/nodelibs-util@0.1.0"
+    },
     "npm:esprima-fb@13001.1001.0-dev-harmony-fb": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2"
@@ -295,6 +303,9 @@ System.config({
     },
     "npm:font-awesome@4.4.0": {
       "css": "github:systemjs/plugin-css@0.1.18"
+    },
+    "npm:google-maps-api-loader@0.0.4": {
+      "es6-promise": "npm:es6-promise@2.3.0"
     },
     "npm:graceful-readlink@1.0.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.2"

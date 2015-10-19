@@ -1,0 +1,6 @@
+<ul>
+  <template v-repeat="lobbies">
+    <lobby-thumb lobby="{{$data}}"></lobby-thumb>
+    <button v-on="click: setLobby($key)">View</button>
+  </template>
+</ul>

@@ -6,10 +6,29 @@ import 'firebase';
 
 var appl = window.appl = new Vue({
             el: ".content",
-            data:{},
+            data:{
+              text: "",
+              chat: {},
+              store: null
+            },
             computed: {},
-            methods: {},
-            components: {}
+            methods: {
+              addMessage: function(e){
+                this.store.push(this.text);
+                this.text = ""
+                e.preventDefault();
+              }
+            },
+            components: {},
+            ready: function() {
+              this.store = new Firebase('https://scorching-fire-6566.firebaseio.com/');
+              this.store.on('value', (snap) => {
+                this.chat = snap.val() || {};
+              });
+              this.store.on('child_added', (snap) => {
+                this.chat[snap.key()] = snap.val();
+              });
+            }
         });
 
 

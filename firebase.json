@@ -1,0 +1,9 @@
+{
+  "firebase": "scorching-fire-6566",
+  "public": "dist",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

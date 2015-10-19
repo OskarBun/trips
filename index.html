@@ -6,18 +6,8 @@
   </head>
   <body>
     <div class="container content">
-      <template v-repeat="chat">
-        <h1>{{$value}}</h1>
-      </template>
       <div class="row">
-        <form v-on="submit: addMessage">
-          <div class="ten columns">
-            <input class="u-full-width" type="text" v-model="text">
-          </div>
-          <div class="two columns">
-            <button type="submit">Send</button>
-          </div>
-      </form>
+        <h1>{{user.displayName}}</h1>
       </div>
     </div>
 

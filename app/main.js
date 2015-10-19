@@ -3,31 +3,23 @@ import 'jspm_packages/npm/font-awesome@4.4.0/css/font-awesome.min.css!';
 import 'app/main.css!';
 import Vue from 'vue';
 import 'firebase';
+import User from 'app/models/user';
+
+let fireUrl = 'https://scorching-fire-6566.firebaseio.com/';
 
 var appl = window.appl = new Vue({
             el: ".content",
             data:{
-              text: "",
-              chat: {},
-              store: null
+              user: null,
+              view: "login",
+              session: null
             },
             computed: {},
-            methods: {
-              addMessage: function(e){
-                this.store.push(this.text);
-                this.text = ""
-                e.preventDefault();
-              }
-            },
+            methods: {},
             components: {},
-            ready: function() {
-              this.store = new Firebase('https://scorching-fire-6566.firebaseio.com/');
-              this.store.on('value', (snap) => {
-                this.chat = snap.val() || {};
-              });
-              this.store.on('child_added', (snap) => {
-                this.chat[snap.key()] = snap.val();
-              });
+            ready: function(){
+              this.session = new Firebase(fireUrl);
+              this.user = new User(fireUrl);
             }
         });
 

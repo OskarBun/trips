@@ -23,6 +23,10 @@ class Trip extends Vue {
 						lng:lng,
 						label:label
 					});
+				},
+				set_location: function(child, lat, lng){
+					// send to firebase the change of location
+					child.set({lat:lat, lng:lng});
 				}
 			}
 		});

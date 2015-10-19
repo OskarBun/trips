@@ -62,49 +62,73 @@ function code_address(postcode, callback){
     	});
 }
 
+	
 
 function googleMap(vm, element){
 	map_loader({
             libraries: ['places']
         })
 	   .then(function(googleApi) {
-	   		if(vm.location == null){
-				vm.location = new google.maps.LatLng(54.8143,-2.9694);
-	   		}
-			var mapOptions = {
-		    	center: vm.location,
-		    	zoom: 15,
-		    	mapTypeId: googleApi.maps.MapTypeId.MAP
-			};
-			var map = new googleApi.maps.Map(element, mapOptions);
-			var to_do = null;
+		   	class GoogleMap{
+				constructor(vm, element){
+					if(vm.location == null){
+						vm.location = new google.maps.LatLng(54.8143,-2.9694);
+			   		}
+					var mapOptions = {
+				    	center: vm.location,
+				    	zoom: 15,
+				    	mapTypeId: googleApi.maps.MapTypeId.MAP
+					};
+					this.vm = vm;
+					this.map = new googleApi.maps.Map(element, mapOptions);
+					this.to_do = null;
+					this.markers = [];
 
-		    googleApi.maps.event.addListener(map, 'dblclick', function(e) {
-		        if(to_do){
-		        	clearTimeout(to_do);
-		    		to_do = null;
-		        }
-		    });
-		    googleApi.maps.event.addListener(map, 'click', function(e) {
-		    	if(to_do === null){
-		        	to_do = setTimeout(function(){
-		        		to_do = null;
-		        		vm.do_map_clicked(e.latLng.lat(),e.latLng.lng());
-		        		/*
-			            var marker = new googleApi.maps.Marker({
-			                map: map,
-			                position: item.location,
-			                title: item.title,
-			                draggable: true
-			            });
-			            googleApi.maps.event.addListener(marker, 'dragend', function(e){
-			                item.location = marker.getPosition();
-			            });
-		        		*/
-		        	},300);
-		    	}
-		    });
-			vm._map_ = map;
+				    googleApi.maps.event.addListener(map, 'dblclick', (e) => {
+				        if(this.to_do){
+				        	clearTimeout(this.to_do);
+				    		this.to_do = null;
+				        }
+				    });
+				    googleApi.maps.event.addListener(map, 'click',(e) => {
+				    	if(this.to_do === null){
+				        	this.to_do = setTimeout(function(){
+				        		this.to_do = null;
+				        		this.vm.do_map_clicked(e.latLng.lat(),e.latLng.lng());
+				        	},300);
+				    	}
+				    });
+					vm._map_ = this;
+				}
+
+				add_marker(item){
+					var marker = new googleApi.maps.Marker({
+		                map: map,
+		                position: item.location,
+		                title: item.title,
+		                draggable: true
+		            });
+		            this.markers.push({marker:marker, item:item});
+		            googleApi.maps.event.addListener(marker, 'dragend', (e) => {
+		                var location = marker.getPosition();
+		                this.vm.do_marker_dragged(marker.item,location.lat(), location.lng());
+		            });
+				}
+
+				remove_marker(item){
+					this.markers.some((marker, index) => {
+						if(marker.item == item){
+							this.markers.splice(index,1);
+							return true;
+						}
+					});
+				}
+
+				set_center(location){
+					this.map.setCenter(location);
+				}
+			}
+	   		return new GoogleMap(vm, element);
 		}, function(err) {
 	        console.error(err);
 	    });
@@ -150,6 +174,9 @@ Vue.component('map-panel', {
 				this.trip.add_location(lat,lng,"untitled");
 			}
 		},
+		"do_marker_dragged": function(item, lat, lng){
+			this.trip.set_location(item, lat, lng);
+		}
 	},
   	events: {
   		"hook:attached": function(){
@@ -164,7 +191,7 @@ Vue.component('map-panel', {
   	watch:{
   		"location": function(val){
   			if(val && this._map_){
-  				this._map_.setCenter(val);
+  				this._map_.set_center(val);
   			}
   		}
   	}

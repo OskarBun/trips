@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="eight columns">
+		<h2 v-if="trip">{{ trip.name }}</h2>
+		<div class="map"></div>
+	</div>
+	<div class="four columns">
+		<form v-on="submit:do_search">
+			<input id="search_input" type="text" class="u-full-width" v-model="search"  placeholder="search"/>
+			<button type="submit">Search</button>
+			<button v-on="click:do_here">Here</button>
+		</form>
+		<ul>
+			<li v-repeat="markers">
+    			{{ location.lat() }} : {{ location.lng() }} <input type="text" v-model="title" />
+ 			</li>
+		</ul>
+	</div>
+</div>

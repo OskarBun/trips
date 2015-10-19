@@ -3,13 +3,17 @@ import 'jspm_packages/npm/font-awesome@4.4.0/css/font-awesome.min.css!';
 import 'app/main.css!';
 import Vue from 'vue';
 import 'firebase';
+import 'app/components/map-panel/main';
+
+
 
 var appl = window.appl = new Vue({
             el: ".content",
             data:{
               text: "",
               chat: {},
-              store: null
+              store: null,
+              trip: null
             },
             computed: {},
             methods: {

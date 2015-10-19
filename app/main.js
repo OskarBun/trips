@@ -4,18 +4,22 @@ import 'app/main.css!';
 import Vue from 'vue';
 import 'firebase';
 import 'app/components/map-panel/main';
+import User from 'app/models/user';
 
-
+let fireUrl = 'https://scorching-fire-6566.firebaseio.com/'
 
 var appl = window.appl = new Vue({
             el: ".content",
             data:{
-              text: "",
-              chat: {},
               store: null,
-              trip: null
+              trip: null,
+              user: null
             },
-            computed: {},
+            computed: {
+              name: function() {
+                return this.user.displayName || '';
+              }
+            },
             methods: {
               addMessage: function(e){
                 this.store.push(this.text);
@@ -25,13 +29,8 @@ var appl = window.appl = new Vue({
             },
             components: {},
             ready: function() {
-              this.store = new Firebase('https://scorching-fire-6566.firebaseio.com/');
-              this.store.on('value', (snap) => {
-                this.chat = snap.val() || {};
-              });
-              this.store.on('child_added', (snap) => {
-                this.chat[snap.key()] = snap.val();
-              });
+              this.store = new Firebase(fireUrl);
+              this.user = new User(fireUrl);
             }
         });
 

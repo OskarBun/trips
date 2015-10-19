@@ -2,7 +2,7 @@ import './main.css!';
 import tmpl from './main-tmpl.html!text';
 import Vue from 'vue';
 import map_loader from "map";
-
+import TripFactory from "app/models/trip"
 
 
 function getDescendantWithClass(element, clName) {

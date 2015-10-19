@@ -17,7 +17,7 @@ var appl = window.appl = new Vue({
             },
             computed: {
               name: function() {
-                return this.user.displayName || '';
+                return this.user.username || '';
               }
             },
             methods: {

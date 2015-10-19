@@ -4,7 +4,7 @@ import Vue from 'vue';
 let defaults = {
   data: function() {
     return {
-      displayName: null,
+      username: null,
       location: null
     }
   }
@@ -29,17 +29,17 @@ class User extends Vue {
           let val = snap.val();
           if(!val){
             userSession.set({
-              displayName: authData.github.username,
+              username: authData.github.username,
               location: null
             });
           } else {
-            this.displayName = val.displayName;
+            this.username = val.username;
             this.location = val.location
           }
         });
       } else {
         console.log("User is logged out");
-        this.displayName = null;
+        this.username = null;
       }
     });
   }

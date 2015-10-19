@@ -5,6 +5,8 @@ import Vue from 'vue';
 import 'firebase';
 import 'app/components/map-panel/main';
 import User from 'app/models/user';
+import TripFactory from 'app/models/trip';
+
 
 let fireUrl = 'https://scorching-fire-6566.firebaseio.com/'
 
@@ -13,6 +15,7 @@ var appl = window.appl = new Vue({
             data:{
               store: null,
               trip: null,
+              trips: {},
               user: null
             },
             computed: {
@@ -31,6 +34,8 @@ var appl = window.appl = new Vue({
             ready: function() {
               this.store = new Firebase(fireUrl);
               this.user = new User(fireUrl);
+              this._trip_factory = new TripFactory(fireUrl);
+              this._trip_factory.list_trips(this.trips);
             }
         });
 

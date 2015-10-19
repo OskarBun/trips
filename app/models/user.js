@@ -1,25 +1,38 @@
 import 'firebase';
 import Vue from 'vue';
 
-let defaults = {
-  data: function() {
-    return {
-      username: null,
-      location: null
-    }
-  }
-}
-
 class User extends Vue {
   constructor(url){
-    super(defaults);
+    super({
+      data: function() {
+        return {
+          username: null,
+          location: null,
+          loggedIn: false
+        }
+      },
+      methods: {
+        login: function() {
+          this.loginWith('github');
+        },
+        logout: function() {
+          this._session.unauth();
+        },
+        update: function(user) {
+          new Firebase(`${this._url}users/${this._uid}`).update(user);
+        },
+        loginWith: function(provider) {
+          this._session.authWithOAuthPopup(provider, function(error, authData) {
+            if (error) {
+              console.log("Login Failed!", error);
+            }
+          });
+        }
+      }
+    });
     this._url = url;
     this._session = new Firebase(url);
     this._uid = null;
-    this.init();
-  }
-
-  init(){
     this._session.onAuth((authData) => {
       if (authData) {
         console.log("User " + authData.uid + " is logged in with " + authData.provider);
@@ -36,32 +49,15 @@ class User extends Vue {
             this.username = val.username;
             this.location = val.location
           }
+          this.loggedIn = true
         });
       } else {
         console.log("User is logged out");
         this.username = null;
+        this._uid = null;
+        this.loggedIn = false;
       }
     });
-  }
-
-  update(user) {
-    new Firebase(`${this._url}users/${this._uid}`).update(user);
-  }
-
-  login() {
-    this.loginWith('github');
-  }
-
-  loginWith(provider) {
-    this._session.authWithOAuthPopup(provider, function(error, authData) {
-      if (error) {
-        console.log("Login Failed!", error);
-      }
-    });
-  }
-
-  logout() {
-    this._session.unauth();
   }
 }
 

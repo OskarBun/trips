@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Tripping</title>
+    <link rel="stylesheet" type="text/css" href="index.css" />
     <style type="text/css">
 [v-cloak] { display: none }
     </style>
@@ -10,6 +11,13 @@
   <body>
     <div class="container content">
       <h3 v-cloak>{{name}}</h3>
+
+      <div class="sk-folding-cube" v-if="loading">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+      </div>
 
       <map-panel trip_factory="{{ trip_factory }}"></map-panel>
     </div>

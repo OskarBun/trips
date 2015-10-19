@@ -15,21 +15,19 @@ var appl = window.appl = new Vue({
             data:{
               trip: null,
               user: new User(fireUrl),
-              trip_factory: new TripFactory(fireUrl)
+              trip_factory: new TripFactory(fireUrl),
+              loading: true
             },
             computed: {
               name: function() {
                 return this.user.username || '';
               }
             },
-            methods: {
-              addMessage: function(e){
-                this.store.push(this.text);
-                this.text = ""
-                e.preventDefault();
-              }
-            },
-            components: {}
+            methods: {},
+            components: {},
+            ready: function(){
+                this.loading = false;
+            }
         });
 
 

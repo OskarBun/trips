@@ -9,10 +9,25 @@
 			<button type="submit" class="button-primary">Search</button>
 			<button v-on="click:do_here">Here</button>
 		</form>
+
+		<template v-if="!trip">
+		<input id="trip_label_input" type="text" class="u-full-width" v-model="new_label"  placeholder="label"/>
+		<button v-on="click:add_trip">Add</button>
 		<ul>
-			<li v-repeat="markers">
-    			{{ location.lat() }} : {{ location.lng() }} <input type="text" v-model="title" />
+			<li v-repeat="trips">
+    			<a v-on="click:open_trip($data)">{{ label }}</a>
  			</li>
 		</ul>
+		</template>
+
+		<template v-if="trip">
+			<input id="trip_label_input" type="text" class="u-full-width" v-model="trip.label"  placeholder="label"/>
+			<ul>
+				<li v-repeat="trip.locations">
+	    			{{ lat }} : {{ lng }} <input type="text" v-model="title" />
+	 			</li>
+			</ul>
+			<button v-on="click:close_trip">Close</button>
+		</template>
 	</div>
 </div>

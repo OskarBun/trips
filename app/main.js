@@ -13,10 +13,9 @@ let fireUrl = 'https://scorching-fire-6566.firebaseio.com/'
 var appl = window.appl = new Vue({
             el: ".content",
             data:{
-              store: null,
               trip: null,
-              trips: {},
-              user: null
+              user: new User(fireUrl),
+              trip_factory: new TripFactory(fireUrl)
             },
             computed: {
               name: function() {
@@ -30,13 +29,7 @@ var appl = window.appl = new Vue({
                 e.preventDefault();
               }
             },
-            components: {},
-            ready: function() {
-              this.store = new Firebase(fireUrl);
-              this.user = new User(fireUrl);
-              this._trip_factory = new TripFactory(fireUrl);
-              this._trip_factory.list_trips(this.trips);
-            }
+            components: {}
         });
 
 

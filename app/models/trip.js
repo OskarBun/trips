@@ -33,13 +33,13 @@ class Trip extends Vue {
 			this.locations = fdata.locations || {};
 		});
 		base.child(LOCATION_PATH).on("child_added", (snapshot, prevChildKey) => {
-			this.locations[snapshot.val()];
+			this.locations.$add(snapshot.key(), snapshot.val());
 		});
 		base.child(LOCATION_PATH).on("child_changed", (snapshot) => {
-			this.locations[snapshot.key()]=snapshot.val();
+			this.locations.$set(snapshot.key(),snapshot.val());
 		});
 		base.child(LOCATION_PATH).on("child_removed", (snapshot) => {
-			delete this.locations[snapshot.key()];
+			this.locations.$delete(snapshot.key());
 		});
 		this._base = base;
 	}

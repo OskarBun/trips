@@ -89,17 +89,8 @@ function googleMap(vm, element){
 		    	if(to_do === null){
 		        	to_do = setTimeout(function(){
 		        		to_do = null;
-		        		var item = new Vue({
-		        			data:{
-		            			title: "foo",
-		            			location: e.latLng
-		            		},
-		            		watch:{
-		            			"title": function(val){
-		            				marker.setTitle(val);
-		            			}
-		            		}
-		        		});
+		        		vm.do_map_clicked(e.latLng.lat(),e.latLng.lng());
+		        		/*
 			            var marker = new googleApi.maps.Marker({
 			                map: map,
 			                position: item.location,
@@ -109,7 +100,7 @@ function googleMap(vm, element){
 			            googleApi.maps.event.addListener(marker, 'dragend', function(e){
 			                item.location = marker.getPosition();
 			            });
-		        		vm.markers.push(item);
+		        		*/
 		        	},300);
 		    	}
 		    });
@@ -125,11 +116,13 @@ Vue.component('map-panel', {
 			_map_: null,
 			location: null,
 			search: null,
-			markers: []
+			trip: null,
+			trips: [],
+			new_label: null
 		};
 	},
   	template: tmpl,
-  	props: ['trip'],
+  	props: ['trip_factory'],
 	methods: {
 		"do_search": function(e){
 			e.preventDefault();
@@ -142,10 +135,25 @@ Vue.component('map-panel', {
 			geo_location(function(result){
 				this.location = result;
 			}.bind(this));
-		}
+		},
+		"add_trip": function(){
+			this.trip = this.trip_factory.create_trip(this.new_label);
+		},
+		"open_trip": function(trip){
+			this.trip = trip;
+		},
+		"close_trip": function(){
+			this.trip = null;
+		},
+		"do_map_clicked": function(lat,lng){
+			if(this.trip){
+				this.trip.add_location(lat,lng,"untitled");
+			}
+		},
 	},
   	events: {
   		"hook:attached": function(){
+            this.trip_factory.list_trips(this.trips);
   			var element = getDescendantWithClass(this.$el, "map");
   			googleMap(this, element);
   		},

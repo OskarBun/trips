@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Tripping</title>
+    <style type="text/css">
+[v-cloak] { display: none }
+    </style>
   </head>
   <body>
     <div class="container content">
-      <h3>{{name}}</h3>
+      <h3 v-cloak>{{name}}</h3>
 
       <map-panel trip_factory="{{ trip_factory }}"></map-panel>
     </div>

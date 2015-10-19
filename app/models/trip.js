@@ -65,10 +65,16 @@ class TripFactory{
 		return new Trip(this._url + ftrip.key());
 	}
 
+	open_trip (item){
+		return new Trip(this._url + item.id);
+	}
+
 	list_trips (container){
 		var trips = new Firebase(this._url);
 		trips.on("child_added",function(snapshot){
-			container.push(snapshot.val());
+			var data = snapshot.val();
+			data.id = snapshot.key();
+			container.push(data);
 		});
 		return trips;
 	}

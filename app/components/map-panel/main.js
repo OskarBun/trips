@@ -84,15 +84,15 @@ function googleMap(vm, element){
 					this.to_do = null;
 					this.markers = [];
 
-				    googleApi.maps.event.addListener(map, 'dblclick', (e) => {
+				    googleApi.maps.event.addListener(this.map, 'dblclick', (e) => {
 				        if(this.to_do){
 				        	clearTimeout(this.to_do);
 				    		this.to_do = null;
 				        }
 				    });
-				    googleApi.maps.event.addListener(map, 'click',(e) => {
+				    googleApi.maps.event.addListener(this.map, 'click',(e) => {
 				    	if(this.to_do === null){
-				        	this.to_do = setTimeout(function(){
+				        	this.to_do = setTimeout(() => {
 				        		this.to_do = null;
 				        		this.vm.do_map_clicked(e.latLng.lat(),e.latLng.lng());
 				        	},300);
@@ -103,7 +103,7 @@ function googleMap(vm, element){
 
 				add_marker(item){
 					var marker = new googleApi.maps.Marker({
-		                map: map,
+		                map: this.map,
 		                position: item.location,
 		                title: item.title,
 		                draggable: true
@@ -163,8 +163,8 @@ Vue.component('map-panel', {
 		"add_trip": function(){
 			this.trip = this.trip_factory.create_trip(this.new_label);
 		},
-		"open_trip": function(trip){
-			this.trip = trip;
+		"open_trip": function(item){
+			this.trip = this.trip_factory.open_trip(item);
 		},
 		"close_trip": function(){
 			this.trip = null;

@@ -1,6 +1,5 @@
 import VueAdapter from "app/adapters/vue_adapter";
 import Vue from "vue";
-import jasmine from "jasmine-standalone";
 
 
 class VueTest extends VueAdapter{
@@ -28,14 +27,14 @@ class VueTest extends VueAdapter{
 	}
 
 	del_val(key){
-		this._obj.$remove(key);
+		this._obj.$delete(key);
 	}
 
 }
 
-
-jasmine.describe("VueAdapter suite", function() {
+describe("VueAdapter suite", function() {
 	var adapter = new VueTest();
+
 	it("should contruct", function() {
 		expect(true).toBe(true);
 	});

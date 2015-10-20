@@ -22,6 +22,8 @@ System.config({
     "firebase": "npm:firebase@2.3.1",
     "font-awesome": "npm:font-awesome@4.4.0",
     "google-maps-api-loader": "npm:google-maps-api-loader@0.0.4",
+    "jasmine": "npm:jasmine@2.3.2",
+    "jasmine-standalone": "npm:jasmine-standalone@1.3.1",
     "map": "npm:google-maps-api-loader@0.0.4",
     "maps": "npm:google-maps-api-loader@0.0.4",
     "scss": "github:screendriver/plugin-sass@0.0.5",
@@ -281,6 +283,9 @@ System.config({
       "create-hash": "npm:create-hash@1.1.2",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0"
     },
+    "npm:exit@0.1.2": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:faye-websocket@0.10.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -304,6 +309,16 @@ System.config({
     "npm:font-awesome@4.4.0": {
       "css": "github:systemjs/plugin-css@0.1.18"
     },
+    "npm:glob@3.2.11": {
+      "assert": "github:jspm/nodelibs-assert@0.1.0",
+      "events": "github:jspm/nodelibs-events@0.1.1",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "inherits": "npm:inherits@2.0.1",
+      "minimatch": "npm:minimatch@0.3.0",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
     "npm:google-maps-api-loader@0.0.4": {
       "es6-promise": "npm:es6-promise@2.3.0"
     },
@@ -319,6 +334,21 @@ System.config({
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
+    "npm:jasmine-core@2.3.4": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:jasmine@2.3.2": {
+      "exit": "npm:exit@0.1.2",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "glob": "npm:glob@3.2.11",
+      "jasmine-core": "npm:jasmine-core@2.3.4",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0",
+      "util": "github:jspm/nodelibs-util@0.1.0"
+    },
     "npm:jstransform@10.1.0": {
       "base62": "npm:base62@0.1.1",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -330,6 +360,12 @@ System.config({
     "npm:miller-rabin@2.0.1": {
       "bn.js": "npm:bn.js@2.2.0",
       "brorand": "npm:brorand@1.0.5"
+    },
+    "npm:minimatch@0.3.0": {
+      "lru-cache": "npm:lru-cache@2.7.0",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "sigmund": "npm:sigmund@1.0.1"
     },
     "npm:os-browserify@0.1.2": {
       "os": "github:jspm/nodelibs-os@0.1.0"
@@ -401,6 +437,10 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "inherits": "npm:inherits@2.0.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:sigmund@1.0.1": {
+      "http": "github:jspm/nodelibs-http@1.7.1",
+      "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:source-map@0.1.31": {
       "amdefine": "npm:amdefine@1.0.0",

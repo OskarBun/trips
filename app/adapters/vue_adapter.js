@@ -21,3 +21,5 @@ class VueAdapter {
 
 	}
 }
+
+export default VueAdapter

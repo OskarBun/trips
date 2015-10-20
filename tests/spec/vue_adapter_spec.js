@@ -1,10 +1,11 @@
 import VueAdapter from "app/adapters/vue_adapter";
 import Vue from "vue";
+import jasmine from "jasmine-standalone";
 
 
 class VueTest extends VueAdapter{
-	contstructor(){
-		super(Vue({
+	constructor(){
+		super(new Vue({
 			data:{}
 		}),'obj');
 		this.output = [];
@@ -33,7 +34,7 @@ class VueTest extends VueAdapter{
 }
 
 
-describe("VueAdapter suite", function() {
+jasmine.describe("VueAdapter suite", function() {
 	var adapter = new VueTest();
 	it("should contruct", function() {
 		expect(true).toBe(true);

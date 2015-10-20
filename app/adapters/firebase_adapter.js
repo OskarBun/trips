@@ -29,3 +29,5 @@ class FirebaseAdapter {
 	}
 
 }
+
+export default FirebaseAdapter

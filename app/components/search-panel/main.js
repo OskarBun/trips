@@ -49,7 +49,6 @@ Vue.component('map-panel', {
 		};
 	},
   	template: tmpl,
-  	props: ['listener'],
 	methods: {
 		"do_search": function(e){
 			e.preventDefault();
@@ -62,6 +61,11 @@ Vue.component('map-panel', {
 			geo_location(function(result){
 				this.location = result;
 			}.bind(this));
+		}
+	},
+	watch:{
+		'location': function(val){
+			this.$emit("search-location-set",this.location);
 		}
 	}
 });

@@ -2,7 +2,7 @@ import './main.css!';
 import tmpl from './main-tmpl.html!text';
 import Vue from 'vue';
 import map_loader from "map";
-import 'app/adapters/firebase_adapter';
+import FirebaseAdapter from 'app/adapters/firebase_adapter';
 	
 
 function googleMap(vm){
@@ -10,9 +10,10 @@ function googleMap(vm){
             libraries: ['places']
         })
 	   .then(function(googleApi) {
+
 		   	class GoogleMap extends FirebaseAdapter{
 				constructor(path, element){
-					super(path)
+					super(path);
 					this.markers = {};
 					this.to_do = null;
 
@@ -40,12 +41,14 @@ function googleMap(vm){
 				        	},300);
 				    	}
 				    });
+				    this.init();
 				}
 
 				dispose(){
 					for(var marker in this.markers){
 						this.markers[marker].map = null;
 					}
+					this.markers={};
 				}
 
 				map_clicked(lat,lng){

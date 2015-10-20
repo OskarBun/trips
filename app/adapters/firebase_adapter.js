@@ -4,7 +4,12 @@ import 'firebase';
 class FirebaseAdapter {
 	constructor(path){
 		this._base = new Firebase(path);
+	}
 
+	init(){
+		this._base.on('value', (snapshot) => {
+			console.log(snapshot.val());
+		});
 		this._base.on("child_added", (snapshot, prevChildKey) => {
 			this.added(snapshot.key(), snapshot.val());
 		});

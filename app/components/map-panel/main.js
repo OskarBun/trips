@@ -23,7 +23,7 @@ function googleMap(vm){
 
 				dispose(){
 					for(var marker in this.markers){
-						this.markers[marker].map = null;
+						this.markers[marker].setMap(null);
 					}
 					this.markers={};
 					this.map = null;

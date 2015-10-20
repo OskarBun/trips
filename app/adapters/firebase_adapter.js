@@ -14,7 +14,7 @@ class FirebaseAdapter {
 	 */
 	init(){
 		this._base.on('value', (snapshot) => {
-			console.log(snapshot.val());
+			// noop - forces node to load
 		});
 		this._base.on("child_added", (snapshot, prevChildKey) => {
 			this.added(snapshot.key(), snapshot.val());

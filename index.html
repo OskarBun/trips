@@ -45,11 +45,11 @@
             <div class="content">
                 <div class="map-container">
                     <search-panel></search-panel>
-                    <map-panel url="{{ trip_url }}"></map-panel>
+                    <map-panel url="{{@ trip_url }}"></map-panel>
                 </div>
 
                 <div class="trip-list-container">
-                    <trips-panel trip_factory="{{ trip_factory }}" trip="{{@ trip }}"></trips-panel>
+                    <trips-panel trips="{{ trips }}" trip="{{@ trip }}"></trips-panel>
                 </div>
             </div>
         </div>

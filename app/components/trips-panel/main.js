@@ -6,18 +6,18 @@ import TripFactory from "app/models/trip"
 Vue.component('trips-panel', {
 	data: function(){
 		return {
-			trips: {},
+			items: {},
 			new_label: null
 		};
 	},
   	template: tmpl,
-  	props: ['trip_factory', 'trip'],
+  	props: ['trips', 'trip'],
 	methods: {
 		"add_trip": function(){
-			this.trip = this.trip_factory.create_trip(this.new_label);
+			this.trip = this.trips.create_trip(this.new_label);
 		},
 		"open_trip": function(key){
-			this.trip = this.trip_factory.open_trip(key);
+			this.trip = this.trips.open_trip(key);
 		},
 		"close_trip": function(){
 			this.trip = null;
@@ -25,7 +25,7 @@ Vue.component('trips-panel', {
 	},
 	events: {
 		"hook:attached": function(){
-      this.trip_factory.list_trips(this.trips);
+      		this.trips.list_trips(this.items);
 		},
 		"hook:detached": function(){}
 	},

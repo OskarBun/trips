@@ -17,9 +17,9 @@ let fireUrl = 'https://scorching-fire-6566.firebaseio.com/'
 var appl = window.appl = new Vue({
             el: "body",
             data:{
-              trip: null,
               user: new User(fireUrl),
-              trip_factory: new TripFactory(fireUrl),
+              trips: new TripFactory(fireUrl),
+              trip: null,
               loading: true
             },
             computed: {

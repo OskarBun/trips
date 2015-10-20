@@ -4,6 +4,7 @@ import 'app/main.css!';
 import Vue from 'vue';
 import 'firebase';
 import 'app/components/map-panel/main';
+import 'app/components/trips-panel/main';
 import User from 'app/models/user';
 import TripFactory from 'app/models/trip';
 
@@ -18,15 +19,12 @@ var appl = window.appl = new Vue({
               trip_factory: new TripFactory(fireUrl),
               loading: true
             },
-            computed: {
-              name: function() {
-                return this.user.username || '';
-              }
-            },
+            computed: {},
             methods: {},
             components: {},
             ready: function(){
                 this.loading = false;
+                let fireUrl = 'https://scorching-fire-6566.firebaseio.com/'
             }
         });
 

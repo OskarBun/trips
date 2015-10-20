@@ -46,10 +46,9 @@ class Trip extends Vue {
 			this.locations.$delete(snapshot.key());
 		});
 		this._base = base;
+    this.locations_path = url+LOCATION_PATH;
 	}
 }
-
-
 
 class TripFactory{
 	constructor(url="https://scorching-fire-6566.firebaseio.com/"){
@@ -59,22 +58,20 @@ class TripFactory{
 	create_trip (label){
 		var base = new Firebase(this._url);
 		var ftrip = base.push({
-			label: label, 
-			locations: {} 
+			label: label,
+			locations: {}
 		});
 		return new Trip(this._url + ftrip.key());
 	}
 
-	open_trip (item){
-		return new Trip(this._url + item.id);
+	open_trip (key){
+		return new Trip(this._url + key);
 	}
 
 	list_trips (container){
 		var trips = new Firebase(this._url);
 		trips.on("child_added",function(snapshot){
-			var data = snapshot.val();
-			data.id = snapshot.key();
-			container.push(data);
+			container.$add(snapshot.key(), snapshot.val());
 		});
 		return trips;
 	}

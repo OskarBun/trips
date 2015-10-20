@@ -1,3 +1,4 @@
+import 'jspm_packages/npm/skeleton-css@2.0.4/css/normalize.css';
 import 'jspm_packages/npm/skeleton-css@2.0.4/css/skeleton.css!';
 import 'jspm_packages/npm/font-awesome@4.4.0/css/font-awesome.min.css!';
 import 'app/main.css!';

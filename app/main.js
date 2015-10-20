@@ -23,7 +23,7 @@ var appl = window.appl = new Vue({
               loading: true
             },
             computed: {
-              tripUrl: function() {
+              trip_url: function() {
                 if(this.trip){
                   return this.trip.locations_path;
                 }
@@ -33,7 +33,6 @@ var appl = window.appl = new Vue({
             components: {},
             ready: function(){
                 this.loading = false;
-                let fireUrl = 'https://scorching-fire-6566.firebaseio.com/'
             },
             events: {
               "search-location-set": function(e) {

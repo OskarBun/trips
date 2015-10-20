@@ -63,15 +63,22 @@ Vue.component('search-panel', {
 	methods: {
 		"do_search": function(e){
 			e.preventDefault();
-			code_address(this.search,function(result){
+			code_address(this.search, (result) => {
 				this.$dispatch('search-location-results', result);
-			}.bind(this));
+			});
 		},
 		"do_here": function(e){
 			e.preventDefault();
-			geo_location(function(result){
+			geo_location((result) => {
 				this.location = result;
-			}.bind(this));
+			});
+		},
+		"clear": function(e){
+			e.preventDefault();
+			this.search = null;
+			code_address(this.search,(result) => {
+				this.$dispatch('search-location-results', result);
+			});
 		}
 	},
 	watch:{

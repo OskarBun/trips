@@ -11,8 +11,8 @@
 }
 
 .UserPanel
-.user-profile {
-
+.site-title {
+	display: inline-block;
 }
 
 .UserPanel

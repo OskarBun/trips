@@ -42,6 +42,7 @@ function googleMap(vm){
 				    	}
 				    });
 				    this.init();
+				    this.set_bounds();
 				}
 
 				dispose(){
@@ -52,7 +53,7 @@ function googleMap(vm){
 				}
 
 				map_clicked(lat,lng){
-					this._base.push({
+					this.add({
 						title: "untitled",
 						lat: lat,
 						lng: lng
@@ -60,7 +61,7 @@ function googleMap(vm){
 				}
 
 				marker_dragged(key, value, lat, lng){
-					this._base.child(key).update({lat:lat, lng:lng});
+					this.change(key,{lat:lat, lng:lng});
 				}
 
 				added(key, value){
@@ -95,6 +96,27 @@ function googleMap(vm){
 
 				set_center(lat,lng){
 					this.map.setCenter(new google.maps.LatLng(lat,lng));
+				}
+
+				set_bounds(){
+					var rb = null, loc = null, marker=null;
+					for(var key in this.markers){
+						marker = this.markers[key];
+						loc = marker.getPosition();
+						if(rb===null){
+							rb = new google.maps.LatLngBounds(loc, loc);
+						} else {
+							rb.extend(loc);
+							loc = null;
+						}
+					};
+					if(loc){
+						this.map.setCenter(loc);
+						console.log(loc);
+					} else if(rb){
+						this.map.fitBounds(rb);
+						console.log(rb);
+					}
 				}
 			}
 	   		vm._map_ = new GoogleMap(vm.url, vm.$el);

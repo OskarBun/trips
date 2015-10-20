@@ -13,64 +13,54 @@ import User from 'app/models/user';
 import TripFactory from 'app/models/trip';
 
 
-let fireUrl = 'https://scorching-fire-6566.firebaseio.com/'
+let fireUrl = 'https://scorching-fire-6566.firebaseio.com/';
+Vue.config.debug = true;
+
+function calc_content_height() {
+    var user_panel = document.getElementsByClassName("UserPanel")[0];
+    return window.innerHeight - user_panel.offsetHeight;
+}
 
 var appl = window.appl = new Vue({
-            el: "body",
-            data:{
-              user: new User(fireUrl),
-              trips: new TripFactory(fireUrl),
-              trip: null,
-              loading: true,
-              label: null
-            },
-            computed: {
-              trip_url: function() {
-                if(this.trip){
-                  return this.trip.locations_path;
-                }
-              }
-            },
-            methods: {},
-            components: {},
-            ready: function(){
-                this.loading = false;
-            },
-            events: {
-                "search-location-set": function(e) {
-                    this.$broadcast('set-center', e);
-                },
-                "search-location-results": function(e) {
-                    this.$broadcast('search-results', e);
-                },
-                "highlight-result": function(e) {
-                    this.$broadcast('highlight-result', e);
-                },
-                "add_location": function(e) {
-
-                }
-            }
+    el: "body",
+    data:{
+      user: new User(fireUrl),
+      trips: new TripFactory(fireUrl),
+      trip: null,
+      loading: true,
+      label: null,
+      content_height: 500
+    },
+    computed: {
+      trip_url: function() {
+        if(this.trip){
+          return this.trip.locations_path;
+        }
+      }
+    },
+    methods: {},
+    components: {},
+    ready: function(){
+        this.$nextTick(() => {
+            this.content_height = calc_content_height();
+            window.addEventListener("resize", () => {
+                this.content_height = calc_content_height();
+            });
         });
+        this.loading = false;
+    },
+    events: {
+        "search-location-set": function(e) {
+            this.$broadcast('set-center', e);
+        },
+        "search-location-results": function(e) {
+            this.$broadcast('search-results', e);
+        },
+        "highlight-result": function(e) {
+            this.$broadcast('highlight-result', e);
+        },
+        "add_location": function(e) {
 
-
-/*
-##For in file definition
-import './main.css!';
-import tmpl from './main-tmpl.html!text';
-import Vue from 'vue';
-
-Vue.component('name', {
-    	template: tmpl,
-    	props: []
-  });
-
-##For in file export for component switching
-import './main.css!';
-import tmpl from './main-tmpl.html!text';
-import Vue from 'vue';
-
-export default {
-      template: tmpl,
-      props: ['lobby','close']
-  };
-*/
+        }
+    }
+});

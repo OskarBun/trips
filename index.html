@@ -2,7 +2,7 @@
 <html lang="en-gb">
     <head>
         <!-- title -->
-        <title>Tripping</title>
+        <title>Trippy - Tripping</title>
 
         <!-- metas -->
         <meta charset="utf-8" />
@@ -32,7 +32,23 @@
         <!-- Vue.js binding CSS -->
         <style type="text/css"> [v-cloak] { display: none } </style>
     </head>
-    <body>
+    <body>    
+        <div class="main">
+            <user-panel user="{{ user }}"></user-panel>
+            <div class="content" v-style="height:content_height+'px'">
+                <div class="trip-container">
+                    <trips-panel trips="{{ trips }}" trip="{{@ trip }}"></trips-panel>
+                </div>
+                <div class="map-container">
+                    <map-panel url="{{@ trip_url }}"></map-panel>
+                </div>
+                <div class="search-container">
+                    <results-panel></results-panel>
+                    <search-panel></search-panel>
+                </div>
+            </div>
+        </div>
+
         <!-- Loading Spinner -->
         <div class="PlaceholderRoot" v-if="loading">
             <div class="sk-folding-cube">
@@ -40,29 +56,6 @@
                 <div class="sk-cube2 sk-cube"></div>
                 <div class="sk-cube4 sk-cube"></div>
                 <div class="sk-cube3 sk-cube"></div>
-            </div>
-        </div>
-
-        <div class="main" v-if="!loading">
-            <user-panel user="{{ user }}"></user-panel>
-            <div class="content">
-                <div class="row">
-                    <div class="nine columns">
-                        <div class="map-container">
-                            <map-panel url="{{@ trip_url }}"></map-panel>
-                        </div>
-                    </div>
-                    <div class="three columns">
-                        <div class="search-container">
-                            <results-panel></results-panel>
-                            <search-panel></search-panel>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="trip-list-container">
-                    <trips-panel trips="{{ trips }}" trip="{{@ trip }}"></trips-panel>
-                </div>
             </div>
         </div>
 

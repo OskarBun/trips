@@ -7,6 +7,7 @@ class User extends Vue {
       data: function() {
         return {
           username: null,
+          profileImageUrl: null,
           location: null,
           loggedIn: false
         }
@@ -39,17 +40,19 @@ class User extends Vue {
         this._uid = authData.uid;
         let userSession = new Firebase(`${this._url}users/${authData.uid}`);
         userSession.on('value', (snap) => {
-          let val = snap.val();
-          if(!val){
-            userSession.set({
-              username: authData.github.username,
-              location: null
-            });
-          } else {
-            this.username = val.username;
-            this.location = val.location
+          let permitted = {
+            username: authData.github.username,
+            profileImage: authData.github.profileImageURL
           }
-          this.loggedIn = true
+          if(!snap.val()){
+            userSession.set(permitted);
+          } else {
+            userSession.update(permitted, (error) => {
+              Object.assign(this, permitted);
+              this.loggedIn = true
+            });
+          }
+
         });
       } else {
         console.log("User is logged out");

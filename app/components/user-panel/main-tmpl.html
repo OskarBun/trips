@@ -1,6 +1,7 @@
 <div class="row" id="user-panel">
   <div  v-if="user.loggedIn" class="row">
     <div class="eight columns">
+      <img v-attr="src: user.profileImage" />
       <h3>{{user.username}}</h3>
     </div>
     <div class="four columns">

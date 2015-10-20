@@ -31,19 +31,21 @@
     </head>
     <body>
         <!-- Loading Spinner -->
-        <div class="sk-folding-cube" v-if="loading">
-            <div class="sk-cube1 sk-cube"></div>
-            <div class="sk-cube2 sk-cube"></div>
-            <div class="sk-cube4 sk-cube"></div>
-            <div class="sk-cube3 sk-cube"></div>
+        <div class="PlaceholderRoot" v-if="loading">
+            <div class="sk-folding-cube">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+            </div>
         </div>
 
         <div class="main" v-if="!loading">
             <user-panel user="{{ user }}"></user-panel>
             <div class="content">
-                <div class="map-container" v-if="trip">
+                <div class="map-container">
                     <search-panel></search-panel>
-                    <map-panel url="{{ trip.locations_path }}"></map-panel>
+                    <map-panel url="{{ tripUrl }}"></map-panel>
                 </div>
 
                 <div>

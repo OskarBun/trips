@@ -19,7 +19,7 @@ class Trip extends VueFire {
 			},
 			methods:{
 				add_location: function(lat,lng,label){
-					var floc = this._base.child("locations").push({
+					var floc = this.adapter._base.child("locations").push({
 						lat:lat,
 						lng:lng,
 						label:label
@@ -32,7 +32,7 @@ class Trip extends VueFire {
 			}
 		}, url);
         this.locations_path = url+'/'+LOCATION_PATH;
-        new VueFireArray(this.container.locations, this.locations_path);
+        new VueFireArray(this.locations, this.locations_path);
     }
 }
 
@@ -47,7 +47,7 @@ class TripFactory {
 			label: label,
 			locations: {}
 		});
-		return new Trip(this._url + ftrip.key()).container;
+		return new Trip(this._url + ftrip.key());
 	}
 
 	open_trip (key){
@@ -55,8 +55,7 @@ class TripFactory {
 	}
 
 	list_trips (container){
-		var trips = new VueFireArray(container, this._url);
-		return trips._base;
+		return new VueFireArray(container, this._url);
 	}
 }
 

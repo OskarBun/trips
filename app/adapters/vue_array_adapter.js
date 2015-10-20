@@ -6,7 +6,6 @@ class VueFireArray extends FirebaseAdapter {
 	constructor(container, path){
 		super(path);
 		this.container = container;
-        this.container.firebase = this;
 
 		this.init();
 	}

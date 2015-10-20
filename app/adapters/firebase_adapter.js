@@ -6,11 +6,11 @@ class FirebaseAdapter {
 		this._base = new Firebase(path);
 	}
 
-	/** 
+	/**
 		if base is in the Firebase cache the
 		callbacks to child_added will happen
 		immediately - so call init at the end of
-		you subclasses constructor. 
+		you subclasses constructor.
 	 */
 	init(){
 		this._base.on('value', (snapshot) => {
@@ -27,41 +27,41 @@ class FirebaseAdapter {
 		});
 	}
 
-	/** 
-		will add a child to our base container 
+	/**
+		will add a child to our base container
 	 */
 	add(value){
 		return this._base.push(value);
 	}
 
-	/** 
-		will update a child to our base container 
+	/**
+		will update a child to our base container
 	 */
 	change(key,value){
 		this._base.child(key).update(value);
 	}
 
-	/** 
-		will remove a child to our base container 
+	/**
+		will remove a child to our base container
 	 */
 	remove(key){
 		this._base.child(key).remove();
 	}
 
-	/** 
-		called after load or add 
+	/**
+		called after load or add
 		sub-class responsibility
 	 */
 	added(key, value){}
 
-	/** 
-		called after change 
+	/**
+		called after change
 		sub-class responsibility
 	 */
 	changed(key, value){}
 
-	/** 
-		called after remove 
+	/**
+		called after remove
 		sub-class responsibility
 	 */
 	removed(key){}

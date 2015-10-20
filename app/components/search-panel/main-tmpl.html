@@ -1,5 +1,7 @@
-<form v-on="submit:do_search">
-	<input id="search_input" type="text" class="u-full-width" v-model="search"  placeholder="search"/>
-	<button type="submit" class="button-primary">Search</button>
-	<button v-on="click:do_here">Here</button>
-</form>
+<div class="SearchPanel">
+	<form v-on="submit:do_search">
+		<input id="search_input" type="text" v-model="search"  placeholder="search"/>
+		<button type="submit" class="button-primary">Search</button>
+		<button v-on="click:do_here">Here</button>
+	</form>
+</div>

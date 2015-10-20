@@ -1,7 +1,7 @@
 import 'firebase';
 
 
-FirebaseAdapter(){
+class FirebaseAdapter {
 	constructor(path){
 		this._base = new Firebase(path);
 

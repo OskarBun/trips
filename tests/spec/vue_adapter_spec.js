@@ -2,12 +2,12 @@ import VueAdapter from "app/adapters/vue_adapter";
 import Vue from "vue";
 
 
-VueTest(VueAdapter){
+class VueTest extends VueAdapter{
 	contstructor(){
-		this.output = [];
 		super(Vue({
 			data:{}
-		}));
+		}),'obj');
+		this.output = [];
 	}
 
 	added(n,o){

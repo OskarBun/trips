@@ -5,9 +5,16 @@ import Vue from 'vue';
 import map_loader from "map";
 import FirebaseAdapter from 'app/adapters/firebase_adapter';
 
+import barefoot from './resources/barefoot.svg!text';
+import flaf5 from './resources/flag5.svg!text';
+
+
+
 var GREEN_ICON='//maps.google.com/mapfiles/ms/icons/green-dot.png';
-var BLUE_ICON='//maps.google.com/mapfiles/ms/icons/blue-dot.png';
-var RED_ICON='//maps.google.com/mapfiles/ms/icons/red-dot.png';
+var BLUE_ICON= "data:image/svg+xml," + encodeURIComponent(flaf5); //'//maps.google.com/mapfiles/ms/icons/blue-dot.png';
+var RED_ICON= "data:image/svg+xml," + encodeURIComponent(barefoot); //'//maps.google.com/mapfiles/ms/icons/red-dot.png';
+
+
 
 
 function googleMap(vm){

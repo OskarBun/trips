@@ -29,21 +29,26 @@ function code_address(postcode, callback){
             libraries: ['geocoder']
         })
 	   .then(function(googleApi) {
-		    var geocoder = new googleApi.maps.Geocoder();
-		    geocoder.geocode( { 'address': postcode }, function(results, status) {
-		        if (status == googleApi.maps.GeocoderStatus.OK) {
-					var permitted = results.map(function(e){
-						return {
-							lat: e.geometry.location.lat(),
-							lng: e.geometry.location.lng(),
-							title: e.formatted_address
-						}
-					});
-					callback(permitted);
-		        } else {
-		            console.error("Geocode error: " + status);
-		        }
-    		});
+	   		if(postcode){
+			    var geocoder = new googleApi.maps.Geocoder();
+			    geocoder.geocode( { 'address': postcode }, function(results, status) {
+			        if (status == googleApi.maps.GeocoderStatus.OK) {
+						var permitted = results.map(function(e){
+							return {
+								lat: e.geometry.location.lat(),
+								lng: e.geometry.location.lng(),
+								title: e.formatted_address
+							}
+						});
+						callback(permitted);
+			        } else {
+			            console.error("Geocode error: " + status);
+			        }
+	    		});
+	    	}
+	    	else {
+	    		callback([]);
+	    	}
     	});
 }
 

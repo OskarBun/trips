@@ -1,7 +1,7 @@
 <div class="SearchPanel">
 	<form v-on="submit:do_search" autocomplete="off">
 		<input id="search_input" type="text" v-model="search"  placeholder="search"/>
-		<button type="submit" class="button-primary">Search</button>
+		<button type="submit" class="button-primary">{{ search ? 'Search' : 'Clear' }}</button>
 		<button v-on="click:do_here">Here</button>
 	</form>
 </div>

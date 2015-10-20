@@ -60,7 +60,7 @@ function googleMap(vm){
 				}
 
 				marker_dragged(key, value, lat, lng){
-					value.set({lat:lat, lng:lng});
+					this._base.child(key).update({lat:lat, lng:lng});
 				}
 
 				added(key, value){
@@ -88,7 +88,7 @@ function googleMap(vm){
 				removed(key){
 					var marker = this.markers[key];
 					if(marker){
-						marker.map = null;
+            			marker.setMap(null);
 						delete this.markers[key]
 					}
 				}

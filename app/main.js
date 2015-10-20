@@ -38,6 +38,9 @@ var appl = window.appl = new Vue({
               "search-location-set": function(e) {
                 this.$broadcast('set_center', e);
               }
+              "search-results": function(e) {
+                this.$broadcast('search-results', e);
+              }
             }
         });
 

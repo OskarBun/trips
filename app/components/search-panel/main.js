@@ -32,8 +32,14 @@ function code_address(postcode, callback){
 		    var geocoder = new googleApi.maps.Geocoder();
 		    geocoder.geocode( { 'address': postcode }, function(results, status) {
 		        if (status == googleApi.maps.GeocoderStatus.OK) {
-		        	var value = results[0].geometry.location;
-					callback(value);
+					var permitted = results.map(function(e){
+						return {
+							lat: e.geometry.location.lat,
+							lng: e.geometry.location.lng,
+							title: e.formatted_address
+						}
+					});
+					callback(permitted);
 		        } else {
 		            console.error("Geocode error: " + status);
 		        }
@@ -53,7 +59,7 @@ Vue.component('search-panel', {
 		"do_search": function(e){
 			e.preventDefault();
 			code_address(this.search,function(result){
-				this.location = result;
+				this.$dispatch('search-results', result);
 			}.bind(this));
 		},
 		"do_here": function(e){

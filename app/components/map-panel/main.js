@@ -2,87 +2,27 @@ import './main.css!';
 import tmpl from './main-tmpl.html!text';
 import Vue from 'vue';
 import map_loader from "map";
-import TripFactory from "app/models/trip"
-
-
-function getDescendantWithClass(element, clName) {
-    var i, children = element.childNodes;
-    for (i = 0; i < children.length; i++) {
-        if (children[i].className &&
-            children[i].className.split(' ').indexOf(clName) >= 0)
-        {
-            return children[i];
-         }
-     }
-     for (i = 0; i < children.length; i++) {
-         var match = getDescendantWithClass(children[i], clName);
-         if (match !== null) {
-             return match;
-         }
-     }
-     return null;
-}
-
-
-        
-function geo_location(callback){
-	if (navigator.geolocation){
-		navigator.geolocation.getCurrentPosition(function(position){
-			map_loader({
-		            libraries: ['places']
-		        })
-			   .then(function(googleApi) {
-					var value = new googleApi.maps.LatLng(
-							position.coords.latitude, 
-							position.coords.longitude);
-					callback(value);
-				});
-		});
-    }
-	else{
-		console.error("Geolocation is not supported by this browser.");
-	}
-}
-
-
-function code_address(postcode, callback){
-	map_loader({
-            libraries: ['geocoder']
-        })
-	   .then(function(googleApi) {
-		    var geocoder = new googleApi.maps.Geocoder();
-		    geocoder.geocode( { 'address': postcode }, function(results, status) {
-		        if (status == googleApi.maps.GeocoderStatus.OK) {
-		        	var value = results[0].geometry.location;
-					callback(value);
-		        } else {
-		            console.error("Geocode error: " + status);
-		        }
-    		});
-    	});
-}
-
+import 'app/adapters/firebase_adapter';
 	
 
-function googleMap(vm, element){
+function googleMap(vm){
 	map_loader({
             libraries: ['places']
         })
 	   .then(function(googleApi) {
-		   	class GoogleMap{
-				constructor(vm, element){
-					if(vm.location == null){
-						vm.location = new google.maps.LatLng(54.8143,-2.9694);
-			   		}
+		   	class GoogleMap extends FirebaseAdapter{
+				constructor(path, element){
+					super(path)
+					this.markers = {};
+					this.to_do = null;
+
 					var mapOptions = {
-				    	center: vm.location,
+				    	center: new google.maps.LatLng(54.8143,-2.9694),
 				    	zoom: 15,
 				    	mapTypeId: googleApi.maps.MapTypeId.MAP
 					};
-					this.vm = vm;
+
 					this.map = new googleApi.maps.Map(element, mapOptions);
-					this.to_do = null;
-					this.markers = [];
 
 				    googleApi.maps.event.addListener(this.map, 'dblclick', (e) => {
 				        if(this.to_do){
@@ -94,104 +34,85 @@ function googleMap(vm, element){
 				    	if(this.to_do === null){
 				        	this.to_do = setTimeout(() => {
 				        		this.to_do = null;
-				        		this.vm.do_map_clicked(e.latLng.lat(),e.latLng.lng());
+				        		this.map_clicked(
+				        			e.latLng.lat(),
+				        			e.latLng.lng());
 				        	},300);
 				    	}
 				    });
-					vm._map_ = this;
 				}
 
-				add_marker(item){
-					var marker = new googleApi.maps.Marker({
-		                map: this.map,
-		                position: item.location,
-		                title: item.title,
-		                draggable: true
-		            });
-		            this.markers.push({marker:marker, item:item});
-		            googleApi.maps.event.addListener(marker, 'dragend', (e) => {
-		                var location = marker.getPosition();
-		                this.vm.do_marker_dragged(marker.item,location.lat(), location.lng());
-		            });
+				dispose(){
+					for(var marker in this.markers){
+						this.markers[marker].map = null;
+					}
 				}
 
-				remove_marker(item){
-					this.markers.some((marker, index) => {
-						if(marker.item == item){
-							this.markers.splice(index,1);
-							return true;
-						}
+				map_clicked(lat,lng){
+					this._base.push({
+						title: "untitled",
+						lat: lat,
+						lng: lng
 					});
 				}
 
-				set_center(location){
-					this.map.setCenter(location);
+				marker_dragged(key, value, lat, lng){
+					value.set({lat:lat, lng:lng});
+				}
+
+				added(key, value){
+					var marker = new googleApi.maps.Marker({
+		                map: this.map,
+		                position: new google.maps.LatLng(value.lat,value.lng),
+		                title: value.title,
+		                draggable: true
+		            });
+		            this.markers[key]=marker;
+		            googleApi.maps.event.addListener(marker, 'dragend', (e) => {
+		                var location = marker.getPosition();
+		                this.marker_dragged(key, value,location.lat(), location.lng());
+		            });
+				}
+
+				changed(key, value){
+					var marker = this.markers[key];
+					if(marker){
+						marker.setTitle(value.title);
+						marker.setPosition(new google.maps.LatLng(value.lat,value.lng));
+					}
+				}
+
+				removed(key){
+					var marker = this.markers[key];
+					if(marker){
+						marker.map = null;
+						delete this.markers[key]
+					}
 				}
 			}
-	   		return new GoogleMap(vm, element);
+	   		vm._map_ = new GoogleMap(vm.url, vm.$el);
 		}, function(err) {
 	        console.error(err);
 	    });
 }
 
+
 Vue.component('map-panel', {
 	data: function(){
 		return {
-			_map_: null,
-			location: null,
-			search: null,
-			trip: null,
-			trips: [],
-			new_label: null
+			_map_: null
 		};
 	},
   	template: tmpl,
-  	props: ['trip_factory'],
-	methods: {
-		"do_search": function(e){
-			e.preventDefault();
-			code_address(this.search,function(result){
-				this.location = result;
-			}.bind(this));
-		},
-		"do_here": function(e){
-			e.preventDefault();
-			geo_location(function(result){
-				this.location = result;
-			}.bind(this));
-		},
-		"add_trip": function(){
-			this.trip = this.trip_factory.create_trip(this.new_label);
-		},
-		"open_trip": function(item){
-			this.trip = this.trip_factory.open_trip(item);
-		},
-		"close_trip": function(){
-			this.trip = null;
-		},
-		"do_map_clicked": function(lat,lng){
-			if(this.trip){
-				this.trip.add_location(lat,lng,"untitled");
-			}
-		},
-		"do_marker_dragged": function(item, lat, lng){
-			this.trip.set_location(item, lat, lng);
-		}
-	},
+  	props: ['url'],
   	events: {
   		"hook:attached": function(){
-            this.trip_factory.list_trips(this.trips);
-  			var element = getDescendantWithClass(this.$el, "map");
-  			googleMap(this, element);
+  			googleMap(this);
   		},
   		"hook:detached": function(){
-  			this._map_ = null;
-  		}
-  	},
-  	watch:{
-  		"location": function(val){
-  			if(val && this._map_){
-  				this._map_.set_center(val);
+  			if(this._map_){
+  				this._map_.dispose();
+  				this._map_ = null;
   			}
   		}
   	}

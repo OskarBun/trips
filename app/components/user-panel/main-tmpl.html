@@ -1,14 +1,17 @@
 <div class="UserPanel">
-    <h4 class="site-title">Trippy</h4>
-    <span class="user-profile pull-right">
-        <span class="profile-name title" v-text="user_tag"></span>
-        <span class="profile-image">
-            <div class="logout-container" v-if="user.logged_in" v-on="click: user.logout">
-                <img class="login-image u-full-width" v-attr="src: user.profile_image" />
-            </div>
-            <div class="login-container" v-if="!user.logged_in" v-on="click: user.login">
-                <i class="fa fa-user fa-fw"></i>
-            </div>
+    <div class="head">
+        <h4 class="site-title">Trippy</h4>
+        <span class="user-profile pull-right">
+            <span class="profile-name title" v-text="user_tag"></span>
+            <span class="profile-image">
+                <div class="logout-container" v-if="user.logged_in" v-on="click: user.logout">
+                    <img class="login-image u-full-width" v-attr="src: user.profile_image" />
+                </div>
+                <div class="login-container" v-if="!user.logged_in" v-on="click: user.login">
+                    <i class="fa fa-user fa-fw"></i>
+                </div>
+            </span>
         </span>
-    </span>
+    </div>
+    <div class="foot"></div>
 </div>

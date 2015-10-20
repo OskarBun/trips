@@ -1,13 +1,24 @@
 .UserPanel {
 	width: 100%;
+}
+
+.head {
+	width: 100%;
 	height: 50px;
 
 	padding: 5px 10px;
 
 	box-sizing: border-box;
 
-    background-color: #255E69;
+    background-color: #69AEBB;
     color: white;
+}
+
+.UserPanel
+.foot {
+	width: 100%;
+	height: 5px;
+	background-color: #FFDE8D;
 }
 
 .UserPanel
@@ -27,9 +38,9 @@
 	height: 40px;
 	border-radius: 20px;
 
-	overflow: hidden;
-	color: #012C34;
+	/*border: 1px solid #FFDE8D;*/
 
+	overflow: hidden;
 	vertical-align: middle;
 	cursor: pointer;
 }
@@ -45,6 +56,7 @@
 	box-sizing: border-box;
 
     text-align: center;
+	color: #FFDE8D;
 
     font-size: 1.5em;
 }
@@ -53,7 +65,8 @@
 .login-container {
 	box-sizing: border-box;
 
-	background: rgba(255,255,255, 0.3);
+	background: #428B99;
+	color: #69AEBB;
 }
 
 .UserPanel

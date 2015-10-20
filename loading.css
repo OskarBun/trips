@@ -5,6 +5,7 @@
 
     width: 100%;
     height: 100%;
+    background-color: #FFDE8D;
 }
 
 .PlaceholderRoot
@@ -24,8 +25,8 @@
     height: 50%;
     position: relative;
     -webkit-transform: scale(1.1);
-      -ms-transform: scale(1.1);
-          transform: scale(1.1); 
+        -ms-transform: scale(1.1);
+            transform: scale(1.1); 
 }
 .PlaceholderRoot
 .sk-folding-cube .sk-cube:before {
@@ -35,7 +36,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: orange;
+    background-color: white;
     -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
             animation: sk-foldCubeAngle 2.4s infinite linear both;
     -webkit-transform-origin: 100% 100%;

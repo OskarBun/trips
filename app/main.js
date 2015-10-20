@@ -36,9 +36,9 @@ var appl = window.appl = new Vue({
             },
             events: {
               "search-location-set": function(e) {
-                this.$broadcast('set_center', e);
-              }
-              "search-results": function(e) {
+                this.$broadcast('set-center', e);
+              },
+              "search-location-results": function(e) {
                 this.$broadcast('search-results', e);
               }
             }

@@ -1,5 +1,6 @@
 import './main.css!';
 import tmpl from './main-tmpl.html!text';
+import info_tmpl from './info-tmpl.html!text';
 import Vue from 'vue';
 import map_loader from "map";
 import FirebaseAdapter from 'app/adapters/firebase_adapter';
@@ -34,6 +35,7 @@ function googleMap(vm){
 		                map: this.container.map,
 		                position: new google.maps.LatLng(value.lat,value.lng),
 		                title: value.title,
+		                icon: "//maps.google.com/mapfiles/ms/icons/red-dot.png",
 		                draggable: true
 		            });
 		            this.markers[key]=marker;
@@ -58,11 +60,79 @@ function googleMap(vm){
 						delete this.markers[key]
 					}
 				}
+
+	   			get_bounds(rb){
+					var marker=null;
+					for(var key in this.markers){
+						marker = this.markers[key];
+						let loc = marker.getPosition();
+						if(rb===null){
+							rb = new google.maps.LatLngBounds(loc, loc);
+						} else {
+							rb.extend(loc);
+						}
+					};
+					return rb;
+	   			}
+	   		}
+
+	   		class SearchResultsAdapter{
+	   			constructor(container, results){
+	   				this.markers = [];
+	   				this.container = container;
+	   				results.map((item) => {
+						let marker = new googleApi.maps.Marker({
+			                map: container.map,
+			                position: new google.maps.LatLng(item.lat,item.lng),
+			                title: item.title,
+			                icon: '//maps.google.com/mapfiles/ms/icons/blue-dot.png'
+			            });
+						let info = new google.maps.InfoWindow();
+			            google.maps.event.addListener(marker, 'click', (e) => {
+			            	if (e.stop) {
+			            	    e.stop();
+			            	}
+			            	this.open_info(marker,info,item);
+			            });
+	   					this.markers.push({m:marker,i:info});
+	   				});
+	   			}
+
+	   			dispose(){
+	   				this.markers.map(function(item){
+	   					item.m.setMap(null);
+	   					item.i.setMap(null);
+	   				});
+	   			}
+
+	   			open_info(marker, info, item){
+	   				var id = "info_" + new Date().getMilliseconds();
+					info.setContent('<div id="'+id+'">loading...</div>');
+			        info.open(this.container.map,marker);
+					new Vue({
+						el:"#"+id,
+						template: info_tmpl,
+						data:item
+					});
+	   			}
+
+	   			get_bounds(rb){
+					this.markers.map((marker) => {
+						let loc = marker.m.getPosition();
+						if(rb===null){
+							rb = new google.maps.LatLngBounds(loc, loc);
+						} else {
+							rb.extend(loc);
+						}
+					});
+					return rb;
+	   			}
 	   		}
 
 		   	class MapContainer{
 				constructor(element){
 					this.locations = null;
+					this.search_results = null;
 					this.to_do = null;
 
 					var mapOptions = {
@@ -95,6 +165,9 @@ function googleMap(vm){
 					if(this.locations){
 						this.locations.dispose();
 					}
+					if(this.search_results){
+						this.search_results.dispose();
+					}
 					delete this.map;
 					this.map = null;
 				}
@@ -120,23 +193,15 @@ function googleMap(vm){
 				}
 
 				set_bounds(){
+					var rb = null;
 					if(this.locations){
-						var rb = null, loc = null, marker=null;
-						for(var key in this.locations.markers){
-							marker = this.locations.markers[key];
-							loc = marker.getPosition();
-							if(rb===null){
-								rb = new google.maps.LatLngBounds(loc, loc);
-							} else {
-								rb.extend(loc);
-								loc = null;
-							}
-						};
-						if(loc){
-							this.map.setCenter(loc);
-						} else if(rb){
-							this.map.fitBounds(rb);
-						}
+						rb = this.locations.get_bounds(rb);
+					}
+					if(this.search_results){
+						rb = this.search_results.get_bounds(rb);
+					}
+					if(rb){
+						this.map.fitBounds(rb);
 					}
 				}
 
@@ -149,6 +214,14 @@ function googleMap(vm){
 						this.locations = new LocationsAdapter(this, path);
 						this.set_bounds();
 					}
+				}
+
+				set_search_results(results){
+					if(this.search_results){
+						this.search_results.dispose();
+					}
+					this.search_results = new SearchResultsAdapter(this,results);
+					this.set_bounds();
 				}
 			}
 	   		vm._map_container_ = new MapContainer(vm.$el);
@@ -176,9 +249,14 @@ Vue.component('map-panel', {
   				this._map_container_ = null;
   			}
   		},
-  		"set_center": function(e){
+  		"set-center": function(e){
   			if(this._map_container_){
   				this._map_container_.set_center(e.lat, e.lng);
+  			}
+  		},
+  		"search-results": function(e){
+  			if(this._map_container_){
+  				this._map_container_.set_search_results(e);
   			}
   		}
   	},

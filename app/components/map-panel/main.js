@@ -13,12 +13,12 @@ function googleMap(vm){
 
 	   		class LocationsAdapter extends FirebaseAdapter{
 
-				constructor(map, path){
+				constructor(container, path){
 					super(path);
-					this.map = map;
+					this.container = container;
 					this.markers = {};
+
 				    this.init();
-				    this.map.set_bounds();
 				}
 
 				dispose(){
@@ -26,12 +26,12 @@ function googleMap(vm){
 						this.markers[marker].setMap(null);
 					}
 					this.markers={};
-					this.map = null;
+					this.container = null;
 				}
 
 				added(key, value){
 					var marker = new googleApi.maps.Marker({
-		                map: this.map.map,
+		                map: this.container.map,
 		                position: new google.maps.LatLng(value.lat,value.lng),
 		                title: value.title,
 		                draggable: true
@@ -39,7 +39,7 @@ function googleMap(vm){
 		            this.markers[key]=marker;
 		            googleApi.maps.event.addListener(marker, 'dragend', (e) => {
 		                var location = marker.getPosition();
-		                this.map.marker_dragged(key, value, location.lat(), location.lng());
+		                this.container.marker_dragged(key, value, location.lat(), location.lng());
 		            });
 				}
 
@@ -60,7 +60,7 @@ function googleMap(vm){
 				}
 	   		}
 
-		   	class GoogleMap{
+		   	class MapContainer{
 				constructor(element){
 					this.locations = null;
 					this.to_do = null;
@@ -120,23 +120,23 @@ function googleMap(vm){
 				}
 
 				set_bounds(){
-					var rb = null, loc = null, marker=null;
-					for(var key in this.markers){
-						marker = this.markers[key];
-						loc = marker.getPosition();
-						if(rb===null){
-							rb = new google.maps.LatLngBounds(loc, loc);
-						} else {
-							rb.extend(loc);
-							loc = null;
+					if(this.locations){
+						var rb = null, loc = null, marker=null;
+						for(var key in this.locations.markers){
+							marker = this.locations.markers[key];
+							loc = marker.getPosition();
+							if(rb===null){
+								rb = new google.maps.LatLngBounds(loc, loc);
+							} else {
+								rb.extend(loc);
+								loc = null;
+							}
+						};
+						if(loc){
+							this.map.setCenter(loc);
+						} else if(rb){
+							this.map.fitBounds(rb);
 						}
-					};
-					if(loc){
-						this.map.setCenter(loc);
-						console.log(loc);
-					} else if(rb){
-						this.map.fitBounds(rb);
-						console.log(rb);
 					}
 				}
 
@@ -147,10 +147,11 @@ function googleMap(vm){
 					}
 					if(path){
 						this.locations = new LocationsAdapter(this, path);
+						this.set_bounds();
 					}
 				}
 			}
-	   		vm._map_ = new GoogleMap(vm.$el);
+	   		vm._map_container_ = new MapContainer(vm.$el);
 		}, function(err) {
 	        console.error(err);
 	    });
@@ -160,7 +161,7 @@ function googleMap(vm){
 Vue.component('map-panel', {
 	data: function(){
 		return {
-			_map_: null
+			_map_container_: null
 		};
 	},
   	template: tmpl,
@@ -171,20 +172,20 @@ Vue.component('map-panel', {
   		},
   		"hook:detached": function(){
   			if(this._map_){
-  				this._map_.dispose();
-  				this._map_ = null;
+  				this._map_container_.dispose();
+  				this._map_container_ = null;
   			}
   		},
   		"set_center": function(e){
-  			if(this._map_){
-  				this._map_.set_center(e.lat, e.lng);
+  			if(this._map_container_){
+  				this._map_container_.set_center(e.lat, e.lng);
   			}
   		}
   	},
   	watch:{
   		"url": function(val){
-  			if(this._map_){
-  				this._map_.set_locations(val);
+  			if(this._map_container_){
+  				this._map_container_.set_locations(val);
   			}
   		}
   	}

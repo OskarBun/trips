@@ -45,20 +45,23 @@ button, a, .button {
 button.button-primary, a.button-primary, .button.button-primary {
     background-color: #255E69;
     border-color: #255E69;
-    color: #6A959D;
+    color: #fff;
 }
 
-button.button-primary:hover, a.button-primary:hover, .button.button-primary:hover,
-button.button-primary:focus, a.button-primary:focus, .button.button-primary:focus {
-    background-color: #012C34;
+button.button-primary:hover, a.button-primary:hover, .button.button-primary:hover {
+    background-color: #255E69;
     border-color: #424242;
-    color: #6A959D;
 }
 
 button.button-primary:active, a.button-primary:active, .button.button-primary:active {
+    color: #6A959D;
     -webkit-box-shadow: inset 5px 5px 30px 5px rgba(0,0,0,0.3);
        -moz-box-shadow: inset 5px 5px 30px 5px rgba(0,0,0,0.3);
             box-shadow: inset 5px 5px 30px 5px rgba(0,0,0,0.3);
+}
+
+button.button-primary:focus, a.button-primary:focus, .button.button-primary:focus {
+    background-color: #255E69;
 }
 
 button.button-primary:focus, a.button-primary:focus, .button.button-primary:focus,
@@ -73,7 +76,15 @@ input[type="password"]:focus, textarea:focus, select:focus {
     height: 100%;
     width: 100%;
 
-    overflow: auto;
+    overflow: hidden;
+}
+
+.main
+.content {
+  height: 90%;
+  width: 100%;
+
+  overflow: auto;
 }
 
 .noselect {

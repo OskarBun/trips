@@ -1,9 +1,23 @@
 .UserPanel {
 	width: 100%;
-	height: 100px;
+	height: 50px;
+
+	padding: 5px 10px;
+
+	box-sizing: border-box;
 
     background-color: #255E69;
     color: white;
+}
+
+.UserPanel
+.user-profile {
+
+}
+
+.UserPanel
+.profile-name {
+	vertical-align: middle;
 }
 
 .UserPanel
@@ -11,6 +25,51 @@
 	display: inline-block;
 	width: 40px;
 	height: 40px;
+	border-radius: 20px;
+
+	overflow: hidden;
+	color: #012C34;
+
+	vertical-align: middle;
+}
+
+.UserPanel
+.logout-container,
+.UserPanel
+.login-container {
+	height: 40px;
+	width: 40px;
 
 	border-radius: 20px;
+	box-sizing: border-box;
+
+    text-align: center;
+
+    font-size: 1.5em;
+}
+
+.UserPanel
+.login-container {
+	padding: 3px;
+	box-sizing: border-box;
+
+	background: rgba(255,255,255, 0.3);
+}
+
+.UserPanel
+.logout-container:hover::after {
+	position: relative; 
+	top: -50px;
+
+	display: block;
+	height: 40px;
+
+	padding: 3px;
+	border-radius: 20px;
+	box-sizing: border-box;
+
+	background: rgba(255,255,255, 0.3);
+
+	font-family: 'FontAwesome';
+	content: '\f08b';
 }

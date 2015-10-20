@@ -1,14 +1,13 @@
 <div class="UserPanel">
-    <div class="username" v-if="user.logged_in">
-        <div class="eight columns">
-            <img class="profile-image u-full-width" v-attr="src: user.profile_image" />
-            <h3>{{user.username}}</h3>
-        </div>
-        <div class="four columns">
-            <button v-on="click: user.logout">logout</button>
-        </div>
-    </div>
-    <template v-if="!user.logged_in">
-        <button v-on="click: user.login">login</button>
-    </template>
+    <span class="user-profile pull-right">
+        <span class="profile-name title" v-text="user_tag"></span>
+        <span class="profile-image">
+            <div class="logout-container" v-if="user.logged_in" v-on="click: user.logout">
+                <img class="login-image u-full-width" v-attr="src: user.profile_image" />
+            </div>
+            <div class="login-container" v-if="!user.logged_in" v-on="click: user.login">
+                <i class="fa fa-sign-in fa-fw"></i>
+            </div>
+        </span>
+    </span>
 </div>

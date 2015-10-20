@@ -5,5 +5,9 @@ import Vue from 'vue';
 Vue.component('user-panel', {
 	template: tmpl,
 	props: ['user'],
-	computed: {}
+	computed: {
+		user_tag: function() {
+			return this.user && this.user.username ? this.user.username : 'Login';
+		}
+	}
 });

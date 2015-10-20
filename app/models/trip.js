@@ -32,7 +32,7 @@ class Trip extends VueFire {
 			}
 		}, url);
         this.locations_path = url+'/'+LOCATION_PATH;
-        new VueFireArray(this.locations, this.locations_path);
+        new VueFireArray(this.container.locations, this.locations_path);
     }
 }
 

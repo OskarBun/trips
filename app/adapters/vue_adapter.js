@@ -5,6 +5,7 @@ class VueFire extends FirebaseAdapter {
     constructor(config, path){
         super(path);
         this.container = new Vue(config);
+		debugger;
 		this.container.firebase = this;
 
         this.init();
@@ -22,3 +23,5 @@ class VueFire extends FirebaseAdapter {
         this.container[key] = null;
     }
 }
+
+export default VueFire;

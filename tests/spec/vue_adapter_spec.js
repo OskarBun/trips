@@ -40,11 +40,11 @@ describe("VueAdapter suite", function() {
 	});
 	it("should set a value", function() {
 	 	adapter.set_val("foo","bar");
-	 	expect(adapter._obj["foo"]).toBe("bar");
+	 	expect(adapter._obj.foo).toBe("bar");
 	});
 	it("should update a value", function() {
 	 	adapter.set_val("foo","bar2");
-	 	expect(adapter._obj["foo"]).toBe("bar2");
+	 	expect(adapter._obj.foo).toBe("bar2");
 	});
 	it("should remove a value", function() {
 	 	adapter.del_val("foo");

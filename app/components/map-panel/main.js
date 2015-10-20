@@ -92,6 +92,10 @@ function googleMap(vm){
 						delete this.markers[key]
 					}
 				}
+
+				set_center(lat,lng){
+					this.map.setCenter(new google.maps.LatLng(lat,lng));
+				}
 			}
 	   		vm._map_ = new GoogleMap(vm.url, vm.$el);
 		}, function(err) {
@@ -116,6 +120,11 @@ Vue.component('map-panel', {
   			if(this._map_){
   				this._map_.dispose();
   				this._map_ = null;
+  			}
+  		},
+  		"set_center": function(e){
+  			if(this._map_){
+  				this._map_.set_center(e.lat, e.lng);
   			}
   		}
   	}

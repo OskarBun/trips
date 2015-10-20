@@ -65,7 +65,13 @@ Vue.component('map-panel', {
 	},
 	watch:{
 		'location': function(val){
-			this.$emit("search-location-set",this.location);
+			if(val){
+				this.$emit("search-location-set",{
+					lat: val.lat(), 
+					lng: val.lng(),
+					term: this.search
+				});
+			}
 		}
 	}
 });

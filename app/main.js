@@ -14,7 +14,7 @@ import TripFactory from 'app/models/trip';
 let fireUrl = 'https://scorching-fire-6566.firebaseio.com/'
 
 var appl = window.appl = new Vue({
-            el: ".content",
+            el: "body",
             data:{
               trip: null,
               user: new User(fireUrl),

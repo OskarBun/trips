@@ -1,0 +1,135 @@
+/* ---- Colours ---- */
+/* Primary   
+   #255E69
+*/
+
+/* Secondary 
+   #012C34
+*/
+
+/* Highlight 
+   #6A959D
+*/
+
+
+/* ---- Font Imports ---- */
+/* Comment out if importing fonts from JS or from HTML */
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:400,200,700);
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,700,300);
+
+
+/* ---- General CSS ---- */
+
+body {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    overflow: hidden;
+
+    font-family: 'Work Sans', sans-serif;
+}
+
+h1,h2,h3,h4,.title {
+    font-family: 'Quicksand', sans-serif;
+}
+
+button, a, .button {
+    font-family: 'Quicksand', sans-serif;
+
+    text-transform: none;
+    letter-spacing: normal;
+    border-radius: 2px;
+}
+
+button.button-primary, a.button-primary, .button.button-primary {
+    background-color: #255E69;
+    border-color: #255E69;
+    color: #6A959D;
+}
+
+button.button-primary:hover, a.button-primary:hover, .button.button-primary:hover,
+button.button-primary:focus, a.button-primary:focus, .button.button-primary:focus {
+    background-color: #012C34;
+    border-color: #424242;
+    color: #6A959D;
+}
+
+button.button-primary:active, a.button-primary:active, .button.button-primary:active {
+    -webkit-box-shadow: inset 5px 5px 30px 5px rgba(0,0,0,0.3);
+       -moz-box-shadow: inset 5px 5px 30px 5px rgba(0,0,0,0.3);
+            box-shadow: inset 5px 5px 30px 5px rgba(0,0,0,0.3);
+}
+
+button.button-primary:focus, a.button-primary:focus, .button.button-primary:focus,
+input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, 
+input[type="text"]:focus, input[type="tel"]:focus, input[type="url"]:focus, 
+input[type="password"]:focus, textarea:focus, select:focus {
+    border-color: #012C34;
+}
+
+.main {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    overflow: auto;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+}
+
+.transition-base {
+    -webkit-transition: 1s;
+       -moz-transition: 1s;
+        -ms-transition: 1s;
+         -o-transition: 1s;
+            transition: 1s;
+}
+
+
+/* ---- Media Queries ---- */
+
+/* Larger than mobile */
+@media (min-width: 400px) {}
+
+/* Larger than phablet */
+@media (min-width: 550px) {}
+
+/* Larger than tablet */
+@media (min-width: 750px) {}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {}
+
+
+/** IE 10 Mobile CSS **/
+@-webkit-viewport {
+    width: device-width;
+}
+
+@-moz-viewport {
+    width: device-width;
+}
+
+@-ms-viewport {
+    width: device-width;
+}
+
+@-o-viewport {
+    width: device-width;
+}
+
+@viewport {
+    width: device-width;
+}
+

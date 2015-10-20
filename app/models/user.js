@@ -7,9 +7,9 @@ class User extends Vue {
       data: function() {
         return {
           username: null,
-          profileImageUrl: null,
+          profile-image: null,
           location: null,
-          loggedIn: false
+          logged-in: false
         }
       },
       methods: {
@@ -42,14 +42,14 @@ class User extends Vue {
         userSession.on('value', (snap) => {
           let permitted = {
             username: authData.github.username,
-            profileImage: authData.github.profileImageURL
+            profile-image: authData.github.profileImageURL
           }
           if(!snap.val()){
             userSession.set(permitted);
           } else {
             userSession.update(permitted, (error) => {
               Object.assign(this, permitted);
-              this.loggedIn = true
+              this.logged-in = true
             });
           }
 
@@ -58,7 +58,7 @@ class User extends Vue {
         console.log("User is logged out");
         this.username = null;
         this._uid = null;
-        this.loggedIn = false;
+        this.logged-in = false;
       }
     });
   }

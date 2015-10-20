@@ -1,27 +1,24 @@
 import Vue from "vue";
+import FirebaseAdapter from 'app/adapters/firebase_adapter';
 
+class VueFire extends FirebaseAdapter {
+    constructor(config, path){
+        super(path);
+        this.container = new Vue(config);
+		this.container.firebase = this;
 
-class VueAdapter {
-	constructor(obj, key){
-		this._obj = obj;
-		this._obj.$watch((a,b) => {
-			console.log(a,b);
-		},{
-		  deep: true
-		});
-	}
+        this.init();
+    }
 
-	added(){
+    added(key, value) {
+        this.container[key] = value;
+    }
 
-	}
+    changed(key, value) {
+        this.container[key] = value;
+    }
 
-	changed(){
-
-	}
-
-	removed(){
-
-	}
+    remove(key) {
+        this.container[key] = null;
+    }
 }
-
-export default VueAdapter

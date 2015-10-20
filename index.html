@@ -3,7 +3,7 @@
     <head>
         <!-- title -->
         <title>Tripping</title>
-        
+
         <!-- metas -->
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -43,9 +43,18 @@
         <div class="main" v-if="!loading">
             <user-panel user="{{ user }}"></user-panel>
             <div class="content">
-                <div class="map-container">
-                    <search-panel></search-panel>
-                    <map-panel url="{{@ trip_url }}"></map-panel>
+                <div class="row">
+                    <div class="nine columns">
+                        <div class="map-container">
+                            <map-panel url="{{@ trip_url }}"></map-panel>
+                        </div>
+                    </div>
+                    <div class="three columns">
+                        <div class="search-container">
+                            <results-panel></results-panel>
+                            <search-panel></search-panel>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="trip-list-container">

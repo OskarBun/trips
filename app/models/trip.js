@@ -1,5 +1,6 @@
 import 'firebase';
 import Vue from 'vue';
+import FirebaseAdapter from 'app/adapters/firebase_adapter';
 
 function errback(errorObject) {
   console.log("The read failed: " + errorObject.code);
@@ -7,7 +8,6 @@ function errback(errorObject) {
 
 var TRIPS_PATH = "trips/";
 var LOCATION_PATH = "locations";
-
 
 class Trip extends Vue {
 	constructor(url){
@@ -50,7 +50,7 @@ class Trip extends Vue {
 	}
 }
 
-class TripFactory{
+class TripFactory {
 	constructor(url="https://scorching-fire-6566.firebaseio.com/"){
 		this._url = url + TRIPS_PATH;
 	}
@@ -73,6 +73,12 @@ class TripFactory{
 		trips.on("child_added",function(snapshot){
 			container.$add(snapshot.key(), snapshot.val());
 		});
+        trips.on("child_removed", function(snapshot){
+            container.$delete(snapshot.key(), snapshot.val());
+        });
+        trips.on("child_changed", function(snapshot){
+            container.$set(snapshot.key(), snapshot.val());
+        });
 		return trips;
 	}
 }

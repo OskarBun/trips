@@ -1,39 +1,34 @@
-import VueAdapter from "app/adapters/vue_adapter";
+import FirebaseAdapter from "app/adapters/firebase_adapter";
 import Vue from "vue";
 
 
-class VueTest extends VueAdapter{
-	constructor(){
-		super(new Vue({
-			data:{}
-		}),'obj');
-		this.output = [];
-	}
+class VueFire extends FirebaseAdapter {
+    //Container should be a Vue
+    constructor(config, path){
+        super(path);
+        this.container = new Vue(config);
 
-	added(n,o){
-		this.output.push([n,o]);
-	}
+        this.init();
+    }
 
-	changed(n,o){
-		this.output.push([n,o]);
-	}
+    added(key, value) {
+        this.container.$add(key, value)
+    }
 
-	removed(n,o){
-		this.output.push([n,o]);
-	}
+    changed(key, value) {
+        this.container.$set(key, value);
+    }
 
-	set_val(key, val){
-		this._obj.$set(key,val);
-	}
-
-	del_val(key){
-		this._obj.$delete(key);
-	}
-
+    remove(key, value) {
+        this.container.$delete(key);
+    }
 }
 
 describe("VueAdapter suite", function() {
-	var adapter = new VueTest();
+	var adapter = new VueFire(data: {
+		label: null,
+		locations: {}
+	}, 'https://scorching-fire-6566.firebaseio.com/trips/-K1-bQ2NT5d2SEj26ZIZ');
 
 	it("should contruct", function() {
 		expect(true).toBe(true);

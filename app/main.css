@@ -1,13 +1,13 @@
 /* ---- Colours ---- */
-/* Primary   
+/* Primary
    #255E69
 */
 
-/* Secondary 
+/* Secondary
    #012C34
 */
 
-/* Highlight 
+/* Highlight
    #6A959D
 */
 
@@ -65,8 +65,8 @@ button.button-primary:focus, a.button-primary:focus, .button.button-primary:focu
 }
 
 button.button-primary:focus, a.button-primary:focus, .button.button-primary:focus,
-input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, 
-input[type="text"]:focus, input[type="tel"]:focus, input[type="url"]:focus, 
+input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus,
+input[type="text"]:focus, input[type="tel"]:focus, input[type="url"]:focus,
 input[type="password"]:focus, textarea:focus, select:focus {
     border-color: #012C34;
 }
@@ -143,4 +143,3 @@ input[type="password"]:focus, textarea:focus, select:focus {
 @viewport {
     width: device-width;
 }
-

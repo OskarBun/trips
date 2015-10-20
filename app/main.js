@@ -8,6 +8,7 @@ import 'app/components/map-panel/main';
 import 'app/components/trips-panel/main';
 import 'app/components/user-panel/main';
 import 'app/components/search-panel/main';
+import 'app/components/results-panel/main';
 import User from 'app/models/user';
 import TripFactory from 'app/models/trip';
 
@@ -20,7 +21,8 @@ var appl = window.appl = new Vue({
               user: new User(fireUrl),
               trips: new TripFactory(fireUrl),
               trip: null,
-              loading: true
+              loading: true,
+              label: null
             },
             computed: {
               trip_url: function() {
@@ -35,12 +37,18 @@ var appl = window.appl = new Vue({
                 this.loading = false;
             },
             events: {
-              "search-location-set": function(e) {
-                this.$broadcast('set-center', e);
-              },
-              "search-location-results": function(e) {
-                this.$broadcast('search-results', e);
-              }
+                "search-location-set": function(e) {
+                    this.$broadcast('set-center', e);
+                },
+                "search-location-results": function(e) {
+                    this.$broadcast('search-results', e);
+                },
+                "highlight-result": function(e) {
+                    this.$broadcast('highlight-result', e);
+                },
+                "add_location": function(e) {
+
+                }
             }
         });
 

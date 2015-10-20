@@ -4,7 +4,11 @@ import info_tmpl from './info-tmpl.html!text';
 import Vue from 'vue';
 import map_loader from "map";
 import FirebaseAdapter from 'app/adapters/firebase_adapter';
-	
+
+var GREEN_ICON='//maps.google.com/mapfiles/ms/icons/green-dot.png';
+var BLUE_ICON='//maps.google.com/mapfiles/ms/icons/blue-dot.png';
+var RED_ICON='//maps.google.com/mapfiles/ms/icons/red-dot.png';
+
 
 function googleMap(vm){
 	map_loader({
@@ -35,7 +39,7 @@ function googleMap(vm){
 		                map: this.container.map,
 		                position: new google.maps.LatLng(value.lat,value.lng),
 		                title: value.title,
-		                icon: "//maps.google.com/mapfiles/ms/icons/red-dot.png",
+		                icon: RED_ICON,
 		                draggable: true
 		            });
 		            this.markers[key]=marker;
@@ -85,7 +89,7 @@ function googleMap(vm){
 			                map: container.map,
 			                position: new google.maps.LatLng(item.lat,item.lng),
 			                title: item.title,
-			                icon: '//maps.google.com/mapfiles/ms/icons/blue-dot.png'
+			                icon: BLUE_ICON
 			            });
 						let info = new google.maps.InfoWindow();
 			            google.maps.event.addListener(marker, 'click', (e) => {
@@ -112,7 +116,12 @@ function googleMap(vm){
 					new Vue({
 						el:"#"+id,
 						template: info_tmpl,
-						data:item
+						data:item,
+						methods: {
+							addLocation: function(){
+								this.$dispatch('addLocation', this.item);
+							}
+						}
 					});
 	   			}
 
@@ -127,6 +136,12 @@ function googleMap(vm){
 					});
 					return rb;
 	   			}
+
+				hilite(index){
+					this.markers.map((item, i) => {
+						item.m.setIcon(i===index ? GREEN_ICON: BLUE_ICON);
+					});
+				}
 	   		}
 
 		   	class MapContainer{
@@ -223,6 +238,12 @@ function googleMap(vm){
 					this.search_results = new SearchResultsAdapter(this,results);
 					this.set_bounds();
 				}
+
+				hilite_search(index){
+					if(this.search_results){
+						this.search_results.hilite(index);
+					}
+				}
 			}
 	   		vm._map_container_ = new MapContainer(vm.$el);
 		}, function(err) {
@@ -258,7 +279,12 @@ Vue.component('map-panel', {
   			if(this._map_container_){
   				this._map_container_.set_search_results(e);
   			}
-  		}
+  		},
+		"highlight-result": function(e){
+			if(this._map_container_){
+				this._map_container_.hilite_search(e);
+			}
+		}
   	},
   	watch:{
   		"url": function(val){

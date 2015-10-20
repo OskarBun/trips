@@ -11,38 +11,14 @@ function googleMap(vm){
         })
 	   .then(function(googleApi) {
 
-		   	class GoogleMap extends FirebaseAdapter{
-				constructor(path, element){
+	   		class LocationsAdapter extends FirebaseAdapter{
+
+				constructor(map, path){
 					super(path);
+					this.map = map;
 					this.markers = {};
-					this.to_do = null;
-
-					var mapOptions = {
-				    	center: new google.maps.LatLng(54.8143,-2.9694),
-				    	zoom: 15,
-				    	mapTypeId: googleApi.maps.MapTypeId.MAP
-					};
-
-					this.map = new googleApi.maps.Map(element, mapOptions);
-
-				    googleApi.maps.event.addListener(this.map, 'dblclick', (e) => {
-				        if(this.to_do){
-				        	clearTimeout(this.to_do);
-				    		this.to_do = null;
-				        }
-				    });
-				    googleApi.maps.event.addListener(this.map, 'click',(e) => {
-				    	if(this.to_do === null){
-				        	this.to_do = setTimeout(() => {
-				        		this.to_do = null;
-				        		this.map_clicked(
-				        			e.latLng.lat(),
-				        			e.latLng.lng());
-				        	},300);
-				    	}
-				    });
 				    this.init();
-				    this.set_bounds();
+				    this.map.set_bounds();
 				}
 
 				dispose(){
@@ -50,23 +26,12 @@ function googleMap(vm){
 						this.markers[marker].map = null;
 					}
 					this.markers={};
-				}
-
-				map_clicked(lat,lng){
-					this.add({
-						title: "untitled",
-						lat: lat,
-						lng: lng
-					});
-				}
-
-				marker_dragged(key, value, lat, lng){
-					this.change(key,{lat:lat, lng:lng});
+					this.map = null;
 				}
 
 				added(key, value){
 					var marker = new googleApi.maps.Marker({
-		                map: this.map,
+		                map: this.map.map,
 		                position: new google.maps.LatLng(value.lat,value.lng),
 		                title: value.title,
 		                draggable: true
@@ -74,7 +39,7 @@ function googleMap(vm){
 		            this.markers[key]=marker;
 		            googleApi.maps.event.addListener(marker, 'dragend', (e) => {
 		                var location = marker.getPosition();
-		                this.marker_dragged(key, value,location.lat(), location.lng());
+		                this.map.marker_dragged(key, value, location.lat(), location.lng());
 		            });
 				}
 
@@ -91,6 +56,62 @@ function googleMap(vm){
 					if(marker){
             			marker.setMap(null);
 						delete this.markers[key]
+					}
+				}
+	   		}
+
+		   	class GoogleMap{
+				constructor(element){
+					this.locations = null;
+					this.to_do = null;
+
+					var mapOptions = {
+				    	center: new google.maps.LatLng(54.8143,-2.9694),
+				    	zoom: 15,
+				    	mapTypeId: googleApi.maps.MapTypeId.MAP
+					};
+
+					this.map = new googleApi.maps.Map(element, mapOptions);
+
+				    googleApi.maps.event.addListener(this.map, 'dblclick', (e) => {
+				        if(this.to_do){
+				        	clearTimeout(this.to_do);
+				    		this.to_do = null;
+				        }
+				    });
+				    googleApi.maps.event.addListener(this.map, 'click', (e) => {
+				    	if(this.to_do === null){
+				        	this.to_do = setTimeout(() => {
+				        		this.to_do = null;
+				        		this.map_clicked(
+				        			e.latLng.lat(),
+				        			e.latLng.lng());
+				        	},300);
+				    	}
+				    });
+				}
+
+				dispose(){
+					if(this.locations){
+						this.locations.dispose();
+					}
+					delete this.map;
+					this.map = null;
+				}
+
+				map_clicked(lat,lng){
+					if(this.locations){
+						this.locations.add({
+							title: "untitled",
+							lat: lat,
+							lng: lng
+						});
+					}
+				}
+
+				marker_dragged(key, value, lat, lng){
+					if(this.locations){
+						this.locations.change(key,{lat:lat, lng:lng});
 					}
 				}
 
@@ -118,8 +139,18 @@ function googleMap(vm){
 						console.log(rb);
 					}
 				}
+
+				set_locations(path){
+					if(this.locations){
+						this.locations.dispose();
+						this.locations = null;
+					}
+					if(path){
+						this.locations = new LocationsAdapter(this, path);
+					}
+				}
 			}
-	   		vm._map_ = new GoogleMap(vm.url, vm.$el);
+	   		vm._map_ = new GoogleMap(vm.$el);
 		}, function(err) {
 	        console.error(err);
 	    });
@@ -147,6 +178,13 @@ Vue.component('map-panel', {
   		"set_center": function(e){
   			if(this._map_){
   				this._map_.set_center(e.lat, e.lng);
+  			}
+  		}
+  	},
+  	watch:{
+  		"url": function(val){
+  			if(this._map_){
+  				this._map_.set_locations(val);
   			}
   		}
   	}

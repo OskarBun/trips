@@ -46,7 +46,7 @@ class Trip extends Vue {
 			this.locations.$delete(snapshot.key());
 		});
 		this._base = base;
-    this.locations_path = url+LOCATION_PATH;
+    this.locations_path = url+'/'+LOCATION_PATH;
 	}
 }
 

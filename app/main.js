@@ -21,7 +21,13 @@ var appl = window.appl = new Vue({
               trip_factory: new TripFactory(fireUrl),
               loading: true
             },
-            computed: {},
+            computed: {
+              tripUrl: function() {
+                if(this.trip){
+                  return this.trip.locations_path;
+                }
+              }
+            },
             methods: {},
             components: {},
             ready: function(){

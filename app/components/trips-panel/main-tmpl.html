@@ -14,8 +14,9 @@
 	<input id="trip_label_input" type="text" class="u-full-width" v-model="trip.label"  placeholder="label"/>
 	<ul>
 		<li v-repeat="trip.locations">
-  			{{ lat }} : {{ lng }} <input type="text" v-model="title" />
-			</li>
+			{{ lat }} : {{ lng }}
+			<input type="text" v-model="title" />
+		</li>
 	</ul>
 	<button v-on="click:close_trip">Close</button>
 </template>

@@ -5,6 +5,8 @@ import Vue from 'vue';
 import 'firebase';
 import 'app/components/map-panel/main';
 import 'app/components/trips-panel/main';
+import 'app/components/user-panel/main';
+import 'app/components/search-panel/main';
 import User from 'app/models/user';
 import TripFactory from 'app/models/trip';
 
@@ -25,6 +27,11 @@ var appl = window.appl = new Vue({
             ready: function(){
                 this.loading = false;
                 let fireUrl = 'https://scorching-fire-6566.firebaseio.com/'
+            },
+            events: {
+              "search-location-set": function(e) {
+                this.$broadcast('set_center', e);
+              }
             }
         });
 

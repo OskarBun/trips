@@ -3,7 +3,7 @@ import tmpl from './main-tmpl.html!text';
 import Vue from 'vue';
 import map_loader from "map";
 
-        
+
 function geo_location(callback){
 	if (navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(position){
@@ -12,7 +12,7 @@ function geo_location(callback){
 		        })
 			   .then(function(googleApi) {
 					var value = new googleApi.maps.LatLng(
-							position.coords.latitude, 
+							position.coords.latitude,
 							position.coords.longitude);
 					callback(value);
 				});
@@ -41,7 +41,7 @@ function code_address(postcode, callback){
     	});
 }
 
-Vue.component('map-panel', {
+Vue.component('search-panel', {
 	data: function(){
 		return {
 			location: null,
@@ -66,8 +66,8 @@ Vue.component('map-panel', {
 	watch:{
 		'location': function(val){
 			if(val){
-				this.$emit("search-location-set",{
-					lat: val.lat(), 
+				this.$dispatch("search-location-set",{
+					lat: val.lat(),
 					lng: val.lng(),
 					term: this.search
 				});

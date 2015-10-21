@@ -6,11 +6,13 @@ import Vue from 'vue';
 import Location from 'app/models/location';
 import User from 'app/models/user';
 
-var ReferenceLister = function(){
-	return new Promise((resolve, reject) => {
-
-	}
-}
+// var ReferenceLister = function(list, Model){
+// 	return new Promise((resolve, reject) => {
+// 		var newList = return Object.keys(this.trip.locations).map((key) => {
+// 			return new Model(`https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`)
+// 		});
+// 	}
+// }
 
 Vue.component('trips-panel', {
 	data: function(){
@@ -23,18 +25,18 @@ Vue.component('trips-panel', {
   	props: ['trips', 'trip'],
 	computed: {
 		locations: function() {
-			// if(this.trip && this.trip.locations){
-			// 	return Object.keys(this.trip.locations).map((key) => {
-			// 		return new Location(`https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`)
-			// 	});
-			// }
+			if(this.trip && this.trip.locations){
+				return Object.keys(this.trip.locations).map((key) => {
+					return new Location(`https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`)
+				});
+			}
 		},
 		users: function() {
-			// if(this.trip && this.trip.users){
-			// 	return Object.keys(this.trip.users).map(key => {
-			// 		return new User(`https://scorching-fire-6566.firebaseio.com/reference-test/users/${key}`)
-			// 	});
-			// }
+			if(this.trip && this.trip.users){
+				return Object.keys(this.trip.users).map(key => {
+					return new User(`https://scorching-fire-6566.firebaseio.com/reference-test/users/${key}`)
+				});
+			}
 		}
 	},
 	methods: {
@@ -43,7 +45,7 @@ Vue.component('trips-panel', {
 			this.new_label = null;
 		},
 		"open_trip": function(key){
-			this.trip = this.trips.open_trip(key);
+			this.$dispatch('show-trip', key);
 		},
 		"close_trip": function(){
 			this.trip = null;

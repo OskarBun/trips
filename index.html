@@ -37,7 +37,7 @@
             <user-panel user="{{ user }}" root="{{ base }}"></user-panel>
             <div class="content" v-style="height:content_height+'px'">
                 <div class="trip-container">
-                    <trips-panel trips="{{ trips }}" trip="{{@ trip }}"></trips-panel>
+                    <trips-panel trips="{{ trips }}" trip="{{ trip }}"></trips-panel>
                 </div><div class="map-container">
                     <map-panel url="{{@ trip_url }}"></map-panel>
                 </div><div class="search-container">

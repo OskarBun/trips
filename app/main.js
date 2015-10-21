@@ -85,8 +85,8 @@ var appl = window.appl = new Vue({
         "highlight-result": function(e) {
             this.$broadcast('highlight-result', e);
         },
-        "add_location": function(e) {
-
+        "show-trip": function(e) {
+            this.trip = this.trips.open_trip(e);
         }
     }
 });

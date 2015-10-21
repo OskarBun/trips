@@ -32,9 +32,9 @@
         <!-- Vue.js binding CSS -->
         <style type="text/css"> [v-cloak] { display: none } </style>
     </head>
-    <body>    
+    <body>
         <div class="main">
-            <user-panel user="{{ user }}"></user-panel>
+            <user-panel user="{{ user }}" root="{{ base }}"></user-panel>
             <div class="content" v-style="height:content_height+'px'">
                 <div class="trip-container">
                     <trips-panel trips="{{ trips }}" trip="{{@ trip }}"></trips-panel>

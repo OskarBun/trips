@@ -12,9 +12,11 @@ class FirebaseAdapter {
 		immediately - so call init at the end of
 		you subclasses constructor.
 	 */
-	init(callback){
+	init(){
 		this._base.on('value', (snapshot) => {
-			//noop
+			if(snapshot.val() === null){
+				console.log(this);
+			}
 		});
 		this._base.on("child_added", (snapshot, prevChildKey) => {
 			this.added(snapshot.key(), snapshot.val());
@@ -27,15 +29,14 @@ class FirebaseAdapter {
 		});
 	}
 
-	// load(){
-	// 	return new Promise((resolve, reject)=>{
-	// 		this.init(resolve);
-	// 	});
-	// }
-
-	set(key, value){
-		return this._base.child(key).set(value);
+	off(){
+		this._base.off();
 	}
+
+	set(value){
+		return this._base.set(value);
+	}
+
 
 	/**
 		will add a child to our base container
@@ -47,8 +48,8 @@ class FirebaseAdapter {
 	/**
 		will update a child to our base container
 	 */
-	change(key,value){
-		this._base.child(key).update(value);
+	change(obj, callback){
+		this._base.update(obj, callback);
 	}
 
 	/**

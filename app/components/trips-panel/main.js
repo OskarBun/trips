@@ -24,6 +24,7 @@ Vue.component('trips-panel', {
 	methods: {
 		"add_trip": function(){
 			this.trip = this.trips.create_trip(this.new_label);
+			this.new_label = null;
 		},
 		"open_trip": function(key){
 			this.trip = this.trips.open_trip(key);

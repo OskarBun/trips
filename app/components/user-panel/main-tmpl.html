@@ -5,10 +5,10 @@
         <span class="user-profile pull-right">
             <span class="profile-name title" v-text="user_tag"></span>
             <span class="profile-image">
-                <div class="logout-container" v-if="user.logged_in" v-on="click: user.logout">
+                <div class="logout-container" v-if="user" v-on="click: logout">
                     <img class="login-image u-full-width" v-attr="src: user.profile_image" />
                 </div>
-                <div class="login-container" v-if="!user.logged_in" v-on="click: user.login">
+                <div class="login-container" v-if="!user" v-on="click: login">
                     <i class="fa fa-user fa-fw"></i>
                 </div>
             </span>

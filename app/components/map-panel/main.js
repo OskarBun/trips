@@ -57,6 +57,7 @@ function googleMap(vm){
 					}
 					this.markers={};
 					this.container = null;
+					this.off();
 				}
 
 				added(key, value){
@@ -217,7 +218,8 @@ function googleMap(vm){
 			                lat: lat,
 			                lng: lng
 			            });
-						this.locations.set(snap.key(), true);
+						var change = { [snap.key()]: true }
+						this.locations.change(change);
 					}
 				}
 
@@ -247,7 +249,6 @@ function googleMap(vm){
 					}
 					if(path){
 						this.locations = new LocationsAdapter(this, path);
-						// this.locations.load().then(this.set_bounds);
 					}
 				}
 

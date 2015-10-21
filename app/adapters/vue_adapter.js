@@ -8,6 +8,10 @@ class Foo extends FirebaseAdapter {
 		this.init();
 	}
 
+	setted(value) {
+		this.container = value;
+	}
+
 	added(key, value) {
 		this.container[key] = value;
 	}

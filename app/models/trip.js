@@ -26,10 +26,10 @@ class TripFactory {
 		this._url = url + TRIPS_PATH;
 	}
 
-	create_trip (label, user){
+	create_trip (label){
 		var base = new Firebase(this._url);
         var users = {};
-        users[user._uid] = true;
+        users[base.getAuth().uid] = true
 		var ftrip = base.push({
 			label: label,
 			locations: {},

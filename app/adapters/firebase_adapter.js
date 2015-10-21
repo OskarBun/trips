@@ -13,8 +13,8 @@ class FirebaseAdapter {
 		you subclasses constructor.
 	 */
 	init(){
-		this._base.on('value', (snapshot) => {
-			//Noop
+		this._base.once('value', (snapshot) => {
+			this.setted(snapshot.val());
 		});
 		this._base.on("child_added", (snapshot, prevChildKey) => {
 			this.added(snapshot.key(), snapshot.val());

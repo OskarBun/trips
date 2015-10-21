@@ -45,7 +45,6 @@ var appl = window.appl = new Vue({
     ready: function() {
         this.base.onAuth((auth_data) => {
             if (auth_data) {
-                var user = new User(`${this.base_url}users/${auth_data.uid}`);
                 var user = new User(this.base_url+'users/'+auth_data.uid);
 
                 user._uid = auth_data.uid;

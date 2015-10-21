@@ -1,7 +1,16 @@
 import './main.css!';
 import tmpl from './main-tmpl.html!text';
+import user_tmpl from './user-tmpl.html!text';
+import trip_tmpl from './trip-tmpl.html!text';
 import Vue from 'vue';
 import Location from 'app/models/location';
+import User from 'app/models/user';
+
+var ReferenceLister = function(){
+	return new Promise((resolve, reject) => {
+
+	}
+}
 
 Vue.component('trips-panel', {
 	data: function(){
@@ -14,11 +23,18 @@ Vue.component('trips-panel', {
   	props: ['trips', 'trip'],
 	computed: {
 		locations: function() {
-			if(this.trip){
-				return Object.keys(this.trip.locations).map((key) => {
-					return new Location(`https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`)
-				})
-			}
+			// if(this.trip && this.trip.locations){
+			// 	return Object.keys(this.trip.locations).map((key) => {
+			// 		return new Location(`https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`)
+			// 	});
+			// }
+		},
+		users: function() {
+			// if(this.trip && this.trip.users){
+			// 	return Object.keys(this.trip.users).map(key => {
+			// 		return new User(`https://scorching-fire-6566.firebaseio.com/reference-test/users/${key}`)
+			// 	});
+			// }
 		}
 	},
 	methods: {
@@ -40,4 +56,9 @@ Vue.component('trips-panel', {
 		"hook:detached": function(){}
 	},
 	watch:{}
+});
+
+Vue.component('list-user', {
+	template: user_tmpl,
+	props: ['user']
 });

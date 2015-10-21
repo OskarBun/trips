@@ -14,9 +14,7 @@ class FirebaseAdapter {
 	 */
 	init(){
 		this._base.on('value', (snapshot) => {
-			if(snapshot.val() === null){
-				console.log(this);
-			}
+			//Noop
 		});
 		this._base.on("child_added", (snapshot, prevChildKey) => {
 			this.added(snapshot.key(), snapshot.val());

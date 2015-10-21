@@ -13,7 +13,7 @@ import User from 'app/models/user';
 import TripFactory from 'app/models/trip';
 
 
-let fire_url = 'https://scorching-fire-6566.firebaseio.com/reference-test/';
+var fire_url = 'https://scorching-fire-6566.firebaseio.com/reference-test/';
 Vue.config.debug = true;
 
 function calc_content_height() {
@@ -35,22 +35,24 @@ var appl = window.appl = new Vue({
     },
     computed: {
         trip_url: function() {
-            if(this.trip){
+            if(this.trip) {
                 return this.trip.locations_path;
             }
         }
     },
     methods: {},
     components: {},
-    ready: function(){
-        this.base.onAuth((authData) => {
-            if (authData) {
-                var user = new User(`${this.base_url}users/${authData.uid}`);
-                user._uid = authData.uid;
+    ready: function() {
+        this.base.onAuth((auth_data) => {
+            if (auth_data) {
+                var user = new User(`${this.base_url}users/${auth_data.uid}`);
+                var user = new User(this.base_url+'users/'+auth_data.uid);
+
+                user._uid = auth_data.uid;
                 user.adapter._base.once('value', (snap) => {
-                    let permitted = {
-                        username: authData.github.username,
-                        profile_image: authData.github.profileImageURL
+                    var permitted = {
+                        username: auth_data.github.username,
+                        profile_image: auth_data.github.profileImageURL
                     }
                     if(!snap.val()){
                         user.adapter.set(permitted);
@@ -66,12 +68,12 @@ var appl = window.appl = new Vue({
                 this.user = null;
             }
         });
+
         this.$nextTick(() => {
             this.content_height = calc_content_height();
-            window.addEventListener("resize", () => {
-                this.content_height = calc_content_height();
-            });
+            window.addEventListener( "resize", () => this.content_height = calc_content_height() );
         });
+
         this.loading = false;
     },
     events: {

@@ -18,18 +18,27 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.25",
     "clean-css": "npm:clean-css@3.4.6",
     "core-js": "npm:core-js@1.2.1",
-    "css": "github:systemjs/plugin-css@0.1.18",
+    "css": "github:systemjs/plugin-css@0.1.19",
+    "d3": "github:mbostock/d3@3.5.6",
     "firebase": "npm:firebase@2.3.1",
     "font-awesome": "npm:font-awesome@4.4.0",
     "google-maps-api-loader": "npm:google-maps-api-loader@0.0.4",
     "jasmine": "npm:jasmine@2.3.2",
     "jasmine-standalone": "npm:jasmine-standalone@1.3.1",
+    "jquery": "github:components/jquery@2.1.4",
     "map": "npm:google-maps-api-loader@0.0.4",
     "maps": "npm:google-maps-api-loader@0.0.4",
     "scss": "github:screendriver/plugin-sass@0.0.5",
+    "selectize": "github:brianreavis/selectize.js@0.12.1",
     "skeleton": "npm:skeleton-css@2.0.4",
     "text": "github:systemjs/plugin-text@0.0.2",
     "vue": "npm:vue@0.12.16",
+    "github:brianreavis/selectize.js@0.12.1": {
+      "css": "github:systemjs/plugin-css@0.1.19",
+      "jquery": "github:components/jquery@2.1.4",
+      "microplugin": "npm:microplugin@0.0.3",
+      "sifter": "github:brianreavis/sifter.js@0.4.4"
+    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -307,7 +316,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:font-awesome@4.4.0": {
-      "css": "github:systemjs/plugin-css@0.1.18"
+      "css": "github:systemjs/plugin-css@0.1.19"
     },
     "npm:glob@3.2.11": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",

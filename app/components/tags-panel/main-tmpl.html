@@ -1,0 +1,20 @@
+<div class="TagsPanel">
+	<div class="row">
+        <div class="one-third column">
+            <input id="trip_label_input" type="text" v-model="new_member_title"  placeholder="title"/>
+            <button v-on="click:add_member">Add</button>
+            <hr/>
+            <template v-repeat="members">
+                <div class="TagsMember">
+                    <label>{{ title }}</label>
+                    <input type="text" v-model="tags" />
+                    <p>{{ tags }}</p>
+                </div>
+            </template>
+        </div>
+    	<div class="two-thirds column">
+            <div class="graph"></div>
+            <p>{{ all_tags }}</p>
+        </div>
+  	</div>
+</div>

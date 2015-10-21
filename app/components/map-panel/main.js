@@ -6,16 +6,7 @@ import map_loader from "map";
 import FirebaseAdapter from 'app/adapters/firebase_adapter';
 import Location from 'app/models/location';
 
-import barefoot from './resources/barefoot.svg!text';
-import flaf5 from './resources/flag5.svg!text';
-
-
-
-var GREEN_ICON='//maps.google.com/mapfiles/ms/icons/green-dot.png';
-var BLUE_ICON= "data:image/svg+xml," + encodeURIComponent(flaf5); //'//maps.google.com/mapfiles/ms/icons/blue-dot.png';
-var RED_ICON= "data:image/svg+xml," + encodeURIComponent(barefoot); //'//maps.google.com/mapfiles/ms/icons/red-dot.png';
-
-
+import icons from './icons';
 
 
 function googleMap(vm){
@@ -71,7 +62,7 @@ function googleMap(vm){
 				added(key, value){
 					var m = new FireMarker({
 						map: this.container.map,
-						icon: RED_ICON,
+						icon: icons.RED_ICON,
 						draggable: true
 					}, `https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`, marker => this.markers[key] = marker);
 					m.load().then(()=>{
@@ -120,7 +111,7 @@ function googleMap(vm){
 			                map: container.map,
 			                position: new google.maps.LatLng(item.lat,item.lng),
 			                title: item.title,
-			                icon: BLUE_ICON
+			                icon: icons.BLUE_ICON
 			            });
 						let info = new google.maps.InfoWindow();
 			            google.maps.event.addListener(marker, 'click', (e) => {
@@ -170,7 +161,7 @@ function googleMap(vm){
 
 				hilite(index){
 					this.markers.map((item, i) => {
-						item.m.setIcon(i===index ? GREEN_ICON: BLUE_ICON);
+						item.m.setIcon(i===index ? icons.GREEN_ICON: icons.BLUE_ICON);
 					});
 				}
 	   		}

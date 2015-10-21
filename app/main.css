@@ -1,14 +1,14 @@
 /* ---- Colours ---- */
 /* Primary
-   #255E69
+   #69AEBB
 */
 
 /* Secondary
-   #012C34
+   #FFDE8D
 */
 
 /* Highlight
-   #6A959D
+   #F9D068
 */
 
 
@@ -43,32 +43,33 @@ button, a, .button {
 }
 
 button.button-primary, a.button-primary, .button.button-primary {
-    background-color: #255E69;
-    border-color: #255E69;
+    background-color: #FFDE8D;
+    border-color: #FFDE8D;
     color: #fff;
 }
 
 button.button-primary:hover, a.button-primary:hover, .button.button-primary:hover {
-    background-color: #255E69;
-    border-color: #424242;
+    background-color: #F9D068;
+    border-color: #F9D068;
+    color: #fff;
 }
 
 button.button-primary:active, a.button-primary:active, .button.button-primary:active {
-    color: #6A959D;
+    color: #FFDE8D;
     -webkit-box-shadow: inset 5px 5px 30px 5px rgba(0,0,0,0.3);
        -moz-box-shadow: inset 5px 5px 30px 5px rgba(0,0,0,0.3);
             box-shadow: inset 5px 5px 30px 5px rgba(0,0,0,0.3);
 }
 
 button.button-primary:focus, a.button-primary:focus, .button.button-primary:focus {
-    background-color: #255E69;
+    background-color: #FFDE8D;
 }
 
 button.button-primary:focus, a.button-primary:focus, .button.button-primary:focus,
 input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus,
 input[type="text"]:focus, input[type="tel"]:focus, input[type="url"]:focus,
 input[type="password"]:focus, textarea:focus, select:focus {
-    border-color: #012C34;
+    border-color: #FFDE8D;
 }
 
 .noselect {
@@ -96,6 +97,8 @@ input[type="password"]:focus, textarea:focus, select:focus {
     width: 100%;
 
     overflow: hidden;
+
+    /*background-color: #FFDE8D;*/
 }
 
 .main

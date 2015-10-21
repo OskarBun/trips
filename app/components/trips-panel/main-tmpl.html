@@ -1,13 +1,16 @@
 <div class="TripsPanel">
-
 	<template v-if="!trip">
-		<input id="trip_label_input" type="text" class="u-full-width" v-model="new_label"  placeholder="label"/>
-		<button v-on="click:add_trip">Add</button>
-		<ul>
-			<li v-repeat="items">
-					<a v-on="click:open_trip($key)">{{ label }}</a>
-				</li>
+		<div class="title title-bar">Planned Trips:</div>
+		<ul class="trip-list-containter">
+			<li v-repeat="items" v-on="click:open_trip($key)">{{ label }}</li>
 		</ul>
+		<div class="footer-container">
+			<input class="name-field" type="text" v-model="new_label" placeholder="New Trip Name"/>
+			<button class="add-button pull-right" v-on="click:add_trip">
+				<i class="fa fa-plus fa-fw"></i>
+			</button>
+			<div class="new-trip-foot"></div>
+		</div>
 	</template>
 
 	<template v-if="trip">
@@ -18,7 +21,9 @@
 				<input type="text" v-model="title" />
 			</li>
 		</ul>
-		<button v-on="click:close_trip">Close</button>
+		<div class="footer-container">
+			<button class="close-button" v-on="click:close_trip">Close</button>
+			<div class="new-trip-foot"></div>
+		</div>
 	</template>
-
 </div>

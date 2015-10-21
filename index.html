@@ -38,13 +38,11 @@
             <div class="content" v-style="height:content_height+'px'">
                 <div class="trip-container">
                     <trips-panel trips="{{ trips }}" trip="{{@ trip }}"></trips-panel>
-                </div>
-                <div class="map-container">
+                </div><div class="map-container">
                     <map-panel url="{{@ trip_url }}"></map-panel>
-                </div>
-                <div class="search-container">
-                    <results-panel></results-panel>
+                </div><div class="search-container">
                     <search-panel></search-panel>
+                    <results-panel></results-panel>
                 </div>
             </div>
         </div>

@@ -22,6 +22,12 @@
 }
 
 .UserPanel
+.icon {
+	width: 40px;
+	vertical-align: top;
+}
+
+.UserPanel
 .site-title {
 	display: inline-block;
 }

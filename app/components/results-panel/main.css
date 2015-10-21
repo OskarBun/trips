@@ -1,3 +1,5 @@
-.resultsPanel {
-    margin: 1em;
+.ResultsPanel {
+	width: 100%;
+	
+	background-color: #fff;
 }

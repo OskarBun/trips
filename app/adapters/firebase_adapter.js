@@ -12,9 +12,9 @@ class FirebaseAdapter {
 		immediately - so call init at the end of
 		you subclasses constructor.
 	 */
-	init(){
+	init(callback){
 		this._base.on('value', (snapshot) => {
-			// noop - forces node to load
+			//noop
 		});
 		this._base.on("child_added", (snapshot, prevChildKey) => {
 			this.added(snapshot.key(), snapshot.val());
@@ -25,6 +25,16 @@ class FirebaseAdapter {
 		this._base.on("child_removed", (snapshot) => {
 			this.removed(snapshot.key());
 		});
+	}
+
+	// load(){
+	// 	return new Promise((resolve, reject)=>{
+	// 		this.init(resolve);
+	// 	});
+	// }
+
+	set(key, value){
+		return this._base.child(key).set(value);
 	}
 
 	/**
@@ -47,6 +57,12 @@ class FirebaseAdapter {
 	remove(key){
 		this._base.child(key).remove();
 	}
+
+	/**
+		called after inital load
+		sub-class responsibilty
+	*/
+	setted(value){}
 
 	/**
 		called after load or add

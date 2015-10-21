@@ -1,7 +1,7 @@
 import './main.css!';
 import tmpl from './main-tmpl.html!text';
 import Vue from 'vue';
-import TripFactory from "app/models/trip"
+import Location from 'app/models/location';
 
 Vue.component('trips-panel', {
 	data: function(){
@@ -12,6 +12,15 @@ Vue.component('trips-panel', {
 	},
   	template: tmpl,
   	props: ['trips', 'trip'],
+	computed: {
+		locations: function() {
+			if(this.trip){
+				return Object.keys(this.trip.locations).map((key) => {
+					return new Location(`https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`)
+				})
+			}
+		}
+	},
 	methods: {
 		"add_trip": function(){
 			this.trip = this.trips.create_trip(this.new_label);
@@ -25,7 +34,7 @@ Vue.component('trips-panel', {
 	},
 	events: {
 		"hook:attached": function(){
-      		this.trips.list_trips(this.items);
+      		this.items_adapter = this.trips.list_trips(this.items);
 		},
 		"hook:detached": function(){}
 	},

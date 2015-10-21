@@ -1,38 +1,23 @@
 import 'firebase';
 import Vue from 'vue';
 import VueFire from 'app/adapters/vue_adapter';
-import VueFireArray from 'app/adapters/vue_array_adapter';
-
-function errback(errorObject) {
-  console.log("The read failed: " + errorObject.code);
-}
+import VueFireIterable from 'app/adapters/vue_iterable_adapter';
 
 var TRIPS_PATH = "trips/";
-var LOCATION_PATH = "locations";
+var LOCATION_PATH = "locations/";
 
 class Trip extends VueFire {
     constructor(url){
 		super({
 			data: {
 				label: null,
-				locations: {}
+				locations: {},
+                users: {}
 			},
-			methods:{
-				add_location: function(lat,lng,label){
-					var floc = this.adapter._base.child("locations").push({
-						lat:lat,
-						lng:lng,
-						label:label
-					});
-				},
-				set_location: function(child, lat, lng){
-					// send to firebase the change of location
-					child.set({lat:lat, lng:lng});
-				}
-			}
+			methods:{}
 		}, url);
-        this.locations_path = url+'/'+LOCATION_PATH;
-        new VueFireArray(this.locations, this.locations_path);
+        this.locations_path = url+LOCATION_PATH;
+        this.locations_adapter = new VueFireIterable(this.locations, this.locations_path);
     }
 }
 
@@ -41,21 +26,24 @@ class TripFactory {
 		this._url = url + TRIPS_PATH;
 	}
 
-	create_trip (label){
+	create_trip (label, user){
 		var base = new Firebase(this._url);
+        var users = {};
+        users[user._uid] = true;
 		var ftrip = base.push({
 			label: label,
-			locations: {}
+			locations: {},
+            users: users
 		});
-		return new Trip(this._url + ftrip.key());
+		return new Trip(this._url + ftrip.key() + '/');
 	}
 
 	open_trip (key){
-		return new Trip(this._url + key);
+		return new Trip(this._url + key + '/');
 	}
 
 	list_trips (container){
-		return new VueFireArray(container, this._url);
+		return new VueFireIterable(container, this._url);
 	}
 }
 

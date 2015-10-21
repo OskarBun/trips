@@ -4,6 +4,7 @@ import info_tmpl from './info-tmpl.html!text';
 import Vue from 'vue';
 import map_loader from "map";
 import FirebaseAdapter from 'app/adapters/firebase_adapter';
+import Location from 'app/models/location';
 
 import barefoot from './resources/barefoot.svg!text';
 import flaf5 from './resources/flag5.svg!text';
@@ -22,6 +23,32 @@ function googleMap(vm){
             libraries: ['places']
         })
 	   .then(function(googleApi) {
+		   class FireMarker extends googleApi.maps.Marker {
+				constructor(config, path){
+					super(config);
+					this._base = new Firebase(path)
+					if(config.draggable){
+						googleApi.maps.event.addListener(this, 'dragend', (e) => {
+							var location = this.getPosition();
+							this._base.update({
+								lat: location.lat(),
+								lng: location.lng()
+							})
+						});
+					}
+				}
+
+				load() {
+					return new Promise((resolve, reject) => {
+						this._base.once('value', (snap) => {
+							var value = snap.val();
+							this.setTitle(value.title);
+							this.setPosition(new google.maps.LatLng(value.lat,value.lng));
+							resolve();
+						}, reject);
+					})
+				}
+			}
 
 	   		class LocationsAdapter extends FirebaseAdapter{
 
@@ -30,7 +57,7 @@ function googleMap(vm){
 					this.container = container;
 					this.markers = {};
 
-				    this.init();
+					this.init();
 				}
 
 				dispose(){
@@ -42,18 +69,15 @@ function googleMap(vm){
 				}
 
 				added(key, value){
-					var marker = new googleApi.maps.Marker({
-		                map: this.container.map,
-		                position: new google.maps.LatLng(value.lat,value.lng),
-		                title: value.title,
-		                icon: RED_ICON,
-		                draggable: true
-		            });
-		            this.markers[key]=marker;
-		            googleApi.maps.event.addListener(marker, 'dragend', (e) => {
-		                var location = marker.getPosition();
-		                this.container.marker_dragged(key, value, location.lat(), location.lng());
-		            });
+					var m = new FireMarker({
+						map: this.container.map,
+						icon: RED_ICON,
+						draggable: true
+					}, `https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`, marker => this.markers[key] = marker);
+					m.load().then(()=>{
+						this.markers[key] = m;
+						this.container.set_bounds();
+					});
 				}
 
 				changed(key, value){
@@ -195,26 +219,24 @@ function googleMap(vm){
 				}
 
 				map_clicked(lat,lng){
+					//This should broadcast for a Location Factory to make it
 					if(this.locations){
-						this.locations.add({
-							title: "untitled",
-							lat: lat,
-							lng: lng
-						});
+						var snap = new Firebase('https://scorching-fire-6566.firebaseio.com/reference-test/locations').push({
+			                title: "untitled",
+			                lat: lat,
+			                lng: lng
+			            });
+						this.locations.set(snap.key(), true);
 					}
 				}
 
-				marker_dragged(key, value, lat, lng){
-					if(this.locations){
-						this.locations.change(key,{lat:lat, lng:lng});
-					}
-				}
+				marker_dragged(key, value, lat, lng){}
 
 				set_center(lat,lng){
 					this.map.setCenter(new google.maps.LatLng(lat,lng));
 				}
 
-				set_bounds(){
+				set_bounds(filter){
 					var rb = null;
 					if(this.locations){
 						rb = this.locations.get_bounds(rb);
@@ -234,7 +256,7 @@ function googleMap(vm){
 					}
 					if(path){
 						this.locations = new LocationsAdapter(this, path);
-						this.set_bounds();
+						// this.locations.load().then(this.set_bounds);
 					}
 				}
 

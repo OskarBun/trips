@@ -1,8 +1,8 @@
 import Vue from "vue";
 import FirebaseAdapter from 'app/adapters/firebase_adapter';
 
-class VueFireArray extends FirebaseAdapter {
-	//Should be a observable Array
+class VueFireIterable extends FirebaseAdapter {
+	//container should be a observable {}
 	constructor(container, path){
 		super(path);
 		this.container = container;
@@ -23,4 +23,4 @@ class VueFireArray extends FirebaseAdapter {
     }
 }
 
-export default VueFireArray;
+export default VueFireIterable;

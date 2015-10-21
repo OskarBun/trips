@@ -70,12 +70,15 @@
 
 .TripsPanel
 .trip-list-containter {
+	max-height: 80%;
 	width: 100%;
 	background-color: white;
 	margin: 0px;
 	padding: 0px;
 
 	list-style: none;
+
+	overflow: auto;
 }
 
 .TripsPanel

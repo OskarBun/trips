@@ -15,7 +15,7 @@
 
 	<template v-if="trip">
 		<input id="trip_label_input" type="text" class="u-full-width" v-model="trip.label"  placeholder="label"/>
-		<ul>
+		<ul class="trip-list-containter">
 			<li v-repeat="trip.locations">
 				{{ lat }} : {{ lng }}
 				<input type="text" v-model="title" />

@@ -64,7 +64,7 @@ function googleMap(vm){
 				map_clicked(lat,lng){
 					//This should broadcast for a Location Factory to make it
 					if(this.locations){
-						var snap = new Firebase('https://scorching-fire-6566.firebaseio.com/reference-test/locations').push({
+						var snap = new Firebase(vm.$root.base_url+'locations').push({
 			                title: "untitled",
 			                lat: lat,
 			                lng: lng

@@ -1,0 +1,14 @@
+<ul class="list-containter">
+    <li v-repeat="locations">
+        <div class="location-item">
+            <div class="location-coords">
+                <span v-text="lat | round"></span> :
+                <span v-text="lng | round"></span>
+                <span class="remove-button pull-right">
+                    <i class="fa fa-close fa-fw" v-on="click: remove_location($key)"></i>
+                </span>
+            </div>
+            <span class="location-title" type="text" v-text="title" ></span>
+        </div>
+    </li>
+</ul>

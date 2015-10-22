@@ -57,7 +57,7 @@ export default function(googleApi){
 				map: this.container.map,
 				icon: icons.RED_ICON,
 				draggable: true
-			}, `https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`, marker => this.markers[key] = marker);
+			}, this._base.root().toString()+'/locations/'+key, marker => this.markers[key] = marker);
 			m.load().then(()=>{
 				this.markers[key] = m;
 				this.container.set_bounds();
@@ -95,6 +95,6 @@ export default function(googleApi){
 		}
 	}
 
-	return LocationsAdapter;	   	
+	return LocationsAdapter;
 
 }

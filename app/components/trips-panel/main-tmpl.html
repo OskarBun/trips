@@ -24,21 +24,7 @@
 		<div class="title title-bar">
 			<input id="trip_label_input" class="edit-title" type="text" class="u-full-width" v-model="trip.label" />
 		</div>
-		<ul class="list-containter">
-			<li v-repeat="trip.locations">
-				<div class="location-item">
-					<div class="location-coords">
-						<span v-text="$value.lat | round"></span> :
-						<span v-text="$value.lng | round"></span>
-						<span class="remove-button pull-right">
-							<i class="fa fa-close fa-fw"></i>
-						</span>
-					</div>
-					<input class="location-title" type="text" v-model="$value.title" />
-				</div>
-				<span v-text="$value"></span>
-			</li>
-		</ul>
+		<locations-panel lsadapter="{{ trip.locations_adapter }}"></locations-panel>
 		<div class="close-bar">
 			<button class="close-button" v-on="click:close_trip">Close</button>
 			<div class="footer-bar"></div>

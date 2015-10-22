@@ -12,7 +12,7 @@ import User from 'app/models/user';
 import TripFactory from 'app/models/trip';
 
 
-var fire_url = 'https://scorching-fire-6566.firebaseio.com/reference-test/';
+var fire_url = 'https://scorching-fire-6566.firebaseio.com/';
 Vue.config.debug = true;
 
 function calc_content_height() {

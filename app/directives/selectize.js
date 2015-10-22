@@ -10,25 +10,27 @@ Vue.directive('selectize', {
     // e.g. add event listeners or expensive stuff
     // that needs to be run only once
     var self = this;
-    debugger;
-    $(this.el).selectize({
-	    delimiter: ',',
-	    persist: false,
-	    create: function(input) {
-	        return {
-	            value: input,
-	            text: input
-	        };
-	    },
-	    onChange: function(value){
-	    	self.set(value);
-	    }
-	});
+    setTimeout(()=>{
+      $(this.el).selectize({
+    	    delimiter: ',',
+    	    persist: false,
+          //plugins: ['remove_button'],
+    	    create: function(input) {
+    	        return {
+    	            value: input,
+    	            text: input
+    	        };
+    	    },
+    	    onChange: function(value){
+      	    	self.set(value);
+      	  }
+      	});
+    },0);
   },
   update: function (newValue, oldValue) {
     // do something based on the updated value
     // this will also be called for the initial value
-    // jquery(this.el).val(newValue || '').trigger('change');
+    $(this.el).val(newValue);
   },
   unbind: function () {
     // do clean up work

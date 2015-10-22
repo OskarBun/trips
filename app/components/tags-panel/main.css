@@ -13,3 +13,8 @@
   stroke: #999;
   stroke-opacity: .6;
 }
+
+.TagsPanel
+.gnode text{
+	font-size: 12px;
+}

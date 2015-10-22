@@ -14,6 +14,10 @@ import User from 'app/models/user';
 // 	}
 // }
 
+Vue.filter('round', function(value) {
+	return Math.round(value);
+});
+
 Vue.component('trips-panel', {
 	data: function(){
 		return {

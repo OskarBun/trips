@@ -107,6 +107,7 @@ input[type="password"]:focus, textarea:focus, select:focus {
   width: 100%;
 
   overflow: auto;
+  white-space:nowrap;
 }
 
 .main .content
@@ -121,7 +122,7 @@ input[type="password"]:focus, textarea:focus, select:focus {
 .map-container {
   display: inline-block;
   vertical-align: top;
-  width: 59%;
+  width: 60%;
   height: 100%;
 }
 

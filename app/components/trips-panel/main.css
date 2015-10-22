@@ -1,7 +1,7 @@
 .TripsPanel{
 	position: relative;
-	width: 100%;
 	height: 100%;
+	width: 100%;
 
 	background-color: #f4f4f4;
 }
@@ -16,16 +16,28 @@
 }
 
 .TripsPanel
-.footer-container {
+.add-bar,
+.TripsPanel
+.close-bar {
 	position: absolute;
-	width: 100%;
 	bottom: 0px;
+	
+	width: 100%;
 
 	background-color: #fff;
+	white-space:nowrap;
+
+    border-top: 1px solid #e3e2e1;
 }
 
 .TripsPanel
-.new-trip-foot {
+.add-bar
+form {
+	margin: 0px;
+}
+
+.TripsPanel
+.footer-bar {
 	width: 100%;
 	height: 5px;
 	background-color: #FFDE8D;
@@ -36,7 +48,7 @@
 	border-radius: 0px;
 	margin: 0px;
 
-	width: 80%;
+	width: 90%;
 	border: none;
 }
 
@@ -47,20 +59,21 @@
 
 .TripsPanel
 .add-button {
-	width: 15%;
+	width: 10%;
+	height: 38px;
 
 	margin: 0px;
-	padding: 0px;
-	border-radius: 0px;
+    padding-top: 4px;
+    box-sizing: border-box;
 
-	background-color: #69AEBB;
-	color: white;
-
+	color: #69AEBB;
 	font-size: 1.3em;
 	text-align: center;
-    vertical-align: bottom;
 
     border: none;
+	border-radius: 0px;
+
+    cursor: pointer;
 }
 
 .TripsPanel
@@ -69,7 +82,7 @@
 }
 
 .TripsPanel
-.trip-list-containter {
+.list-containter {
 	max-height: 80%;
 	width: 100%;
 	background-color: white;
@@ -82,7 +95,7 @@
 }
 
 .TripsPanel
-.trip-list-containter
+.list-containter
 li {
 	padding: 5px 10px;
 	border-bottom: 1px solid #e3e2e1;
@@ -92,13 +105,84 @@ li {
 }
 
 .TripsPanel
-.trip-list-containter
+.list-containter
 li:hover {
 	background-color: #CFECF2;
 }
 
 
 /* ---- trip content ---- */
+
+.TripsPanel
+.edit-title {
+	padding: 0px;
+	width: initial;
+	height: 18px;
+	margin: 0px;
+
+	text-align: center;
+
+	border: none;
+	border-radius: 0;
+
+	background-color: transparent;
+}
+
+.TripsPanel
+.edit-title:hover {
+	background: rgba(255, 255, 155, 0.5);
+}
+
+.TripsPanel
+.edit-title:focus {
+	background-color: #fff;
+}
+
+.TripsPanel
+.location-item {
+	padding-bottom: 6px;
+}
+
+.TripsPanel
+.location-coords {
+	padding-top: 6px;
+	padding-left: 10px;
+
+	box-sizing: border-box;
+}
+
+.TripsPanel
+.location-title {
+	display: inline-block;
+	width: 100%;
+	height: 25px;
+	margin: 0px;
+	
+	border-radius: 0px;
+	border: none;
+}
+
+.TripsPanel
+.location-title:focus {
+	border: none;
+}
+
+.TripsPanel
+.remove-button {
+	color: #69AEBB;
+	text-align: center;
+    cursor: pointer;
+}
+
+.TripsPanel
+.remove-button:hover {
+	color: #D83F3F;
+}
+
+.TripsPanel
+.close-bar {
+
+}
 
 .TripsPanel
 .close-button {

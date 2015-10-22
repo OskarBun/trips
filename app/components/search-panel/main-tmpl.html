@@ -1,8 +1,26 @@
+<!-- SearchPanel -->
 <div class="SearchPanel">
-	<form v-on="submit:do_search" autocomplete="off">
-		<input id="search_input" type="text" v-model="search"  placeholder="search"/>
-		<button class="clear" v-on="click:clear">&times;</button>
-		<button type="submit" class="button-primary">Search</button>
-		<button v-on="click:do_here">Here</button>
-	</form>
+    <!-- content -->
+    <div class="title title-bar">Search Locations:</div>
+    <ul class="list-containter">
+        <template v-repeat="results">
+            <li v-on="mouseover: highlight($index)">{{title}}</li>
+        </template>
+    </ul>
+
+	<div class="search-bar">
+		<form v-on="submit:do_search" autocomplete="off">	
+			<span class="input-action align-left" v-on="click: do_here">
+				<i class="fa fa-map-pin fa-fw"></i>
+			</span>
+			<input id="search_input" class="search-input" type="text" v-model="search" placeholder="Search"/>
+			<span class="input-action pull-right search" v-on="click: do_search">
+				<i class="fa fa-search fa-fw"></i>
+			</span>
+			<span class="input-action pull-right clear" v-on="click: clear" v-if="search">
+				<i class="fa fa-close fa-fw"></i>
+			</span>
+		</form>
+		<div class="footer-bar"></div>
+	</div>
 </div>

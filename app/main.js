@@ -8,7 +8,6 @@ import 'app/components/map-panel/main';
 import 'app/components/trips-panel/main';
 import 'app/components/user-panel/main';
 import 'app/components/search-panel/main';
-import 'app/components/results-panel/main';
 import User from 'app/models/user';
 import TripFactory from 'app/models/trip';
 
@@ -76,15 +75,6 @@ var appl = window.appl = new Vue({
         this.loading = false;
     },
     events: {
-        "search-location-set": function(e) {
-            this.$broadcast('set-center', e);
-        },
-        "search-location-results": function(e) {
-            this.$broadcast('search-results', e);
-        },
-        "highlight-result": function(e) {
-            this.$broadcast('highlight-result', e);
-        },
         "show-trip": function(e) {
             this.trip = this.trips.open_trip(e);
         }

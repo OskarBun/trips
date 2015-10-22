@@ -1,32 +1,41 @@
 <div class="TripsPanel">
 	<template v-if="!trip">
 		<div class="title title-bar">Planned Trips:</div>
-		<ul class="trip-list-containter">
+		<ul class="list-containter">
 			<li v-repeat="items" v-on="click:open_trip($key)">{{ label }}</li>
 		</ul>
-		<div class="footer-container">
-			<input class="name-field" type="text" v-model="new_label" placeholder="New Trip Name"/>
-			<button class="add-button pull-right" v-on="click:add_trip">
-				<i class="fa fa-plus fa-fw"></i>
-			</button>
-			<div class="new-trip-foot"></div>
+		<div class="add-bar">
+			<form v-on="submit:add_trip" autocomplete="off">
+				<input class="name-field" type="text" v-model="new_label" placeholder="New Trip Name"/>
+				<span class="add-button pull-right" v-on="click:add_trip">
+					<i class="fa fa-plus fa-fw"></i>
+				</span>
+			</form>
+			<div class="footer-bar"></div>
 		</div>
 	</template>
 
 	<template v-if="trip">
-		<input id="trip_label_input" type="text" class="u-full-width" v-model="trip.label"  placeholder="label"/>
-		<ul class="trip-list-containter">
-			<!-- <li v-repeat="users">
-				{{ username }}
-			</li> -->
+		<div class="title title-bar">
+			<input id="trip_label_input" class="edit-title" type="text" class="u-full-width" v-model="trip.label" />
+		</div>
+		<ul class="list-containter">
 			<li v-repeat="locations">
-				{{ lat }} : {{ lng }}
-				<input type="text" v-model="title" />
+				<div class="location-item">
+					<div class="location-coords">
+						<span v-text="lat | round"></span> :
+						<span v-text="lng | round"></span>
+						<span class="remove-button pull-right">
+							<i class="fa fa-close fa-fw"></i>
+						</span>
+					</div>
+					<input class="location-title" type="text" v-model="title" />
+				</div>
 			</li>
 		</ul>
-		<div class="footer-container">
+		<div class="close-bar">
 			<button class="close-button" v-on="click:close_trip">Close</button>
-			<div class="new-trip-foot"></div>
+			<div class="footer-bar"></div>
 		</div>
 	</template>
 </div>

@@ -56,7 +56,8 @@ Vue.component('search-panel', {
 	data: function(){
 		return {
 			location: null,
-			search: null
+			search: null,
+			results: null
 		};
 	},
   	template: tmpl,
@@ -64,7 +65,8 @@ Vue.component('search-panel', {
 		"do_search": function(e){
 			e.preventDefault();
 			code_address(this.search, (result) => {
-				this.$dispatch('search-location-results', result);
+				this.results = result;
+				this.$root.$broadcast('search-results', result);
 			});
 		},
 		"do_here": function(e){
@@ -77,14 +79,18 @@ Vue.component('search-panel', {
 			e.preventDefault();
 			this.search = null;
 			code_address(this.search,(result) => {
-				this.$dispatch('search-location-results', result);
+				this.results = null;
+				this.$root.$broadcast('search-results', result);
 			});
-		}
+		},
+		"highlight": function(index){
+            this.$root.$broadcast('highlight-result', index);
+        }
 	},
 	watch:{
-		'location': function(val){
+		"location": function(val){
 			if(val){
-				this.$dispatch("search-location-set",{
+				this.$root.$broadcast("set-center",{
 					lat: val.lat(),
 					lng: val.lng(),
 					term: this.search

@@ -11,6 +11,11 @@ Vue.component('locations-panel', {
     },
     template: tmpl,
     props: ['lsadapter'],
+    computed: {
+        length: function(){
+            return Object.keys(this.locations).length
+        }
+    },
     methods: {
         remove_location: function(key) {
             this.locations[key].adapter.set(null);

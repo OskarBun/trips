@@ -24,7 +24,7 @@ function googleMap(vm){
 					this.to_do = null;
 
 					var mapOptions = {
-				    	center: new googleApi.maps.LatLng(54.8143,-2.9694),
+				    	center: new googleApi.maps.LatLng(51,0),
 				    	zoom: 5,
 				    	mapTypeId: googleApi.maps.MapTypeId.MAP,
 				    	styles: style

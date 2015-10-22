@@ -57,7 +57,8 @@ Vue.component('search-panel', {
 		return {
 			location: null,
 			search: null,
-			results: null
+			results: null,
+			here_pending: false
 		};
 	},
   	template: tmpl,
@@ -71,7 +72,9 @@ Vue.component('search-panel', {
 		},
 		"do_here": function(e){
 			e.preventDefault();
+			this.here_pending = true;
 			geo_location((result) => {
+				this.here_pending = false;
 				this.location = result;
 			});
 		},

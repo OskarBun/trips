@@ -24,7 +24,7 @@
 		<div class="title title-bar">
 			<input id="trip_label_input" class="edit-title" type="text" class="u-full-width" v-model="trip.label" />
 		</div>
-		<locations-panel lsadapter="{{ trip.locations_adapter }}"></locations-panel>
+		<locations-panel lsadapter="{{ locations_adapter }}"></locations-panel>
 		<div class="close-bar">
 			<button class="close-button" v-on="click:close_trip">Close</button>
 			<div class="footer-bar"></div>

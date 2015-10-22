@@ -62,7 +62,6 @@ var appl = window.appl = new Vue({
                     this.user = user;
                 });
             } else {
-                console.log("User is logged out");
                 this.user = null;
             }
         });
@@ -74,9 +73,5 @@ var appl = window.appl = new Vue({
 
         this.loading = false;
     },
-    events: {
-        "show-trip": function(e) {
-            this.trip = this.trips.open_trip(e);
-        }
-    }
+    events: {}
 });

@@ -5,6 +5,7 @@ import VueFireIterable from 'app/adapters/vue_iterable_adapter';
 
 var TRIPS_PATH = "trips/";
 var LOCATION_PATH = "locations/";
+var USERS_PATH = "users/"
 
 class Trip extends VueFire {
     constructor(url){
@@ -18,6 +19,7 @@ class Trip extends VueFire {
 		}, url);
         this.locations_path = url+LOCATION_PATH;
         this.locations_adapter = new VueFireIterable(this.locations, this.locations_path);
+        this.users_adapter = new VueFireIterable(this.users, url+USERS_PATH);
     }
 }
 

@@ -21,14 +21,21 @@ Vue.component('trips-panel', {
 	},
   	template: tmpl,
   	props: ['trips', 'trip'],
-	computed: {},
+	computed: {
+		locations_adapter: function() {
+			//Silly Async doesn't work quite well enough
+			if(this.trip){
+				return this.trip.locations_adapter;
+			}
+		}
+	},
 	methods: {
 		"add_trip": function(){
 			this.trip = this.trips.create_trip(this.new_label);
 			this.new_label = null;
 		},
 		"open_trip": function(key){
-			this.$dispatch('show-trip', key);
+			this.trip = this.trips.open_trip(key);
 		},
 		"close_trip": function(){
 			this.trip = null;

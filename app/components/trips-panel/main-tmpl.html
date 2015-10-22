@@ -2,7 +2,12 @@
 	<template v-if="!trip">
 		<div class="title title-bar">Planned Trips:</div>
 		<ul class="list-containter">
-			<li v-repeat="items" v-on="click:open_trip($key)">{{ label }}</li>
+			<li v-repeat="items" v-on="click:open_trip($key)">
+				<span v-text="label"></span>
+				<span class="remove-button pull-right">
+					<i class="fa fa-close fa-fw"></i>
+				</span>
+			</li>
 		</ul>
 		<div class="add-bar">
 			<form v-on="submit:add_trip" autocomplete="off">

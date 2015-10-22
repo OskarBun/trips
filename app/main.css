@@ -14,8 +14,8 @@
 
 /* ---- Font Imports ---- */
 /* Comment out if importing fonts from JS or from HTML */
-@import url(https://fonts.googleapis.com/css?family=Work+Sans:400,200,700);
-@import url(https://fonts.googleapis.com/css?family=Quicksand:400,700,300);
+@import url(//fonts.googleapis.com/css?family=Work+Sans:400,200,700);
+@import url(//fonts.googleapis.com/css?family=Quicksand:400,700,300);
 
 
 /* ---- General CSS ---- */

@@ -30,7 +30,8 @@ Vue.component('trips-panel', {
 		}
 	},
 	methods: {
-		"add_trip": function(){
+		"add_trip": function(e){
+			e.preventDefault();
 			this.trip = this.trips.create_trip(this.new_label);
 			this.new_label = null;
 		},

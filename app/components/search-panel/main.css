@@ -146,3 +146,14 @@ li:hover {
 	height: 5px;
 	background-color: #FFDE8D;
 }
+
+.SearchPanel
+.searching {
+	animation: pulse 1.5s ease-out infinite;
+}
+
+@keyframes pulse { 
+	50% { 
+		color: #F9DF68;
+	}
+}]

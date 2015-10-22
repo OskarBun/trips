@@ -26,6 +26,7 @@ System.config({
     "jasmine": "npm:jasmine@2.3.2",
     "jasmine-standalone": "npm:jasmine-standalone@1.3.1",
     "jquery": "github:components/jquery@2.1.4",
+    "json": "github:systemjs/plugin-json@0.1.0",
     "map": "npm:google-maps-api-loader@0.0.4",
     "maps": "npm:google-maps-api-loader@0.0.4",
     "scss": "github:screendriver/plugin-sass@0.0.5",

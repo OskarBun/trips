@@ -1,4 +1,4 @@
-// import './main.css!';
+import './main.css!';
 import tmpl from './main-tmpl.html!text';
 import Vue from 'vue';
 import Location from 'app/models/location';

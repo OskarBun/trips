@@ -4,7 +4,7 @@
 		<ul class="list-containter">
 			<li v-repeat="items" v-on="click:open_trip($key)">
 				<span v-text="label"></span>
-				<span class="remove-button pull-right">
+				<span class="remove-button pull-right" v-on="click:remove_trip($key)">
 					<i class="fa fa-close fa-fw"></i>
 				</span>
 			</li>
@@ -22,7 +22,9 @@
 
 	<template v-if="trip">
 		<div class="title title-bar">
-			<input id="trip_label_input" class="edit-title" type="text" class="u-full-width" v-model="trip.label" />
+			<form v-on="submit:update_trip_name">
+				<input id="trip_label_input" class="edit-title" type="text" class="u-full-width" v-on="focus: this.title = trip.label" v-model="trip.label" />
+			</form>
 		</div>
 		<locations-panel lsadapter="{{ locations_adapter }}"></locations-panel>
 		<div class="close-bar">

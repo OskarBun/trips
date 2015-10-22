@@ -16,7 +16,8 @@ Vue.component('trips-panel', {
 			items: {},
 			new_label: null,
 			locations: {},
-			users: {}
+			users: {},
+			trip_title: null
 		};
 	},
   	template: tmpl,
@@ -38,8 +39,21 @@ Vue.component('trips-panel', {
 		"open_trip": function(key){
 			this.trip = this.trips.open_trip(key);
 		},
+		"update_trip_name": function(e) {
+			if(this.trip) {
+				this.trip.adapter.change(
+					{ label: this.trip.label }, 
+					(error) => { if(error) this.trip.label = trip_title; }
+				);
+			}
+			e.preventDefault();
+			e.srcElement[0].blur();
+		},
 		"close_trip": function(){
 			this.trip = null;
+		},
+		"remove_trip": function(){
+			// add delete stuff here
 		}
 	},
 	events: {

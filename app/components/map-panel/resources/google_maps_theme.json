@@ -57,6 +57,36 @@
         ]
     },
     {
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#69aebb"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "color": "#69aebb"
+            },
+            {
+                "lightness": "65"
+            }
+        ]
+    },
+    {
         "featureType": "poi",
         "elementType": "all",
         "stylers": [

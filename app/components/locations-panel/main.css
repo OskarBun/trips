@@ -1,0 +1,44 @@
+.LocationsPanel
+.locations-placeholder {
+	width: 100%;
+	margin-top: 30px;
+	background-color: transparent;
+	font: 1.3em;
+	text-align: center;
+	color: #D4D4D4;
+}
+
+.LocationsPanel
+.locations-placeholder
+.placeholder-icon {
+	display: inline-block;
+	width: 60px;
+}
+
+.LocationsPanel
+.location-item {
+	padding: 2px;
+}
+
+.LocationsPanel
+.location-coords {
+	padding-top: 6px 10px;
+	box-sizing: border-box;
+}
+
+.LocationsPanel
+.location-title {
+	padding-top: 6px 10px;
+	display: inline-block;
+	width: 100%;
+	height: 25px;
+	margin: 0px;
+	
+	border-radius: 0px;
+	border: none;
+}
+
+.LocationsPanel
+.location-title:focus {
+	border: none;
+}

@@ -31,7 +31,6 @@
 }
 
 .TripsPanel
-.add-bar
 form {
 	margin: 0px;
 }
@@ -116,8 +115,50 @@ li:hover {
 	background-color: #CFECF2;
 }
 
+.TripsPanel
+.remove-button {
+	color: #69AEBB;
+	text-align: center;
+    cursor: pointer;
+}
 
-/* ---- trip content ---- */
+.TripsPanel
+.remove-button:hover {
+	color: #D83F3F;
+}
+
+.TripsPanel
+.list-containter li 
+.remove-button {
+	visibility: hidden;
+}
+
+.TripsPanel
+.list-containter li:hover 
+.remove-button {
+	visibility: visible;
+}
+
+.TripsPanel
+.close-bar {
+
+}
+
+.TripsPanel
+.close-button {
+	width: 100%;
+	background-color: #69AEBB;
+	color: white;
+
+	border: none;
+	border-radius: 0px;
+	margin: 0px;
+}
+
+.TripsPanel
+.close-button:hover {
+	color: #CFECF2;
+}
 
 .TripsPanel
 .edit-title {
@@ -142,66 +183,4 @@ li:hover {
 .TripsPanel
 .edit-title:focus {
 	background-color: #fff;
-}
-
-.TripsPanel
-.location-item {
-	padding-bottom: 6px;
-}
-
-.TripsPanel
-.location-coords {
-	padding-top: 6px;
-	padding-left: 10px;
-
-	box-sizing: border-box;
-}
-
-.TripsPanel
-.location-title {
-	display: inline-block;
-	width: 100%;
-	height: 25px;
-	margin: 0px;
-	
-	border-radius: 0px;
-	border: none;
-}
-
-.TripsPanel
-.location-title:focus {
-	border: none;
-}
-
-.TripsPanel
-.remove-button {
-	color: #69AEBB;
-	text-align: center;
-    cursor: pointer;
-}
-
-.TripsPanel
-.remove-button:hover {
-	color: #D83F3F;
-}
-
-.TripsPanel
-.close-bar {
-
-}
-
-.TripsPanel
-.close-button {
-	width: 100%;
-	background-color: #69AEBB;
-	color: white;
-
-	border: none;
-	border-radius: 0px;
-	margin: 0px;
-}
-
-.TripsPanel
-.close-button:hover {
-	color: #CFECF2;
 }

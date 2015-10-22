@@ -25,17 +25,18 @@
 			<input id="trip_label_input" class="edit-title" type="text" class="u-full-width" v-model="trip.label" />
 		</div>
 		<ul class="list-containter">
-			<li v-repeat="locations">
+			<li v-repeat="trip.locations">
 				<div class="location-item">
 					<div class="location-coords">
-						<span v-text="lat | round"></span> :
-						<span v-text="lng | round"></span>
+						<span v-text="$value.lat | round"></span> :
+						<span v-text="$value.lng | round"></span>
 						<span class="remove-button pull-right">
 							<i class="fa fa-close fa-fw"></i>
 						</span>
 					</div>
-					<input class="location-title" type="text" v-model="title" />
+					<input class="location-title" type="text" v-model="$value.title" />
 				</div>
+				<span v-text="$value"></span>
 			</li>
 		</ul>
 		<div class="close-bar">

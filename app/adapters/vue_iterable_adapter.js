@@ -11,7 +11,9 @@ class VueFireIterable extends FirebaseAdapter {
 	}
 
 	setted(value) {
-		this.container = value;
+		for(var key in value){
+			this.container.$set(key,value[key]);
+		}
 	}
 
 	added(key, value) {

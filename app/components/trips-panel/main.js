@@ -30,7 +30,6 @@ Vue.component('trips-panel', {
 	computed: {
 		// locations: function() {
 		// 	if(this.trip && this.trip.locations){
-		// 		debugger;
 		// 		return Object.keys(this.trip.locations).map((key) => {
 		// 			return new Location(`https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`)
 		// 		});

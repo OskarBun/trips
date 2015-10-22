@@ -6,13 +6,11 @@ import Vue from 'vue';
 import Location from 'app/models/location';
 import User from 'app/models/user';
 
-// var ReferenceLister = function(list, Model){
-// 	return new Promise((resolve, reject) => {
-// 		var newList = return Object.keys(this.trip.locations).map((key) => {
-// 			return new Model(`https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`)
-// 		});
-// 	}
-// }
+var referenceLister = function(list, Model){
+	return Object.keys(this.trip.locations).map((key) => {
+		return new Model(`https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`)
+	});
+}
 
 Vue.filter('round', function(value) {
 	return Math.round(value);
@@ -22,26 +20,29 @@ Vue.component('trips-panel', {
 	data: function(){
 		return {
 			items: {},
-			new_label: null
+			new_label: null,
+			locations: {},
+			users: {}
 		};
 	},
   	template: tmpl,
   	props: ['trips', 'trip'],
 	computed: {
-		locations: function() {
-			if(this.trip && this.trip.locations){
-				return Object.keys(this.trip.locations).map((key) => {
-					return new Location(`https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`)
-				});
-			}
-		},
-		users: function() {
-			if(this.trip && this.trip.users){
-				return Object.keys(this.trip.users).map(key => {
-					return new User(`https://scorching-fire-6566.firebaseio.com/reference-test/users/${key}`)
-				});
-			}
-		}
+		// locations: function() {
+		// 	if(this.trip && this.trip.locations){
+		// 		debugger;
+		// 		return Object.keys(this.trip.locations).map((key) => {
+		// 			return new Location(`https://scorching-fire-6566.firebaseio.com/reference-test/locations/${key}`)
+		// 		});
+		// 	}
+		// },
+		// users: function() {
+		// 	if(this.trip && this.trip.users){
+		// 		return Object.keys(this.trip.users).map(key => {
+		// 			return new User(`https://scorching-fire-6566.firebaseio.com/reference-test/users/${key}`)
+		// 		});
+		// 	}
+		// }
 	},
 	methods: {
 		"add_trip": function(){
@@ -64,7 +65,7 @@ Vue.component('trips-panel', {
 	watch:{}
 });
 
-Vue.component('list-user', {
+Vue.component('user-list', {
 	template: user_tmpl,
 	props: ['user']
 });

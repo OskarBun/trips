@@ -102,11 +102,8 @@ li {
 
 	cursor: pointer;
 
-	max-width: 100%;
+	width: 100%;
 	box-sizing: border-box;
-
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 .TripsPanel
@@ -116,21 +113,26 @@ li:hover {
 }
 
 .TripsPanel
+.list-item-text {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 90%;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.TripsPanel
 .remove-button {
 	color: #69AEBB;
 	text-align: center;
     cursor: pointer;
+	visibility: hidden;
 }
 
 .TripsPanel
 .remove-button:hover {
 	color: #D83F3F;
-}
-
-.TripsPanel
-.list-containter li 
-.remove-button {
-	visibility: hidden;
 }
 
 .TripsPanel
@@ -140,9 +142,7 @@ li:hover {
 }
 
 .TripsPanel
-.close-bar {
-
-}
+.close-bar {}
 
 .TripsPanel
 .close-button {

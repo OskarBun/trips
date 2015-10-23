@@ -127,17 +127,45 @@ li {
 
 	cursor: pointer;
 
-	max-width: 100%;
+	width: 100%;
 	box-sizing: border-box;
-
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 .SearchPanel
 .list-containter
 li:hover {
 	background-color: #CFECF2;
+}
+
+.SearchPanel
+.list-item-text {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 90%;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.SearchPanel
+.locate-button {
+	display: inline-block;
+	vertical-align: middle;
+	color: #69AEBB;
+	text-align: center;
+    cursor: pointer;
+	visibility: hidden;
+}
+
+.SearchPanel
+.locate-button:hover {
+	color: #55B736;
+}
+
+.SearchPanel
+.list-containter li:hover 
+.locate-button {
+	visibility: visible;
 }
 
 .SearchPanel

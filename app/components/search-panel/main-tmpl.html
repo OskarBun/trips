@@ -11,7 +11,10 @@
     <ul class="list-containter">
         <template v-repeat="results">
             <li v-on="mouseover: highlight($index), click: add_to_trip($data)">
-                {{title}}
+                <span class="list-item-text" v-text="title"></span>
+                <span class="locate-button pull-right">
+                	<i class="fa fa-location-arrow fa-fw"></i>
+				</span>
             </li>
         </template>
     </ul>

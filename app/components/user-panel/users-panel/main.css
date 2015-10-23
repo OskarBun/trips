@@ -23,3 +23,19 @@
 
 	background: #fff;
 }
+
+.UsersPanel
+.add-profile {
+	text-align: center;
+    padding: 3px;
+    box-sizing: border-box;
+    font-size: 1.4em;
+	border: 1px solid #fff;
+}
+
+.UsersPanel
+.add-profile:hover {
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #69AEBB;
+	border: 1px solid #fff;
+}

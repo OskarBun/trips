@@ -16,7 +16,11 @@ Vue.component('users-panel', {
             return Object.keys(this.users).length
         }
     },
-    methods: {},
+    methods: {
+        "add_collaborator": function() {
+            // add user stuff
+        }
+    },
     ready: function() {
         this.base = this.adapter._base;
         this.base.once('value', (snap)=>{

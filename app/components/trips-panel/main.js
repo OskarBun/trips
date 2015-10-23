@@ -5,7 +5,7 @@ import User from 'app/models/user';
 import Locations_Panel from './locations-panel/main';
 
 Vue.filter('round', function(value) {
-	return Math.round(value);
+	return value ? value.toFixed(4) : null;
 });
 
 Vue.component('trips-panel', {

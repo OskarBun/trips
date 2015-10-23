@@ -25,8 +25,10 @@ export default function(googleApi){
 			return new Promise((resolve, reject) => {
 				this._base.on('value', (snap) => {
 					var value = snap.val();
-					this.setTitle(value.title);
-					this.setPosition(new googleApi.maps.LatLng(value.lat,value.lng));
+                    if(value){
+    					this.setTitle(value.title);
+    					this.setPosition(new googleApi.maps.LatLng(value.lat,value.lng));
+                    } 
 					resolve();
 				}, reject);
 			})

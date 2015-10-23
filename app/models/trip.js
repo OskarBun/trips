@@ -56,12 +56,9 @@ class TripFactory {
         dead.adapter.set(null, (error) => {
             if(!error){
                 var locations_ref = dead.adapter._base.root().child('locations')
-                debugger;
                 locations.forEach((location)=> {
                     locations_ref.update({
                         [location]: null
-                    }, () => {
-                        console.log("blah");
                     });
                 })
             }

@@ -97,7 +97,7 @@ Vue.component('search-panel', {
 			this.$root.add_location(result)
 			this.search = null;
 			this.results = null;
-			this.$root.$broadcast('search-results', result);
+			this.$root.$broadcast('search-results', []);
 		},
 		"set_bounds": function(bounds){
 			this.$root.$broadcast('set-bounds', bounds)

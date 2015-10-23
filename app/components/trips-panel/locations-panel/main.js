@@ -18,8 +18,7 @@ Vue.component('locations-panel', {
     },
     methods: {
         remove_location: function(key) {
-            this.locations[key].adapter.set(null);
-            this.adapter.change({
+            this.adapter.update({
                 [key]: null
             });
         }

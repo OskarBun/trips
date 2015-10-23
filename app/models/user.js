@@ -8,7 +8,8 @@ class User extends VueFire {
                 return {
                     username: null,
                     profile_image: null,
-                    logged_in: false
+                    logged_in: false,
+                    color: null
                 }
             }
         }, url);

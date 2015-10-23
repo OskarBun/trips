@@ -23,7 +23,7 @@ class Foo extends FirebaseAdapter {
 		this.container[key] = value;
 	}
 
-	remove(key) {
+	removed(key) {
 		this.container[key] = null;
 	}
 }

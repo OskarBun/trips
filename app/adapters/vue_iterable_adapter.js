@@ -24,7 +24,7 @@ class VueFireIterable extends FirebaseAdapter {
         this.container.$set(key, value);
     }
 
-    remove(key) {
+    removed(key) {
         this.container.$delete(key);
     }
 }

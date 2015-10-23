@@ -8,7 +8,7 @@ var LOCATION_PATH = "locations/";
 var USERS_PATH = "users/"
 
 class Trip extends VueFire {
-    constructor(url){
+    constructor(url, deep){
 		super({
 			data: {
 				label: null,
@@ -17,9 +17,11 @@ class Trip extends VueFire {
 			},
 			methods:{}
 		}, url);
-        this.locations_path = url+LOCATION_PATH;
-        this.locations_adapter = new VueFireIterable(this.locations, this.locations_path);
-        this.users_adapter = new VueFireIterable(this.users, url+USERS_PATH);
+        if(deep === undefined || deep){
+            this.locations_path = url+LOCATION_PATH;
+            this.locations_adapter = new VueFireIterable(this.locations, this.locations_path);
+            this.users_adapter = new VueFireIterable(this.users, url+USERS_PATH);
+        }
     }
 }
 
@@ -47,6 +49,24 @@ class TripFactory {
 	list_trips (container){
 		return new VueFireIterable(container, this._url);
 	}
+
+    remove_trip (key){
+        var dead = new Trip(this._url+key+'/', false);
+        var locations = Object.keys(dead.locations);
+        dead.adapter.set(null, (error) => {
+            if(!error){
+                var locations_ref = dead.adapter._base.root().child('locations')
+                debugger;
+                locations.forEach((location)=> {
+                    locations_ref.update({
+                        [location]: null
+                    }, () => {
+                        console.log("blah");
+                    });
+                })
+            }
+        });
+    }
 }
 
 

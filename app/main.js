@@ -51,7 +51,8 @@ var appl = window.appl = new Vue({
                 user.adapter._base.once('value', (snap) => {
                     var permitted = {
                         username: auth_data.github.username,
-                        profile_image: auth_data.github.profileImageURL
+                        profile_image: auth_data.github.profileImageURL,
+                        color: auth_data.github.username == "OliverDashiell" ? "#F9D068" : "#ffff"
                     }
                     if(!snap.val()){
                         user.adapter.set(permitted);

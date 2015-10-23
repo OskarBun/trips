@@ -31,16 +31,16 @@ class FirebaseAdapter {
 		this._base.off();
 	}
 
-	set(value){
-		return this._base.set(value);
+	set(value, callback){
+		return this._base.set(value, callback);
 	}
 
 
 	/**
 		will add a child to our base container
 	 */
-	add(value){
-		return this._base.push(value);
+	add(value, callback){
+		return this._base.push(value, callback);
 	}
 
 	/**
@@ -53,8 +53,8 @@ class FirebaseAdapter {
 	/**
 		will remove a child to our base container
 	 */
-	remove(key){
-		this._base.child(key).remove();
+	remove(key, callback){
+		this._base.child(key).remove(callback);
 	}
 
 	/**

@@ -4,7 +4,7 @@ import user_tmpl from './user-tmpl.html!text';
 import trip_tmpl from './trip-tmpl.html!text';
 import Vue from 'vue';
 import User from 'app/models/user';
-import Locations_Panel from 'app/components/locations-panel/main';
+import Locations_Panel from './locations-panel/main';
 
 Vue.filter('round', function(value) {
 	return Math.round(value);
@@ -33,8 +33,10 @@ Vue.component('trips-panel', {
 	methods: {
 		"add_trip": function(e){
 			e.preventDefault();
-			this.trip = this.trips.create_trip(this.new_label);
-			this.new_label = null;
+			if(this.new_label){
+				this.trip = this.trips.create_trip(this.new_label);
+				this.new_label = '';
+			}
 		},
 		"open_trip": function(key){
 			this.trip = this.trips.open_trip(key);
@@ -42,7 +44,7 @@ Vue.component('trips-panel', {
 		"update_trip_name": function(e) {
 			if(this.trip) {
 				this.trip.adapter.change(
-					{ label: this.trip.label }, 
+					{ label: this.trip.label },
 					(error) => { if(error) this.trip.label = trip_title; }
 				);
 			}
@@ -52,8 +54,9 @@ Vue.component('trips-panel', {
 		"close_trip": function(){
 			this.trip = null;
 		},
-		"remove_trip": function(){
-			// add delete stuff here
+		"remove_trip": function(key, e){
+			this.trips.remove_trip(key);
+			e.stopPropagation();
 		}
 	},
 	events: {
@@ -62,7 +65,11 @@ Vue.component('trips-panel', {
 		},
 		"hook:detached": function(){}
 	},
-	watch:{}
+	watch:{
+		"items": function(val){
+			console.log(val);
+		}
+	}
 });
 
 Vue.component('user-list', {

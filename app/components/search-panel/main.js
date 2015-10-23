@@ -99,7 +99,8 @@ Vue.component('search-panel', {
 			this.results = null;
 			this.$root.$broadcast('search-results', []);
 		},
-		"set_bounds": function(bounds){
+		"set_bounds": function(bounds, e){
+			e.stopPropagation();
 			this.$root.$broadcast('set-bounds', bounds)
 		}
 	},

@@ -12,7 +12,7 @@
         <template v-repeat="results">
             <li v-on="mouseover: highlight($index), click: add_to_trip($data)">
                 <span class="list-item-text" v-text="title"></span>
-                <span class="locate-button pull-right">
+                <span class="locate-button pull-right" v-on="click: set_bounds(bounds, $event)">
                 	<i class="fa fa-location-arrow fa-fw"></i>
 				</span>
             </li>

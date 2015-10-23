@@ -1,7 +1,9 @@
 <div class="LocationsPanel">
     <div class="locations-placeholder" v-if="length < 1">
         <div class="placeholder-text">Add a destination.</div>
-        <img class="placeholder-icon" src="resources/map_marker_grey.svg" />
+        <div class="placeholder-icon">
+            <icon-component fill="#DDDDDD"></icon-component>
+        </div>
     </div>
     <ul class="list-containter">
         <li v-repeat="locations">

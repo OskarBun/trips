@@ -24,7 +24,9 @@
 
 .UserPanel
 .icon {
+	display: inline-block;
 	width: 40px;
+	height: 40px;
 	vertical-align: top;
 }
 
@@ -90,4 +92,11 @@
 
 	font-family: 'FontAwesome';
 	content: '\f08b';
+}
+
+.UserPanel
+.center-bar {
+	display: inline-block;
+	max-width: 300px;
+	overflow: hidden;
 }

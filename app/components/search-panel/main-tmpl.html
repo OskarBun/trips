@@ -4,7 +4,9 @@
     <div class="title title-bar">Search Locations:</div>
     <div class="search-placeholder" v-if="!results">
         <div class="placeholder-text">Search a destination.</div>
-        <img class="placeholder-icon" src="resources/map_marker_grey.svg" />
+        <div class="placeholder-icon">
+        	<icon-component fill="#DDDDDD"></icon-component>
+        </div>
     </div>
     <ul class="list-containter">
         <template v-repeat="results">

@@ -1,7 +1,5 @@
 import './main.css!';
 import tmpl from './main-tmpl.html!text';
-import user_tmpl from './user-tmpl.html!text';
-import trip_tmpl from './trip-tmpl.html!text';
 import Vue from 'vue';
 import User from 'app/models/user';
 import Locations_Panel from './locations-panel/main';
@@ -15,8 +13,6 @@ Vue.component('trips-panel', {
 		return {
 			items: {},
 			new_label: null,
-			locations: {},
-			users: {},
 			trip_title: null
 		};
 	},
@@ -39,6 +35,7 @@ Vue.component('trips-panel', {
 			}
 		},
 		"open_trip": function(key){
+			//I Need to watch to see this's data ever get's set to null
 			this.trip = this.trips.open_trip(key);
 		},
 		"update_trip_name": function(e) {
@@ -59,9 +56,18 @@ Vue.component('trips-panel', {
 			e.stopPropagation();
 		}
 	},
+	ready: function() {
+		this.items_adapter = this.trips.list_trips(this.items);
+		this.items_adapter._base.on('child_removed', function(key){
+			debugger;
+			if(this.trip && this.trip.uid == key.key()){
+				this.trip = null;
+			}
+		}.bind(this));
+	},
 	events: {
 		"hook:attached": function(){
-      		this.items_adapter = this.trips.list_trips(this.items);
+
 		},
 		"hook:detached": function(){}
 	},
@@ -70,9 +76,4 @@ Vue.component('trips-panel', {
 			console.log(val);
 		}
 	}
-});
-
-Vue.component('user-list', {
-	template: user_tmpl,
-	props: ['user']
 });

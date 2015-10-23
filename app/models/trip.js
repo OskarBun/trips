@@ -8,7 +8,7 @@ var LOCATION_PATH = "locations/";
 var USERS_PATH = "users/"
 
 class Trip extends VueFire {
-    constructor(url, deep){
+    constructor(url, deep=false, key){
 		super({
 			data: {
 				label: null,
@@ -17,6 +17,7 @@ class Trip extends VueFire {
 			},
 			methods:{}
 		}, url);
+        this.uid = key;
         if(deep === undefined || deep){
             this.locations_path = url+LOCATION_PATH;
             this.locations_adapter = new VueFireIterable(this.locations, this.locations_path);
@@ -39,11 +40,11 @@ class TripFactory {
 			locations: {},
             users: users
 		});
-		return new Trip(this._url + ftrip.key() + '/');
+		return new Trip(this._url + ftrip.key() + '/', true, ftrip.key());
 	}
 
 	open_trip (key){
-		return new Trip(this._url + key + '/');
+		return new Trip(this._url + key + '/', true, key);
 	}
 
 	list_trips (container){
@@ -51,7 +52,7 @@ class TripFactory {
 	}
 
     remove_trip (key){
-        var dead = new Trip(this._url+key+'/', false);
+        var dead = new Trip(this._url+key+'/');
         var locations = Object.keys(dead.locations);
         dead.adapter.set(null, (error) => {
             if(!error){

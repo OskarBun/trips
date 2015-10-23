@@ -96,7 +96,9 @@
 
 .UserPanel
 .center-bar {
+	margin-left: 140px;
 	display: inline-block;
 	max-width: 300px;
 	overflow: hidden;
+	vertical-align: top;
 }

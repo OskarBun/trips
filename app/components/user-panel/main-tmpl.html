@@ -4,9 +4,9 @@
         <h4 class="site-title">Trippy</h4>
 
         <!-- Trips Users -->
-        <template v-if="trip">
+        <span class="center-bar" v-if="trip">
             <users-panel adapter="{{ users_adapter }}"></users-panel>
-        </template>
+        </span>
 
         <span class="user-profile pull-right">
             <span class="profile-name title" v-text="user_tag"></span>

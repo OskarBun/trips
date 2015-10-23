@@ -148,6 +148,23 @@ li:hover {
 }
 
 .SearchPanel
+.search-placeholder {
+	width: 100%;
+	margin-top: 30px;
+	background-color: transparent;
+	font: 1.3em;
+	text-align: center;
+	color: #D4D4D4;
+}
+
+.SearchPanel
+.search-placeholder
+.placeholder-icon {
+	display: inline-block;
+	width: 60px;
+}
+
+.SearchPanel
 .searching {
 	animation: pulse 1.5s ease-out infinite;
 }

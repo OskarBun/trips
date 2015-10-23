@@ -2,12 +2,15 @@
 <div class="SearchPanel">
     <!-- content -->
     <div class="title title-bar">Search Locations:</div>
+    <div class="search-placeholder" v-if="!results">
+        <div class="placeholder-text">Search a destination.</div>
+        <img class="placeholder-icon" src="resources/map_marker_grey.svg" />
+    </div>
     <ul class="list-containter">
         <template v-repeat="results">
             <li v-on="mouseover: highlight($index)">{{title}}</li>
         </template>
     </ul>
-
 	<div class="search-bar">
 		<form v-on="submit:do_search" autocomplete="off">
 			<span class="input-action align-left" v-on="click: do_here">
@@ -18,7 +21,7 @@
 				<i class="fa fa-search fa-fw"></i>
 			</span>
 			<span class="input-action pull-right clear" v-on="click: clear" v-if="search">
-				<i class="fa fa-close fa-fw"></i>
+				<i class="fa fa-close fa-fw" v-class="searching: search_pending"></i>
 			</span>
 		</form>
 		<div class="footer-bar"></div>

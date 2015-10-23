@@ -58,16 +58,19 @@ Vue.component('search-panel', {
 			location: null,
 			search: null,
 			results: null,
-			here_pending: false
+			here_pending: false,
+			search_pending: false
 		};
 	},
   	template: tmpl,
 	methods: {
 		"do_search": function(e){
 			e.preventDefault();
+			this.search_pending = true;
 			code_address(this.search, (result) => {
 				this.results = result;
 				this.$root.$broadcast('search-results', result);
+				this.search_pending = false;
 			});
 		},
 		"do_here": function(e){

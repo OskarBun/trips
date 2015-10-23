@@ -28,7 +28,7 @@ export default function(googleApi){
                     if(value){
     					this.setTitle(value.title);
     					this.setPosition(new googleApi.maps.LatLng(value.lat,value.lng));
-                    } 
+                    }
 					resolve();
 				}, reject);
 			})
@@ -62,7 +62,7 @@ export default function(googleApi){
 			}, this._base.root().toString()+'/locations/'+key, marker => this.markers[key] = marker);
 			m.load().then(()=>{
 				this.markers[key] = m;
-				this.container.set_bounds();
+				this.container.set_bounds('locations');
 			});
 		}
 

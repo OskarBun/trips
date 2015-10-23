@@ -10,7 +10,9 @@
     </div>
     <ul class="list-containter">
         <template v-repeat="results">
-            <li v-on="mouseover: highlight($index)">{{title}}</li>
+            <li v-on="mouseover: highlight($index), click: add_to_trip($data)">
+                {{title}}
+            </li>
         </template>
     </ul>
 	<div class="search-bar">

@@ -35,6 +35,7 @@ function code_address(postcode, callback){
 			        if (status == googleApi.maps.GeocoderStatus.OK) {
 						var permitted = results.map(function(e){
 							return {
+								bounds: e.geometry.viewport, //This is going to make dad angry LatLngBounds
 								lat: e.geometry.location.lat(),
 								lng: e.geometry.location.lng(),
 								title: e.formatted_address
@@ -91,7 +92,16 @@ Vue.component('search-panel', {
 		},
 		"highlight": function(index){
             this.$root.$broadcast('highlight-result', index);
-        }
+        },
+		"add_to_trip": function(result){
+			this.$root.add_location(result)
+			this.search = null;
+			this.results = null;
+			this.$root.$broadcast('search-results', result);
+		},
+		"set_bounds": function(bounds){
+			this.$root.$broadcast('set-bounds', bounds)
+		}
 	},
 	watch:{
 		"location": function(val){

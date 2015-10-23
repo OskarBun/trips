@@ -64,13 +64,11 @@ function googleMap(vm){
 				map_clicked(lat,lng){
 					//This should broadcast for a Location Factory to make it
 					if(this.locations){
-						var snap = new Firebase(vm.$root.base_url+'locations').push({
-			                title: "untitled",
-			                lat: lat,
-			                lng: lng
-			            });
-						var change = { [snap.key()]: true }
-						this.locations.change(change);
+						vm.$root.add_location({
+							title: "Clicked",
+							lat: lat,
+							lng: lng
+						})
 					}
 				}
 
@@ -80,12 +78,18 @@ function googleMap(vm){
 					this.map.setCenter(new googleApi.maps.LatLng(lat,lng));
 				}
 
-				set_bounds(filter){
+				set_bounds(filter, bounds){
 					var rb = null;
-					if(this.locations){
+					if(bounds){
+						// var sw = new googleApi.maps.LatLng(bounds.se.lat, bounds.se.lng),
+						// 	ne = new googleApi.maps.LatLng(bounds.nw.lat, bounds.nw.lng);
+						// rb = new googleApi.maps.LatLngBounds(se, nw);
+						rb = bounds;
+					}
+					if((!filter || filter == 'locations') && this.locations){
 						rb = this.locations.get_bounds(rb);
 					}
-					if(this.search_results){
+					if((!filter || filter == 'search') && this.search_results){
 						rb = this.search_results.get_bounds(rb);
 					}
 					if(rb){
@@ -103,12 +107,16 @@ function googleMap(vm){
 					}
 				}
 
+				set_zoom(zoom){
+					this.map.setZoom(zoom);
+				}
+
 				set_search_results(results){
 					if(this.search_results){
 						this.search_results.dispose();
 					}
 					this.search_results = new SearchResultsAdapter(this,results);
-					this.set_bounds();
+					this.set_bounds('search');
 				}
 
 				hilite_search(index){
@@ -145,8 +153,14 @@ Vue.component('map-panel', {
   		"set-center": function(e){
   			if(this._map_container_){
   				this._map_container_.set_center(e.lat, e.lng);
+				this._map_container_.set_zoom(16);
   			}
   		},
+		"set-bounds": function(e){
+			if(this._map_container_){
+				this._map_container_.set_bounds('none', e)
+			}
+		},
   		"search-results": function(e){
   			if(this._map_container_){
   				this._map_container_.set_search_results(e);

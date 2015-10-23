@@ -40,7 +40,20 @@ var appl = window.appl = new Vue({
             }
         }
     },
-    methods: {},
+    methods: {
+        "add_location": function(e){
+            if(this.trip){
+                var snap = new Firebase(this.base_url+'locations').push({
+                    title: e.title.split(',')[0],
+                    lat: e.lat,
+                    lng: e.lng
+                });
+                var change = { [snap.key()]: true }
+                this.trip.locations_adapter.change(change);
+            }
+        }
+    },
+    events: {},
     components: {},
     ready: function() {
         this.base.onAuth((auth_data) => {

@@ -59,18 +59,13 @@ Vue.component('trips-panel', {
 	ready: function() {
 		this.items_adapter = this.trips.list_trips(this.items);
 		this.items_adapter._base.on('child_removed', function(key){
-			debugger;
 			if(this.trip && this.trip.uid == key.key()){
 				this.trip = null;
 			}
+		//Fat arrow wasn't working?!?!?
 		}.bind(this));
 	},
-	events: {
-		"hook:attached": function(){
-
-		},
-		"hook:detached": function(){}
-	},
+	events: {},
 	watch:{
 		"items": function(val){
 			console.log(val);

@@ -1,0 +1,102 @@
+.CollabPanel {
+	height: 100%;
+	width: 100%;
+}
+
+.CollabPanel
+.collab-bar {
+	display: inline-block;
+}
+
+.collab-list {
+    white-space: nowrap;
+}
+
+.CollabPanel
+.collab-profile {
+	position: relative;
+	display: inline-block;
+}
+
+.CollabPanel
+.profile-image {
+	position: relative;
+	vertical-align: top;
+	margin-right: 10px;
+	border-width: 1px;
+	border-style: solid;
+    box-sizing: border-box;
+}
+
+.CollabPanel
+.collab-footer {
+	position: absolute;
+	top: 30px;
+	
+	width: 100%;
+	height: 11px;
+
+	background: #fff;
+}
+
+.CollabPanel
+.add-profile {
+	text-align: center;
+    padding: 3px;
+    box-sizing: border-box;
+    font-size: 1.4em;
+
+    margin: 0;
+    margin-left: -5px;
+
+	color: #69AEBB;
+	background-color: rgba(255, 255, 255, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.CollabPanel
+.add-profile:hover {
+	color: #fff;
+	border: 1px solid #fff;
+}
+
+.CollabPanel
+.tooltip-arrow {
+	position: relative;
+	left: 12px;
+	z-index: 1;
+	width: 0;
+	height: 0;
+
+	border-style: solid;
+	border-width: 0 10px 10px 10px;
+	border-color: transparent transparent #585858 transparent;
+
+	visibility: hidden;
+}
+
+.CollabPanel
+.profile-image:hover + .tooltip-arrow {
+	visibility: visible;
+}
+
+.CollabPanel
+.tooltip-content {
+	position: absolute;
+    top: 5px;
+    left: -20px;
+	z-index: 1;
+
+	padding: 2px 10px;
+
+	background-color: #585858;
+}
+
+.CollabPanel
+.tooltip-text {
+	opacity: 0.7;
+	color: #000;
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+

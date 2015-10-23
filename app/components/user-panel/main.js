@@ -1,7 +1,7 @@
 import './main.css!';
 import tmpl from './main-tmpl.html!text';
 import Vue from 'vue';
-import './users-panel/main';
+import './collab-panel/main';
 
 Vue.component('user-panel', {
 	template: tmpl,

@@ -1,0 +1,20 @@
+<div class="CollabPanel">
+	<div class="collab-bar">
+		<div class="collab-list">
+			<div class="collab-profile" v-repeat="users" >
+				<div class="profile-image" v-style="border-color: color">
+			        <img class="collab-image u-full-width" v-attr="src: profile_image" />
+			        <div class="collab-footer" v-style="background: color"></div>
+			    </div>
+			    <div class="tooltip-arrow" v-style="border-bottom-color: color">
+			    	<div class="tooltip-content" v-style="background: color">
+				    	<div class="tooltip-text" v-text="username" v-style="color: color"></div>
+				    </div>
+			    </div>
+		    </div>
+		</div>
+	</div>
+    <div class="profile-image add-profile" v-on="click: add_collaborator">
+    	<i class="fa fa-plus fa-fw"></i>
+    </div>
+</div>

@@ -1,6 +1,9 @@
 <div class="UsersPanel">
-	<div class="profile-image" v-repeat="users">
+	<div class="profile-image" v-repeat="users" v-style="border-color: color">
         <img class="collab-image u-full-width" v-attr="src: profile_image" />
         <div class="collab-footer" v-style="background: color"></div>
+	    <!-- <div class="collab-tooltip">
+	    	
+	    </div> -->
     </div>
 </div>

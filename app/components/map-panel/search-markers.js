@@ -11,20 +11,20 @@ export default function(googleApi){
 			this.markers = [];
 			this.container = container;
 			results.map((item) => {
-			let marker = new googleApi.maps.Marker({
-                map: container.map,
-                position: new googleApi.maps.LatLng(item.lat,item.lng),
-                title: item.title,
-                icon: icons.BLUE_ICON
-            });
-			let info = new googleApi.maps.InfoWindow();
-            googleApi.maps.event.addListener(marker, 'click', (e) => {
-            	if (e.stop) {
-            	    e.stop();
-            	}
-            	this.open_info(marker,info,item);
-            });
-				this.markers.push({m:marker,i:info});
+				let marker = new googleApi.maps.Marker({
+	                map: container.map,
+	                position: new googleApi.maps.LatLng(item.lat,item.lng),
+	                title: item.title,
+	                icon: icons.BLUE_ICON
+	            });
+				let info = new googleApi.maps.InfoWindow();
+	            googleApi.maps.event.addListener(marker, 'click', (e) => {
+	            	if (e.stop) {
+	            	    e.stop();
+	            	}
+	            	this.open_info(marker,info,item);
+	            });
+					this.markers.push({m:marker,i:info, b:item.bounds});
 			});
 		}
 
@@ -53,11 +53,11 @@ export default function(googleApi){
 
 		get_bounds(rb){
 			this.markers.map((marker) => {
-				let loc = marker.m.getPosition();
+				let loc = marker.b;
 				if(rb===null){
-					rb = new googleApi.maps.LatLngBounds(loc, loc);
+					rb = loc
 				} else {
-					rb.extend(loc);
+					rb.union(loc);
 				}
 			});
 			return rb;

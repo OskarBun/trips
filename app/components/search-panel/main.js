@@ -43,7 +43,7 @@ function code_address(postcode, callback){
 						});
 						callback(permitted);
 			        } else {
-			            console.error("Geocode error: " + status);
+			            callback([])
 			        }
 	    		});
 	    	}
@@ -94,10 +94,11 @@ Vue.component('search-panel', {
             this.$root.$broadcast('highlight-result', index);
         },
 		"add_to_trip": function(result){
-			this.$root.add_location(result)
-			this.search = null;
-			this.results = null;
-			this.$root.$broadcast('search-results', []);
+			if(this.$root.add_location(result)){
+				this.search = null;
+				this.results = null;
+				this.$root.$broadcast('search-results', []);
+			}
 		},
 		"set_bounds": function(bounds, e){
 			e.stopPropagation();

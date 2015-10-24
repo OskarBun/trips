@@ -20,13 +20,13 @@ Vue.component('user-panel', {
 		}
 	},
 	methods: {
-		login: function() {
-			this.loginWith('github');
-		},
+		// login: function() {
+		// 	this.loginWith('github');
+		// },
 		logout: function() {
 			this.root.unauth();
 		},
-		loginWith: function(provider) {
+		login: function(provider) {
 			this.root.authWithOAuthPopup(provider, function(error, authData) {
 				if (error) {
 					console.log("Login Failed!", error);

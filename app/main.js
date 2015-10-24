@@ -21,6 +21,30 @@ function calc_content_height() {
     return window.innerHeight - user_panel.offsetHeight;
 }
 
+var parse_auth_data = {
+    'github': function(auth_data){
+        return {
+            username: auth_data.github.username,
+            profile_image: auth_data.github.profileImageURL,
+            color: auth_data.github.username == "OliverDashiell" ? "#F9D068" : "#ffff"
+        }
+    },
+    'google': function(auth_data){
+        return {
+            username: auth_data.google.displayName,
+            profile_image: auth_data.google.profileImageURL,
+            color: "#ffff"
+        }
+    },
+    'twitter': function(auth_data){
+        return {
+            username: auth_data.twitter.username,
+            profile_image: auth_data.twitter.profileImageURL,
+            color: "#ffff"
+        }
+    }
+}
+
 var appl = window.appl = new Vue({
     el: "body",
     data:{
@@ -51,6 +75,7 @@ var appl = window.appl = new Vue({
                 var change = { [snap.key()]: true }
                 this.trip.locations_adapter.change(change);
             }
+            return this.trip;
         }
     },
     events: {},
@@ -62,11 +87,7 @@ var appl = window.appl = new Vue({
 
                 user._uid = auth_data.uid;
                 user.adapter._base.once('value', (snap) => {
-                    var permitted = {
-                        username: auth_data.github.username,
-                        profile_image: auth_data.github.profileImageURL,
-                        color: auth_data.github.username == "OliverDashiell" ? "#F9D068" : "#ffff"
-                    }
+                    var permitted = parse_auth_data[auth_data.provider](auth_data);
                     if(!snap.val()){
                         user.adapter.set(permitted);
                     } else {

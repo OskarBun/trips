@@ -34,6 +34,7 @@ System.config({
     "skeleton": "npm:skeleton-css@2.0.4",
     "text": "github:systemjs/plugin-text@0.0.2",
     "vue": "npm:vue@0.12.16",
+    "vue-router": "npm:vue-router@0.7.4",
     "github:brianreavis/selectize.js@0.12.1": {
       "css": "github:systemjs/plugin-css@0.1.19",
       "jquery": "github:components/jquery@2.1.4",
@@ -489,6 +490,10 @@ System.config({
     },
     "npm:vm-browserify@0.0.4": {
       "indexof": "npm:indexof@0.0.1"
+    },
+    "npm:vue-router@0.7.4": {
+      "babel-runtime": "npm:babel-runtime@5.8.25",
+      "route-recognizer": "npm:route-recognizer@0.1.9"
     },
     "npm:vue@0.12.16": {
       "envify": "npm:envify@3.4.0",

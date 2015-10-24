@@ -3,24 +3,22 @@ import 'jspm_packages/npm/skeleton-css@2.0.4/css/skeleton.css!';
 import 'jspm_packages/npm/font-awesome@4.4.0/css/font-awesome.min.css!';
 import 'app/main.css!';
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import 'firebase';
-import 'app/components/icon-component/main';
-import 'app/components/map-panel/main';
-import 'app/components/trips-panel/main';
 import 'app/components/user-panel/main';
-import 'app/components/search-panel/main';
+import map_page from'app/pages/map/main';
 import User from 'app/models/user';
 import TripFactory from 'app/models/trip';
 
 
 var fire_url = 'https://scorching-fire-6566.firebaseio.com/';
 Vue.config.debug = true;
+Vue.use(VueRouter);
 
 function calc_content_height() {
     var user_panel = document.getElementsByClassName("UserPanel")[0];
     return window.innerHeight - user_panel.offsetHeight;
 }
-
 var parse_auth_data = {
     'github': function(auth_data){
         return {
@@ -45,17 +43,26 @@ var parse_auth_data = {
     }
 }
 
-var appl = window.appl = new Vue({
-    el: "body",
-    data:{
-        base_url: fire_url,
-        base: new Firebase(fire_url),
-        user: null,
-        trips: new TripFactory(fire_url),
-        trip: null,
-        loading: true,
-        label: null,
-        content_height: 500
+var router = window.router = new VueRouter()
+router.map({
+    '': {
+        component: map_page
+    }
+});
+
+var appl = window.appl = router.start({
+    data: function() {
+        return {
+            base_url: fire_url,
+            base: new Firebase(fire_url),
+            user: null,
+            trips: new TripFactory(fire_url),
+            trip: null,
+            loading: true,
+            label: null,
+            content_height: 500,
+            page: "map"
+        }
     },
     computed: {
         trip_url: function() {
@@ -79,7 +86,9 @@ var appl = window.appl = new Vue({
         }
     },
     events: {},
-    components: {},
+    components: {
+        map: map_page
+    },
     ready: function() {
         this.base.onAuth((auth_data) => {
             if (auth_data) {
@@ -110,4 +119,4 @@ var appl = window.appl = new Vue({
         this.loading = false;
     },
     events: {}
-});
+}, 'body');

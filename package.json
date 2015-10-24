@@ -27,7 +27,8 @@
       "selectize": "github:brianreavis/selectize.js@^0.12.1",
       "skeleton": "npm:skeleton-css@^2.0.4",
       "text": "github:systemjs/plugin-text@^0.0.2",
-      "vue": "npm:vue@^0.12.16"
+      "vue": "npm:vue@^0.12.16",
+      "vue-router": "npm:vue-router@^0.7.4"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",

@@ -32,11 +32,22 @@
 .collab-footer {
 	position: absolute;
 	top: 30px;
-	
-	width: 100%;
-	height: 11px;
 
-	background: #fff;
+	width: 100%;
+	height: 10px;
+
+    overflow: hidden;
+}
+
+.CollabPanel
+.collab-footer
+.circle-segment {
+	margin-top: -29px;
+	width: 38px;
+	height: 38px;
+	
+	background-color: #FFF;
+	border-radius: 19px;
 }
 
 .CollabPanel

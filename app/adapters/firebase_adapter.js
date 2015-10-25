@@ -2,8 +2,9 @@ import 'firebase';
 
 
 class FirebaseAdapter {
-	constructor(path){
-		this._base = new Firebase(path);
+	constructor(path, base){
+		if(base) this._base = base;
+		else this._base = new Firebase(path);
 	}
 
 	/**

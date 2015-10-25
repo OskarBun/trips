@@ -3,8 +3,8 @@ import FirebaseAdapter from 'app/adapters/firebase_adapter';
 
 class VueFireIterable extends FirebaseAdapter {
 	//container should be a observable {}
-	constructor(container, path){
-		super(path);
+	constructor(container, path, base){
+		super(path, base);
 		this.container = container;
 
 		this.init();

@@ -1,5 +1,4 @@
 import 'firebase';
-import Vue from 'vue';
 import VueFire from 'app/adapters/vue_adapter';
 import VueFireIterable from 'app/adapters/vue_iterable_adapter';
 
@@ -26,8 +25,9 @@ export default class Trip extends VueFire {
     }
 
     static create_trip (base_url, label){
-		var base = new Firebase(base_url);
-        var users = {};
+		var base = new Firebase(base_url),
+            users = {},
+            uid = base.getAuth().uid
         users[base.getAuth().uid] = true
 		var ftrip = base.push({
 			label: label,
@@ -41,7 +41,10 @@ export default class Trip extends VueFire {
 		return new Trip(base_url + key + '/', true, key);
 	}
 
-    static list_trips (url, container){
+    static list_trips (url, container, filter){
+        if(filter){
+            var base = new Firebase(url).orderByValue("users")
+        }
 		return new VueFireIterable(container, url);
 	}
 

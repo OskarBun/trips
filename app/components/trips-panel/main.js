@@ -42,19 +42,16 @@ export default Vue.extend({
 			e.stopPropagation();
 		}
 	},
-	ready() {
-		this.trip = null;
-		this.items_adapter = Trip.list_trips(this.$root.base_url+'trips', this.items);
-		this.items_adapter._base.on('child_removed', function(key){
-			if(this.trip && this.trip.uid == key.key()){
-				this.$route.router.go({name: 'trips'});
-			}
-		//Fat arrow wasn't working?!?!?
-		}.bind(this));
-	},
 	route: {
 		data(transition){
-			console.log(transition);
+			this.trip = null;
+			this.items_adapter = Trip.list_trips(this.$root.base_url+'trips', this.items);
+			this.items_adapter._base.on('child_removed', function(key){
+				if(this.trip && this.trip.uid == key.key()){
+					this.$route.router.go({name: 'trips'});
+				}
+			//Fat arrow wasn't working?!?!?
+			}.bind(this));
 			transition.next();
 		}
 	}

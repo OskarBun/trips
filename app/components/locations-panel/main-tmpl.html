@@ -14,11 +14,11 @@
                 </div>
             </div>
             <ul class="list-containter">
-                <li v-repeat="locations">
+                <li v-repeat="locations" v-on="click: show_location($key)" v-class="selected: active_location == $key">
                     <div class="location-item">
                         <div class="location-coords">
                             <span class="remove-button pull-right">
-                                <i class="fa fa-close fa-fw" v-on="click: remove_location($key)"></i>
+                                <i class="fa fa-close fa-fw" v-on="click: remove_location($key, $event)"></i>
                             </span>
                             <span v-text="lat | round"></span> :
                             <span v-text="lng | round"></span>

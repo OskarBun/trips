@@ -5,6 +5,7 @@ import 'app/components/icon-component/main';
 import 'app/components/map-panel/main';
 import 'app/components/trips-panel/main';
 import 'app/components/search-panel/main';
+import 'app/components/location-detail-panel/main';
 
 export default Vue.extend({
     data() {

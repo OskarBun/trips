@@ -6,8 +6,6 @@ import 'app/components/map-panel/main';
 import 'app/components/trips-panel/main';
 import 'app/components/search-panel/main';
 
-
-
 export default Vue.extend({
     data() {
         return {

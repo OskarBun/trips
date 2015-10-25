@@ -93,6 +93,22 @@ input[type="password"]:focus, textarea:focus, select:focus {
             transition: 1s;
 }
 
+/* ---- Scrollbar ---- */ 
+
+::-webkit-scrollbar{ 
+  width: 5px; 
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb { 
+  background-color: #69AEBB; 
+  border-radius: 0; 
+}
+
+::-webkit-scrollbar-track{
+  background-color: #DDDDDD;
+}
+
 
 /* ---- Base ---- */
 .main {

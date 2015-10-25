@@ -126,15 +126,15 @@ form {
 
 .LocationsPanel
 .list-containter {
-	max-height: 90%;
+	max-height: 100%;
 	width: 100%;
-	background-color: white;
+	overflow: auto;
+
 	margin: 0px;
 	padding: 0px;
 
 	list-style: none;
-
-	overflow: auto;
+	background-color: white;
 }
 
 .LocationsPanel

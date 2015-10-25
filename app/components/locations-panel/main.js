@@ -6,9 +6,9 @@ import Trip from 'app/models/trip';
 
 
 function calc_content_height() {
-    var panel = document.getElementsByClassName(".LocationsPanel")[0],
-        head  = panel.getElementsByClassName(".title-bar"),
-        foot  = panel.getElementsByClassName(".action-bar");
+    var panel = document.getElementsByClassName("LocationsPanel")[0],
+        head  = panel.getElementsByClassName("title-bar")[0],
+        foot  = panel.getElementsByClassName("action-bar")[0];
     return (panel.offsetHeight - head.offsetHeight - foot.offsetHeight) + 'px';
 }
 
@@ -95,7 +95,11 @@ export default Vue.extend({
     ready(){
         this.$nextTick(() => {
             this.content_height = calc_content_height();
-            window.addEventListener( "resize", () => this.content_height = calc_content_height() );
+            this.panel_resize = () => this.content_height = calc_content_height();
+            window.addEventListener( "resize", this.panel_resize );
         });
+    },
+    beforeDestroy(){
+        window.removeEventListener( "resize", this.panel_resize );
     }
 });

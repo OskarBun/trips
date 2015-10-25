@@ -1,13 +1,21 @@
 <div class="TripsPanel">
 	<div class="title title-bar">Planned Trips:</div>
-	<ul class="list-containter">
-		<li v-repeat="items" v-on="click:open_trip($key)">
-			<span class="remove-button pull-right" v-on="click:remove_trip($key, $event)">
-				<i class="fa fa-close fa-fw"></i>
-			</span>
-			<span class="list-item-text" v-text="label"></span>
-		</li>
-	</ul>
+	<div class="panel-content" v-style="height:content_height">
+		<!-- <div class="locations-placeholder" v-if="length < 1">
+	        <div class="placeholder-text">Add a destination.</div>
+	        <div class="placeholder-icon">
+	            <icon-component fill="#DDDDDD"></icon-component>
+	        </div>
+	    </div> -->
+		<ul class="list-containter">
+			<li v-repeat="items" v-on="click:open_trip($key)">
+				<span class="remove-button pull-right" v-on="click:remove_trip($key, $event)">
+					<i class="fa fa-close fa-fw"></i>
+				</span>
+				<span class="list-item-text" v-text="label"></span>
+			</li>
+		</ul>
+	</div>
 	<div class="action-bar">
 		<form v-on="submit:add_trip" autocomplete="off">
 			<span class="add-button pull-right" v-on="click:add_trip" v-class="disabled: new_label">

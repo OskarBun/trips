@@ -29,6 +29,12 @@
 }
 
 .CollabPanel
+.collab-image-placeholder {
+	font-size: 2em;
+	color: #fff;
+}
+
+.CollabPanel
 .collab-footer {
 	position: absolute;
 	top: 30px;

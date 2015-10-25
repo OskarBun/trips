@@ -6,7 +6,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import 'firebase';
 import 'app/components/user-panel/main';
-import locations_panel from 'app/components/trips-panel/locations-panel/main';
+import locations_panel from 'app/components/locations-panel/main';
 import trips_panel from 'app/components/trips-panel/main';
 import map_page from'app/pages/map/main';
 import profile_page from 'app/pages/profile/main';
@@ -21,7 +21,7 @@ Vue.use(VueRouter);
 
 function calc_content_height() {
     var user_panel = document.getElementsByClassName("UserPanel")[0];
-    return window.innerHeight - user_panel.offsetHeight;
+    return (window.innerHeight - user_panel.offsetHeight) + 'px';
 }
 
 
@@ -61,7 +61,7 @@ router.start({
             base: new Firebase(fire_url),
             user: null,
             loading: true,
-            content_height: 500
+            content_height: '100%'
         }
     },
     computed: {},

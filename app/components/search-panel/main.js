@@ -94,11 +94,10 @@ Vue.component('search-panel', {
             this.$root.$broadcast('highlight-result', index);
         },
 		"add_to_trip": function(result){
-			if(this.$root.add_location(result)){
-				this.search = null;
-				this.results = null;
-				this.$root.$broadcast('search-results', []);
-			}
+			this.$root.$broadcast("add_location",result)
+			this.search = null;
+			this.results = null;
+			this.$root.$broadcast('search-results', []);
 		},
 		"set_bounds": function(bounds, e){
 			e.stopPropagation();

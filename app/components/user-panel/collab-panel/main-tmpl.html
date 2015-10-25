@@ -3,6 +3,7 @@
 		<div class="collab-list">
 			<div class="collab-profile" v-repeat="user in users" >
 				<div class="profile-image" v-style="border-color: user.color">
+					<div class="collab-status" v-class="online: user.online"></div>
 			        <img class="collab-image u-full-width" v-attr="src: user.profile_image" v-link="{ name: 'user', params: { uid: user.uid }}"/>
 			        <div class="collab-footer">
 			        	<div class="circle-segment" v-style="background: user.color"></div>
@@ -10,7 +11,7 @@
 			    </div>
 			    <div class="tooltip-arrow" v-style="border-bottom-color: user.color">
 			    	<div class="tooltip-content" v-style="background: user.color">
-				    	<div class="tooltip-text" v-text="username" v-style="color: user.color"></div>
+				    	<div class="tooltip-text" v-text="user.username" v-style="color: user.color"></div>
 				    </div>
 			    </div>
 		    </div>

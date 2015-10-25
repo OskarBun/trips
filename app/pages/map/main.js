@@ -19,10 +19,10 @@ export default Vue.extend({
             content_height: 500
         }
     },
-    methods: {
+    events: {
         add_location(e) {
             if(this.trip){
-                var snap = new Firebase(this.base_url+'locations').push({
+                var snap = new Firebase(this.$root.base_url+'locations').push({
                     title: e.title.split(',')[0],
                     lat: e.lat,
                     lng: e.lng

@@ -52,6 +52,10 @@ export default Vue.extend({
 		//Fat arrow wasn't working?!?!?
 		}.bind(this));
 	},
-	events: {},
-	watch:{}
+	route: {
+		data(transition){
+			console.log(transition);
+			transition.next();
+		}
+	}
 });

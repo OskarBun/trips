@@ -64,15 +64,13 @@ function googleMap(vm, callback){
 				map_clicked(lat,lng){
 					//This should broadcast for a Location Factory to make it
 					if(this.locations){
-						vm.$root.add_location({
+						vm.$root.$broadcast("add_location", {
 							title: "Clicked",
 							lat: lat,
 							lng: lng
-						})
+						});
 					}
 				}
-
-				marker_dragged(key, value, lat, lng){}
 
 				set_center(lat,lng){
 					this.map.setCenter(new googleApi.maps.LatLng(lat,lng));
@@ -94,6 +92,19 @@ function googleMap(vm, callback){
 					}
 					if(rb){
 						this.map.fitBounds(rb);
+					}
+				}
+
+				set_line(){
+					if(this.locations){
+						if(this.locations.line) this.locations.line.setMap(null);
+						this.locations.line = new googleApi.maps.Polyline({
+							path: this.locations.get_line(),
+							strokeColor: "#FF8C8C",
+							strokeWeight: 2,
+							map: this.map,
+							geodesic: true
+						});
 					}
 				}
 

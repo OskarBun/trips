@@ -67,13 +67,13 @@ router.start({
                 var user = new User(this.base_url+'users/'+auth_data.uid, auth_data.uid);
                 user.adapter._base.once('value', (snap) => {
                     var permitted = parse_auth_data[auth_data.provider](auth_data);
+                    permitted.online = true;
                     if(!snap.val()){
                         user.adapter.set(permitted);
                     } else {
-                        user.adapter.change(permitted, (error) => {
-                            user.logged_in = true
-                        });
+                        user.adapter.change(permitted);
                     }
+                    user.adapter._base.child('online').onDisconnect().remove();
                     this.user = user;
                 });
             } else {

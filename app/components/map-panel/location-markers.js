@@ -41,6 +41,7 @@ export default function(googleApi){
 			super(path);
 			this.container = container;
 			this.markers = {};
+            this.line = null;
 
 			this.init();
 		}
@@ -50,6 +51,8 @@ export default function(googleApi){
 				this.markers[marker].setMap(null);
 			}
 			this.markers={};
+            this.line.setMap(null);
+            this.line = null;
 			this.container = null;
 			this.off();
 		}
@@ -58,11 +61,12 @@ export default function(googleApi){
 			var m = new FireMarker({
 				map: this.container.map,
 				icon: icons.RED_ICON,
-				draggable: true
+				draggable: false
 			}, this._base.root().toString()+'/locations/'+key, marker => this.markers[key] = marker);
 			m.load().then(()=>{
 				this.markers[key] = m;
 				this.container.set_bounds('locations');
+                this.container.set_line();
 			});
 		}
 
@@ -79,6 +83,7 @@ export default function(googleApi){
 			if(marker){
     			marker.setMap(null);
 				delete this.markers[key]
+                this.container.set_line();
 			}
 		}
 
@@ -95,6 +100,12 @@ export default function(googleApi){
 			};
 			return rb;
 		}
+
+        get_line(){
+            return Object.keys(this.markers).map((m)=>{
+                return this.markers[m].getPosition();
+            });
+        }
 	}
 
 	return LocationsAdapter;

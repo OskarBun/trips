@@ -7,9 +7,6 @@ Vue.component('user-panel', {
 	template: tmpl,
 	props: ['user', 'root'],
 	computed: {
-		logged_in: function() {
-			return this.user && this.user.logged_in;
-		},
 		users_adapter: function() {
 			if(this.trip){
 				return this.trip.users_adapter;

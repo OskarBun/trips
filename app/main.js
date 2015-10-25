@@ -73,7 +73,7 @@ router.start({
                     } else {
                         user.adapter.change(permitted);
                     }
-                    user.adapter._base.child('online').onDisconnect().remove();
+                    user.adapter._base.onDisconnect().update({ online: false });
                     this.user = user;
                 });
             } else {

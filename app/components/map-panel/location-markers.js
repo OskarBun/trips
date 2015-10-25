@@ -51,8 +51,10 @@ export default function(googleApi){
 				this.markers[marker].setMap(null);
 			}
 			this.markers={};
-            this.line.setMap(null);
-            this.line = null;
+            if(this.line){
+                this.line.setMap(null);
+                this.line = null;
+            }
 			this.container = null;
 			this.off();
 		}

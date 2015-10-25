@@ -29,6 +29,10 @@ class FirebaseAdapter {
 		});
 	}
 
+	path(){
+		return this._base.toString();
+	}
+
 	off(){
 		this._base.off();
 	}

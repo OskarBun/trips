@@ -32,6 +32,10 @@ class VueFire extends Vue {
         super(config);
         this.adapter = new Foo(this, path, callback, errback);
     }
+
+	path() {
+		return this.adapter.path();
+	}
 }
 
 export default VueFire;

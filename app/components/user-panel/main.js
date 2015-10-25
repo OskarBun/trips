@@ -5,7 +5,7 @@ import './collab-panel/main';
 
 Vue.component('user-panel', {
 	template: tmpl,
-	props: ['user', 'root', 'trip'],
+	props: ['user', 'root'],
 	computed: {
 		logged_in: function() {
 			return this.user && this.user.logged_in;
@@ -17,9 +17,6 @@ Vue.component('user-panel', {
 		}
 	},
 	methods: {
-		// login: function() {
-		// 	this.loginWith('github');
-		// },
 		logout: function() {
 			this.root.unauth();
 		},

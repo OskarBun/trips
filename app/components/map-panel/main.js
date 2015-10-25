@@ -8,7 +8,7 @@ import location_marker_loader from "./location-markers";
 import search_markers_loader from "./search-markers";
 
 
-function googleMap(vm){
+function googleMap(vm, callback){
 	map_loader({
             libraries: ['places']
         })
@@ -126,6 +126,7 @@ function googleMap(vm){
 				}
 			}
 	   		vm._map_container_ = new MapContainer(vm.$el);
+			callback();
 		}, function(err) {
 	        console.error(err);
 	    });
@@ -142,7 +143,11 @@ Vue.component('map-panel', {
   	props: ['url'],
   	events: {
   		"hook:attached": function(){
-  			googleMap(this);
+  			googleMap(this, function(){
+				if(this.url){
+	  				this._map_container_.set_locations(this.url);
+				}
+			}.bind(this)); //Fat arrow didn't work again!!!!
   		},
   		"hook:detached": function(){
   			if(this._map_container_){
@@ -170,15 +175,10 @@ Vue.component('map-panel', {
 			if(this._map_container_){
 				this._map_container_.hilite_search(e);
 			}
-		},
-		"show-trip": function(e){
-			if(this._map_container_){
-				this._map_container_.hilite_search(set_locations);
-			}
 		}
   	},
   	watch:{
-  		"url": function(val){
+  		url(val){
   			if(this._map_container_){
   				this._map_container_.set_locations(val);
   			}

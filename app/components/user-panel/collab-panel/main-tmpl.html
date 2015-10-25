@@ -16,7 +16,9 @@
 		    </div>
 		</div>
 	</div>
-    <div class="profile-image add-profile" v-on="click: add_collaborator">
-    	<i class="fa fa-plus fa-fw"></i>
-    </div>
+	<template v-if="show">
+	    <div class="profile-image add-profile" v-on="click: add_collaborator">
+	    	<i class="fa fa-plus fa-fw"></i>
+	    </div>
+	</template>
 </div>

@@ -49,9 +49,11 @@ export default Vue.extend({
             this.trip = new Trip(`${this.$root.base_url}trips/${key}/`, true, key, (snap)=>{
                 if(!snap.val()) this.close_trip();
             });
+            this.$root.$broadcast("show_trip", this.trip);
         },
         deactivate(transition) {
             this.trip = null;
+            this.$root.$broadcast('hide_trip', this.trip);
             transition.next();
         },
         canReuse: false

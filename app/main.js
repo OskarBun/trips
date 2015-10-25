@@ -18,10 +18,6 @@ var fire_url = 'https://scorching-fire-6566.firebaseio.com/';
 Vue.config.debug = true;
 Vue.use(VueRouter);
 
-function calc_content_height() {
-    var user_panel = document.getElementsByClassName("UserPanel")[0];
-    return window.innerHeight - user_panel.offsetHeight;
-}
 
 var router = window.router = new VueRouter({
     hashbang: true
@@ -47,39 +43,22 @@ router.map({
     }
 });
 
+// router.beforeEach((transition)=>{
+//     console.log(transition);
+//     transition.next();
+// })
+
 router.start({
     data() {
         return {
             base_url: fire_url,
             base: new Firebase(fire_url),
             user: null,
-            trip: null,
-            loading: true,
-            label: null,
-            content_height: 500
+            loading: true
         }
     },
-    computed: {
-        trip_url() {
-            if(this.trip) {
-                return this.trip.locations_path;
-            }
-        }
-    },
-    methods: {
-        add_location(e) {
-            if(this.trip){
-                var snap = new Firebase(this.base_url+'locations').push({
-                    title: e.title.split(',')[0],
-                    lat: e.lat,
-                    lng: e.lng
-                });
-                var change = { [snap.key()]: true }
-                this.trip.locations_adapter.change(change);
-            }
-            return this.trip;
-        }
-    },
+    computed: {},
+    methods: {},
     events: {},
     components: {},
     ready() {
@@ -100,11 +79,6 @@ router.start({
             } else {
                 this.user = null;
             }
-        });
-
-        this.$nextTick(() => {
-            this.content_height = calc_content_height();
-            window.addEventListener( "resize", () => this.content_height = calc_content_height() );
         });
 
         this.loading = false;

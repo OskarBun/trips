@@ -17,6 +17,7 @@ export default Vue.extend({
     data: function() {
         return {
             locations: {},
+            active_location: null,
 			trip_title: null,
             content_height: "100%"
         }
@@ -34,13 +35,14 @@ export default Vue.extend({
 		}
     },
     methods: {
-        remove_location(key) {
+        remove_location(key, e) {
             var dead_adapter = this.locations[key].adapter;
             this.adapter.update({
                 [key]: null
             }, ()=>{
                 dead_adapter.set(null);
             });
+            e.stopPropagation();
         },
 		close_trip() {
 			this.$route.router.go({name:'trips'});
@@ -55,6 +57,10 @@ export default Vue.extend({
 			e.preventDefault();
 			e.srcElement[0].blur();
 		},
+        show_location(key) {
+            this.location = key;
+            this.$root.$broadcast('show_location', key);
+        }
     },
     route: {
 		data(transition) {

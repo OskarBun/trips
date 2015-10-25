@@ -1,5 +1,13 @@
 <div class="profilePage">
     <template v-if="user">
         <h1 v-text="user.username"></h1>
+        <h4 v-text="user.color"></h4>
+        <select v-model="user.color">
+            <option>#F9D068</option>
+            <option>#F96868</option>
+            <option>#76D358</option>
+            <option>#ffff</option>
+        </select>
+        <button v-on="click: update">Update</button>
     </template>
 </div>

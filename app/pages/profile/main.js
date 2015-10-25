@@ -10,7 +10,14 @@ export default Vue.extend({
         }
     },
     template: tmpl,
-    created: function() {
+    methods: {
+        update(){
+            this.user.adapter.change({
+                color: this.user.color
+            });
+        }
+    },
+    created() {
         this.user = new User(this.base_url+'users/'+this.$route.params.uid, this.$route.params.uid);
     },
     inherit: true

@@ -47,11 +47,6 @@ router.map({
     }
 });
 
-router.beforeEach((transition)=>{
-    console.log(transition);
-    transition.next();
-});
-
 router.start({
     data() {
         return {

@@ -49,12 +49,10 @@ export default Vue.extend({
             this.trip = new Trip(`${this.$root.base_url}trips/${key}/`, true, key, (snap)=>{
                 if(!snap.val()) this.close_trip();
             });
-            // return new Promise((resolve, reject)=>{
-            //     var key = transition.to.params.uid
-            //     var trip = new Trip(`${this.$root.base_url}trips/${key}/`, true, key, ()=>{
-            //         resolve({trip: trip});
-            //     }, reject);
-            // });
+        },
+        deactivate(transition) {
+            this.trip = null;
+            transition.next();
         },
         canReuse: false
 	},

@@ -5,6 +5,7 @@ import 'app/main.css!';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import 'firebase';
+import Idle from 'idle';
 import 'app/components/user-panel/main';
 import locations_panel from 'app/components/locations-panel/main';
 import trips_panel from 'app/components/trips-panel/main';
@@ -71,16 +72,26 @@ router.start({
     ready() {
         this.base.onAuth((auth_data) => {
             if (auth_data) {
-                var user = new User(this.base_url+'users/'+auth_data.uid, auth_data.uid);
-                user.adapter._base.once('value', (snap) => {
+                var user = new User(this.base_url+'users/'+auth_data.uid, auth_data.uid),
+                    base = user.adapter._base;
+                base.once('value', (snap) => {
                     var permitted = parse_auth_data[auth_data.provider](auth_data);
-                    permitted.online = true;
+                    permitted.online = 'online';
                     if(!snap.val()){
                         user.adapter.set(permitted);
                     } else {
                         user.adapter.change(permitted);
                     }
-                    user.adapter._base.onDisconnect().update({ online: false });
+                    base.onDisconnect().update({ online: 'offline' });
+                    this.idle = new Idle({
+        				onAway(){
+                            user.adapter.change({online: 'away'});
+                        },
+        				onAwayBack(){
+                            user.adapter.change({online: 'online'})
+                        },
+        				awayTimeout: 20000 //away with 20 seconds of inactivity
+        			}).start();
                     this.user = user;
                 });
             } else {

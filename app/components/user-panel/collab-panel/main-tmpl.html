@@ -3,12 +3,12 @@
 		<div class="collab-bar">
 			<div class="collab-list">
 				<div class="collab-profile" v-repeat="user in users">
-					<!-- <div class="collab-status" v-if="user.online"></div> -->
-					<div class="profile-image" v-style="border-color: user.color" v-class="online: user.online">
+					<div class="collab-status" v-if="user.online == 'away'"></div>
+					<div class="profile-image" v-style="border-color: user.color" v-class="online: user.online == 'online'">
 						<div class="collab-image collab-image-placeholder u-full-width" v-if="!user.profile_image">
 	                        <i class="fa fa-user fa-fw"></i>
 	                    </div>
-				        <img class="collab-image u-full-width" v-if="user.profile_image" 
+				        <img class="collab-image u-full-width" v-if="user.profile_image"
 				        	 v-attr="src: user.profile_image" v-link="{ name: 'user', params: { uid: user.uid }}"/>
 				        <div class="collab-footer">
 				        	<div class="circle-segment" v-style="background: user.color"></div>

@@ -30,11 +30,11 @@ export default Vue.extend({
 			if(this.new_label){
 				var key = Trip.create_trip(this.$root.base_url+'trips', this.new_label);
 				this.new_label = '';
-				this.$route.router.go({ name: 'trip', params: { uid: key } });
+				this.$route.router.go('/'+key);
 			}
 		},
 		open_trip(key) {
-			this.$route.router.go({ name: 'trip', params: { uid: key } });
+			this.$route.router.go('/'+key);
 		},
 
 		remove_trip(key, e) {

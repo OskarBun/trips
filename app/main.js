@@ -19,6 +19,12 @@ Vue.config.debug = true;
 Vue.use(VueRouter);
 
 
+function calc_content_height() {
+    var user_panel = document.getElementsByClassName("UserPanel")[0];
+    return window.innerHeight - user_panel.offsetHeight;
+}
+
+
 var router = window.router = new VueRouter({
     hashbang: true
 });
@@ -31,7 +37,7 @@ router.map({
                 component: trips_panel,
                 name: 'trips'
             },
-            '/:uid': {
+            '/*path': {
                 component: locations_panel,
                 name: 'trip'
             }
@@ -54,7 +60,8 @@ router.start({
             base_url: fire_url,
             base: new Firebase(fire_url),
             user: null,
-            loading: true
+            loading: true,
+            content_height: 500
         }
     },
     computed: {},
@@ -79,6 +86,11 @@ router.start({
             } else {
                 this.user = null;
             }
+        });
+
+        this.$nextTick(() => {
+            this.content_height = calc_content_height();
+            window.addEventListener( "resize", () => this.content_height = calc_content_height() );
         });
 
         this.loading = false;

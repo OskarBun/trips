@@ -6,17 +6,12 @@ import 'app/components/map-panel/main';
 import 'app/components/trips-panel/main';
 import 'app/components/search-panel/main';
 
-function calc_content_height() {
-    var user_panel = document.getElementsByClassName("UserPanel")[0];
-    return window.innerHeight - user_panel.offsetHeight;
-}
 
 
 export default Vue.extend({
     data() {
         return {
-            trip: null,
-            content_height: 500
+            trip: null
         }
     },
     events: {
@@ -40,11 +35,5 @@ export default Vue.extend({
             }
         }
     },
-    template: tmpl,
-    ready(){
-        this.$nextTick(() => {
-            this.content_height = calc_content_height();
-            window.addEventListener( "resize", () => this.content_height = calc_content_height() );
-        });
-    }
+    template: tmpl
 });

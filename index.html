@@ -36,7 +36,9 @@
         <div class="main">
             <user-panel user="{{ user }}" root="{{ base }}"></user-panel>
 
-            <router-view keep-alive></router-view>
+            <div class="content" v-style="height:content_height+'px'">
+                <router-view keep-alive></router-view>
+            </div>
 
             <div class="notFound" v-if="!$route.matched">
                 <h1>404 not found</h1>

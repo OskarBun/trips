@@ -48,11 +48,13 @@ export default Vue.extend({
     },
     route: {
 		data(transition) {
-            var key = transition.to.params.uid
+            var parsed = transition.to.params.path.split('/');
+            var key = parsed[0];
             this.trip = new Trip(`${this.$root.base_url}trips/${key}/`, true, key, (snap)=>{
                 if(!snap.val()) this.close_trip();
             });
             this.$root.$broadcast("show_trip", this.trip);
+            transition.next();
         },
         deactivate(transition) {
             this.trip = null;

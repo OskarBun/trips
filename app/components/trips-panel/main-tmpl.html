@@ -2,18 +2,18 @@
 	<div class="title title-bar">Planned Trips:</div>
 	<ul class="list-containter">
 		<li v-repeat="items" v-on="click:open_trip($key)">
-			<span class="list-item-text" v-text="label"></span>
 			<span class="remove-button pull-right" v-on="click:remove_trip($key, $event)">
 				<i class="fa fa-close fa-fw"></i>
 			</span>
+			<span class="list-item-text" v-text="label"></span>
 		</li>
 	</ul>
-	<div class="add-bar">
+	<div class="action-bar">
 		<form v-on="submit:add_trip" autocomplete="off">
-			<input class="name-field" type="text" v-model="new_label" placeholder="New Trip Name"/>
 			<span class="add-button pull-right" v-on="click:add_trip" v-class="disabled: new_label">
 				<i class="fa fa-plus fa-fw"></i>
 			</span>
+			<input class="name-field" type="text" v-model="new_label" placeholder="New Trip Name"/>
 		</form>
 		<div class="footer-bar"></div>
 	</div>

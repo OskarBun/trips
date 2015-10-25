@@ -203,3 +203,8 @@ li:hover {
 		color: #F9DF68;
 	}
 }]
+
+.SearchPanel
+.svg-icon-flag {
+	fill: red;
+}

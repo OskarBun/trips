@@ -16,9 +16,7 @@
 }
 
 .TripsPanel
-.add-bar,
-.TripsPanel
-.close-bar {
+.action-bar {
 	position: absolute;
 	bottom: 0px;
 	
@@ -140,9 +138,6 @@ li:hover {
 .remove-button {
 	visibility: visible;
 }
-
-.TripsPanel
-.close-bar {}
 
 .TripsPanel
 .close-button {

@@ -11,25 +11,25 @@
     <ul class="list-containter">
         <template v-repeat="results">
             <li v-on="mouseover: highlight($index), click: add_to_trip($data)">
-                <span class="list-item-text" v-text="title"></span>
                 <span class="locate-button pull-right" v-on="click: set_bounds(bounds, $event)">
-                	<i class="fa fa-location-arrow fa-fw"></i>
-				</span>
+                    <i class="fa fa-location-arrow fa-fw"></i>
+                </span>
+                <span class="list-item-text" v-text="title"></span>
             </li>
         </template>
     </ul>
 	<div class="search-bar">
 		<form v-on="submit:do_search" autocomplete="off">
+            <span class="input-action pull-right search" v-on="click: do_search">
+                <i class="fa fa-search fa-fw"></i>
+            </span>
+            <span class="input-action pull-right clear" v-on="click: clear" v-if="search">
+                <i class="fa fa-close fa-fw" v-class="searching: search_pending"></i>
+            </span>
 			<span class="input-action align-left" v-on="click: do_here">
 				<i class="fa fa-dot-circle-o fa-fw" v-class="searching: here_pending"></i>
 			</span>
 			<input id="search_input" class="search-input" type="text" v-model="search" placeholder="Search"/>
-			<span class="input-action pull-right search" v-on="click: do_search">
-				<i class="fa fa-search fa-fw"></i>
-			</span>
-			<span class="input-action pull-right clear" v-on="click: clear" v-if="search">
-				<i class="fa fa-close fa-fw" v-class="searching: search_pending"></i>
-			</span>
 		</form>
 		<div class="footer-bar"></div>
 	</div>

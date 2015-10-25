@@ -3,6 +3,15 @@ import tmpl from './main-tmpl.html!text';
 import Vue from 'vue';
 import Trip from 'app/models/trip';
 
+
+function calc_content_height() {
+    var panel = document.getElementsByClassName(".TripsPanel")[0],
+        head  = panel.getElementsByClassName(".title-bar"),
+        foot  = panel.getElementsByClassName(".action-bar");
+    return (panel.offsetHeight - head.offsetHeight - foot.offsetHeight) + 'px';
+}
+
+
 Vue.filter('round', function(value) {
 	return value ? value.toFixed(4) : null;
 });
@@ -11,7 +20,8 @@ export default Vue.extend({
 	data: function(){
 		return {
 			items: {},
-			new_label: null
+			new_label: null,
+            content_height: "100%"
 		};
 	},
   	template: tmpl,
@@ -54,5 +64,11 @@ export default Vue.extend({
 			}.bind(this));
 			transition.next();
 		}
-	}
+	},
+    ready(){
+        this.$nextTick(() => {
+            this.content_height = calc_content_height();
+            window.addEventListener( "resize", () => this.content_height = calc_content_height() );
+        });
+    }
 });

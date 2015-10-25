@@ -4,11 +4,21 @@ import Vue from 'vue';
 import Location from 'app/models/location';
 import Trip from 'app/models/trip';
 
+
+function calc_content_height() {
+    var panel = document.getElementsByClassName(".LocationsPanel")[0],
+        head  = panel.getElementsByClassName(".title-bar"),
+        foot  = panel.getElementsByClassName(".action-bar");
+    return (panel.offsetHeight - head.offsetHeight - foot.offsetHeight) + 'px';
+}
+
+
 export default Vue.extend({
     data: function() {
         return {
             locations: {},
-			trip_title: null
+			trip_title: null,
+            content_height: "100%"
         }
     },
     template: tmpl,
@@ -81,5 +91,11 @@ export default Vue.extend({
                 });
             }
         }
+    },
+    ready(){
+        this.$nextTick(() => {
+            this.content_height = calc_content_height();
+            window.addEventListener( "resize", () => this.content_height = calc_content_height() );
+        });
     }
 });

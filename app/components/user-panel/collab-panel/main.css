@@ -74,7 +74,7 @@
 .CollabPanel
 .tooltip-arrow {
 	position: relative;
-	left: 12px;
+	left: 10px;
 	z-index: 1;
 	width: 0;
 	height: 0;
@@ -109,5 +109,28 @@
 	color: #000;
     -webkit-filter: invert(100%);
     filter: invert(100%);
+}
+
+.CollabPanel
+.collab-status {
+	position: absolute;
+	right: 10px;
+	z-index: 1;
+
+	width: 10px;
+	height: 10px;
+
+	border-radius: 5px;
+	background-color: #FF8C8C;
+}
+
+.CollabPanel
+.collab-status.online {
+	background-color: transparent; /*#97E47E;*/
+}
+
+.CollabPanel
+.collab-status.idle {
+	background-color: #FFEB8C;
 }
 

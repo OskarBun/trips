@@ -62,9 +62,7 @@
 }
 
 .LocationsPanel
-.add-bar,
-.LocationsPanel
-.close-bar {
+.action-bar {
 	position: absolute;
 	bottom: 0px;
 

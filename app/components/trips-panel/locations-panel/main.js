@@ -25,8 +25,11 @@ export default Vue.extend({
     },
     methods: {
         remove_location(key) {
+            var dead_adapter = this.locations[key].adapter;
             this.adapter.update({
                 [key]: null
+            }, ()=>{
+                dead_adapter.set(null);
             });
         },
 		close_trip() {

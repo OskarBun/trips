@@ -15,6 +15,7 @@ Vue.component('user-panel', {
 	},
 	methods: {
 		logout: function() {
+			this.root.child('users/'+this.root.getAuth().uid).update({online:false});
 			this.root.unauth();
 		},
 		login: function(provider) {

@@ -2,9 +2,9 @@
 	<template v-if="show">
 		<div class="collab-bar">
 			<div class="collab-list">
-				<div class="collab-profile" v-repeat="user in users" >
-					<div class="collab-status" v-class="online: user.online"></div>
-					<div class="profile-image" v-style="border-color: user.color">
+				<div class="collab-profile" v-repeat="user in users">
+					<!-- <div class="collab-status" v-if="user.online"></div> -->
+					<div class="profile-image" v-style="border-color: user.color" v-class="online: user.online">
 						<div class="collab-image collab-image-placeholder u-full-width" v-if="!user.profile_image">
 	                        <i class="fa fa-user fa-fw"></i>
 	                    </div>
@@ -22,7 +22,7 @@
 			    </div>
 			</div>
 		</div>
-	    <div class="profile-image add-profile" v-on="click: add_collaborator">
+	    <div class="add-profile" v-on="click: add_collaborator">
 	    	<i class="fa fa-plus fa-fw"></i>
 	    </div>
 	</template>

@@ -157,6 +157,19 @@ li:hover {
 }
 
 .LocationsPanel
+.list-containter
+.selected {
+	background-color: #96C6CF;
+	color: #fff;
+}
+
+.LocationsPanel
+.list-containter
+.selected:hover {
+	background-color: #96C6CF;
+}
+
+.LocationsPanel
 .list-item-text {
 	display: inline-block;
 	vertical-align: middle;
@@ -172,6 +185,12 @@ li:hover {
 	text-align: center;
     cursor: pointer;
 	visibility: hidden;
+}
+
+.LocationsPanel
+.selected
+.remove-button {
+	color: #fff;
 }
 
 .LocationsPanel

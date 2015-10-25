@@ -26,6 +26,13 @@
 	border-width: 1px;
 	border-style: solid;
     box-sizing: border-box;
+
+	opacity: 0.5;
+}
+
+.CollabPanel
+.profile-image.online {
+	opacity: 1;
 }
 
 .CollabPanel
@@ -58,23 +65,33 @@
 
 .CollabPanel
 .add-profile {
-	text-align: center;
+	position: relative;
+	width: 40px;
+	height: 40px;
+
+	display: inline-block;
+	vertical-align: top;
+
+    margin-left: -5px;
     padding: 3px;
     box-sizing: border-box;
-    font-size: 1.4em;
 
-    margin: 0;
-    margin-left: -5px;
+	text-align: center;
+    font-size: 1.4em;
 
 	color: #69AEBB;
 	background-color: rgba(255, 255, 255, 0.5);
-	border: 1px solid rgba(255, 255, 255, 0.1);
+
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgba(255, 255, 255, 0.1);
+	border-radius: 20px;
 }
 
 .CollabPanel
 .add-profile:hover {
 	color: #fff;
-	border: 1px solid #fff;
+	border-color: #fff;
 }
 
 .CollabPanel
@@ -104,6 +121,9 @@
     left: -20px;
 	z-index: 1;
 
+	min-width: 40px;
+	min-height: 24px;
+
 	padding: 2px 10px;
 
 	background-color: #585858;
@@ -127,16 +147,5 @@
 	height: 10px;
 
 	border-radius: 5px;
-	background-color: #FF8C8C;
-}
-
-.CollabPanel
-.collab-status.online {
-	background-color: transparent; /*#97E47E;*/
-}
-
-.CollabPanel
-.collab-status.idle {
 	background-color: #FFEB8C;
 }
-

@@ -28,8 +28,9 @@ export default Vue.extend({
 		add_trip(e) {
 			e.preventDefault();
 			if(this.new_label){
-				this.trip = Trip.create_trip(this.$root.base_url+'trips', this.new_label);
+				var key = Trip.create_trip(this.$root.base_url+'trips', this.new_label);
 				this.new_label = '';
+				this.$route.router.go({ name: 'trip', params: { uid: key } });
 			}
 		},
 		open_trip(key) {
@@ -37,7 +38,7 @@ export default Vue.extend({
 		},
 
 		remove_trip(key, e) {
-			Trip.remove_trip(this.$root.base_url+'trips'+key);
+			Trip.remove_trip(this.$root.base_url+'trips/'+key);
 			e.stopPropagation();
 		}
 	},

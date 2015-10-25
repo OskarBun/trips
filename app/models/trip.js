@@ -26,7 +26,7 @@ export default class Trip extends VueFire {
     }
 
     static create_trip (base_url, label){
-		var base = new Firebase(base);
+		var base = new Firebase(base_url);
         var users = {};
         users[base.getAuth().uid] = true
 		var ftrip = base.push({
@@ -34,7 +34,7 @@ export default class Trip extends VueFire {
 			locations: {},
             users: users
 		});
-		return new Trip(base_url + ftrip.key() + '/', true, ftrip.key());
+		return ftrip.key()
 	}
 
     static open_trip (base_url, key){

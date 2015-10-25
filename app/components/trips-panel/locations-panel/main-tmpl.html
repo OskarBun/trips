@@ -1,22 +1,34 @@
 <div class="LocationsPanel">
-    <div class="locations-placeholder" v-if="length < 1">
-        <div class="placeholder-text">Add a destination.</div>
-        <div class="placeholder-icon">
-            <icon-component fill="#DDDDDD"></icon-component>
+    <template v-if="trip">
+        <div class="title title-bar">
+            <form v-on="submit:update_trip_name">
+                <input id="trip_label_input" class="edit-title u-full-width" type="text"
+                       v-on="focus: this.title = trip.label" v-model="trip.label" />
+            </form>
         </div>
-    </div>
-    <ul class="list-containter">
-        <li v-repeat="locations">
-            <div class="location-item">
-                <div class="location-coords">
-                    <span v-text="lat | round"></span> :
-                    <span v-text="lng | round"></span>
-                    <span class="remove-button pull-right">
-                        <i class="fa fa-close fa-fw" v-on="click: remove_location($key)"></i>
-                    </span>
-                </div>
-                <span class="location-title" type="text" v-text="title"></span>
+        <div class="locations-placeholder" v-if="length < 1">
+            <div class="placeholder-text">Add a destination.</div>
+            <div class="placeholder-icon">
+                <icon-component fill="#DDDDDD"></icon-component>
             </div>
-        </li>
-    </ul>
+        </div>
+        <ul class="list-containter">
+            <li v-repeat="locations">
+                <div class="location-item">
+                    <div class="location-coords">
+                        <span v-text="lat | round"></span> :
+                        <span v-text="lng | round"></span>
+                        <span class="remove-button pull-right">
+                            <i class="fa fa-close fa-fw" v-on="click: remove_location($key)"></i>
+                        </span>
+                    </div>
+                    <span class="location-title" type="text" v-text="title"></span>
+                </div>
+            </li>
+        </ul>
+        <div class="close-bar">
+            <button class="close-button" v-on="click:close_trip">Close</button>
+            <div class="footer-bar"></div>
+        </div>
+    </template>
 </div>

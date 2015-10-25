@@ -7,8 +7,8 @@ var TRIPS_PATH = "trips/";
 var LOCATION_PATH = "locations/";
 var USERS_PATH = "users/"
 
-class Trip extends VueFire {
-    constructor(url, deep=false, key){
+export default class Trip extends VueFire {
+    constructor(url, deep=false, key, callback){
 		super({
 			data: {
 				label: null,
@@ -16,7 +16,7 @@ class Trip extends VueFire {
                 users: {}
 			},
 			methods:{}
-		}, url);
+		}, url, callback);
         this.uid = key;
         if(deep === undefined || deep){
             this.locations_path = url+LOCATION_PATH;
@@ -24,15 +24,9 @@ class Trip extends VueFire {
             this.users_adapter = new VueFireIterable(this.users, url+USERS_PATH);
         }
     }
-}
 
-class TripFactory {
-	constructor(url="https://scorching-fire-6566.firebaseio.com/"){
-		this._url = url + TRIPS_PATH;
-	}
-
-	create_trip (label){
-		var base = new Firebase(this._url);
+    static create_trip (base_url, label){
+		var base = new Firebase(base);
         var users = {};
         users[base.getAuth().uid] = true
 		var ftrip = base.push({
@@ -40,19 +34,19 @@ class TripFactory {
 			locations: {},
             users: users
 		});
-		return new Trip(this._url + ftrip.key() + '/', true, ftrip.key());
+		return new Trip(base_url + ftrip.key() + '/', true, ftrip.key());
 	}
 
-	open_trip (key){
-		return new Trip(this._url + key + '/', true, key);
+    static open_trip (base_url, key){
+		return new Trip(base_url + key + '/', true, key);
 	}
 
-	list_trips (container){
-		return new VueFireIterable(container, this._url);
+    static list_trips (url, container){
+		return new VueFireIterable(container, url);
 	}
 
-    remove_trip (key){
-        var dead = new Trip(this._url+key+'/');
+    static remove_trip (url){
+        var dead = new Trip(url);
         var locations = Object.keys(dead.locations);
         dead.adapter.set(null, (error) => {
             if(!error){
@@ -65,7 +59,5 @@ class TripFactory {
             }
         });
     }
+
 }
-
-
-export default TripFactory;

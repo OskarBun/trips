@@ -1,25 +1,23 @@
 import './main.css!';
 import tmpl from './main-tmpl.html!text';
 import Vue from 'vue';
-import User from 'app/models/user';
-import Locations_Panel from './locations-panel/main';
+import Trip from 'app/models/trip';
 
 Vue.filter('round', function(value) {
 	return value ? value.toFixed(4) : null;
 });
 
-Vue.component('trips-panel', {
+export default Vue.extend({
 	data: function(){
 		return {
 			items: {},
-			new_label: null,
-			trip_title: null
+			new_label: null
 		};
 	},
   	template: tmpl,
-  	props: ['trips', 'trip'],
+  	props: ['trip'],
 	computed: {
-		locations_adapter: function() {
+		locations_adapter() {
 			//Silly Async doesn't work quite well enough
 			if(this.trip){
 				return this.trip.locations_adapter;
@@ -27,48 +25,32 @@ Vue.component('trips-panel', {
 		}
 	},
 	methods: {
-		"add_trip": function(e){
+		add_trip(e) {
 			e.preventDefault();
 			if(this.new_label){
-				this.trip = this.trips.create_trip(this.new_label);
+				this.trip = Trip.create_trip(this.$root.base_url+'trips', this.new_label);
 				this.new_label = '';
 			}
 		},
-		"open_trip": function(key){
-			//I Need to watch to see this's data ever get's set to null
-			this.trip = this.trips.open_trip(key);
+		open_trip(key) {
+			this.$route.router.go({ name: 'trip', params: { uid: key } });
 		},
-		"update_trip_name": function(e) {
-			if(this.trip) {
-				this.trip.adapter.change(
-					{ label: this.trip.label },
-					(error) => { if(error) this.trip.label = trip_title; }
-				);
-			}
-			e.preventDefault();
-			e.srcElement[0].blur();
-		},
-		"close_trip": function(){
-			this.trip = null;
-		},
-		"remove_trip": function(key, e){
-			this.trips.remove_trip(key);
+
+		remove_trip(key, e) {
+			Trip.remove_trip(this.$root.base_url+'trips'+key);
 			e.stopPropagation();
 		}
 	},
-	ready: function() {
-		this.items_adapter = this.trips.list_trips(this.items);
+	ready() {
+		this.trip = null;
+		this.items_adapter = Trip.list_trips(this.$root.base_url+'trips', this.items);
 		this.items_adapter._base.on('child_removed', function(key){
 			if(this.trip && this.trip.uid == key.key()){
-				this.trip = null;
+				this.$route.router.go({name: 'trips'});
 			}
 		//Fat arrow wasn't working?!?!?
 		}.bind(this));
 	},
 	events: {},
-	watch:{
-		"items": function(val){
-			console.log(val);
-		}
-	}
+	watch:{}
 });

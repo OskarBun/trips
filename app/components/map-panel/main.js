@@ -145,7 +145,7 @@ Vue.component('map-panel', {
   			googleMap(this);
   		},
   		"hook:detached": function(){
-  			if(this._map_){
+  			if(this._map_container_){
   				this._map_container_.dispose();
   				this._map_container_ = null;
   			}
@@ -169,6 +169,11 @@ Vue.component('map-panel', {
 		"highlight-result": function(e){
 			if(this._map_container_){
 				this._map_container_.hilite_search(e);
+			}
+		},
+		"show-trip": function(e){
+			if(this._map_container_){
+				this._map_container_.hilite_search(set_locations);
 			}
 		}
   	},

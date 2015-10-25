@@ -25,12 +25,12 @@ Vue.component('users-panel', {
         this.base = this.adapter._base;
         this.base.once('value', (snap)=>{
             for(var key in snap.val()) {
-                this.users.$add(key, new User(`${this.$root.base_url}users/${key}`));
+                this.users.$add(key, new User(`${this.$root.base_url}users/${key}`, key));
             }
         });
         this.add = this.base.on('child_added', (snap) => {
             var key = snap.key()
-            this.users.$add(key, new User(`${this.$root.base_url}users/${key}`));
+            this.users.$add(key, new User(`${this.$root.base_url}users/${key}`, key));
         });
         this.remove = this.base.on('child_removed', (snap) => {
             this.users.$delete(snap.key());

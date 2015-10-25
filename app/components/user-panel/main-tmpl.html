@@ -2,10 +2,10 @@
     <div class="head">
         <!-- Site Title -->
         <span class="left-bar">
-            <div class="icon">
+            <div class="icon" v-link="{ name: 'trips' }">
                 <icon-component fill="#FFF"></icon-component>
             </div>
-            <h4 class="site-title">Trippy</h4>
+            <h4 class="site-title" v-link="{ name: 'trips' }">Trippy</h4>
         </span>
         <!-- Trip Users -->
         <span class="center-bar">
@@ -16,7 +16,11 @@
         <!-- Login User -->
         <span class="right-bar">
             <span class="user-profile pull-right">
-                <span class="profile-name title" v-text="user_tag"></span>
+                <span class="profile-name title"
+                    v-text="user.username"
+                    v-link="{ name: 'user', params: { uid: user.uid }}"
+                    v-if="user"></span>
+                <span class="profile-name title" v-if="!user">Login</span>
                 <span class="profile-image">
                     <div class="logout-container" v-if="user" v-on="click: logout">
                         <img class="login-image u-full-width" v-attr="src: user.profile_image" />

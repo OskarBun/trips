@@ -2,14 +2,13 @@ import Vue from "vue";
 import FirebaseAdapter from 'app/adapters/firebase_adapter';
 
 class Foo extends FirebaseAdapter {
-	constructor(container, path) {
+	constructor(container, path, callback, errback) {
 		super(path);
 		this.container = container;
-		this.init();
+		this.init(callback, errback);
 	}
 
 	setted(value) {
-		//this.container = value;
 		for(var key in value){
 			this.container.$set(key,value[key]);
 		}
@@ -29,9 +28,9 @@ class Foo extends FirebaseAdapter {
 }
 
 class VueFire extends Vue {
-    constructor(config, path){
+    constructor(config, path, callback, errback){
         super(config);
-        this.adapter = new Foo(this, path);
+        this.adapter = new Foo(this, path, callback, errback);
     }
 }
 

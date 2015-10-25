@@ -6,10 +6,13 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import 'firebase';
 import 'app/components/user-panel/main';
+import locations_panel from 'app/components/trips-panel/locations-panel/main';
+import trips_panel from 'app/components/trips-panel/main';
 import map_page from'app/pages/map/main';
+import profile_page from 'app/pages/profile/main';
 import User from 'app/models/user';
-import TripFactory from 'app/models/trip';
-
+import Trip from 'app/models/trip';
+import {parse_auth_data} from 'app/utils/auth-data';
 
 var fire_url = 'https://scorching-fire-6566.firebaseio.com/';
 Vue.config.debug = true;
@@ -19,60 +22,57 @@ function calc_content_height() {
     var user_panel = document.getElementsByClassName("UserPanel")[0];
     return window.innerHeight - user_panel.offsetHeight;
 }
-var parse_auth_data = {
-    'github': function(auth_data){
-        return {
-            username: auth_data.github.username,
-            profile_image: auth_data.github.profileImageURL,
-            color: auth_data.github.username == "OliverDashiell" ? "#F9D068" : "#ffff"
-        }
-    },
-    'google': function(auth_data){
-        return {
-            username: auth_data.google.displayName,
-            profile_image: auth_data.google.profileImageURL,
-            color: "#ffff"
-        }
-    },
-    'twitter': function(auth_data){
-        return {
-            username: auth_data.twitter.username,
-            profile_image: auth_data.twitter.profileImageURL,
-            color: "#ffff"
-        }
-    }
-}
 
-var router = window.router = new VueRouter()
+var router = window.router = new VueRouter({
+    hashbang: true
+});
+
 router.map({
     '': {
-        component: map_page
+        component: map_page,
+        subRoutes: {
+            '/': {
+                component: trips_panel,
+                name: 'trips'
+            },
+            '/:uid': {
+                component: locations_panel,
+                name: 'trip'
+            }
+        }
+    },
+    '/user/:uid': {
+        component: profile_page,
+        name: 'user'
     }
 });
 
-var appl = window.appl = router.start({
-    data: function() {
+router.beforeEach((transition)=>{
+    console.log(transition);
+    transition.next();
+});
+
+router.start({
+    data() {
         return {
             base_url: fire_url,
             base: new Firebase(fire_url),
             user: null,
-            trips: new TripFactory(fire_url),
             trip: null,
             loading: true,
             label: null,
-            content_height: 500,
-            page: "map"
+            content_height: 500
         }
     },
     computed: {
-        trip_url: function() {
+        trip_url() {
             if(this.trip) {
                 return this.trip.locations_path;
             }
         }
     },
     methods: {
-        "add_location": function(e){
+        add_location(e) {
             if(this.trip){
                 var snap = new Firebase(this.base_url+'locations').push({
                     title: e.title.split(',')[0],
@@ -86,15 +86,11 @@ var appl = window.appl = router.start({
         }
     },
     events: {},
-    components: {
-        map: map_page
-    },
-    ready: function() {
+    components: {},
+    ready() {
         this.base.onAuth((auth_data) => {
             if (auth_data) {
-                var user = new User(this.base_url+'users/'+auth_data.uid);
-
-                user._uid = auth_data.uid;
+                var user = new User(this.base_url+'users/'+auth_data.uid, auth_data.uid);
                 user.adapter._base.once('value', (snap) => {
                     var permitted = parse_auth_data[auth_data.provider](auth_data);
                     if(!snap.val()){
@@ -117,6 +113,7 @@ var appl = window.appl = router.start({
         });
 
         this.loading = false;
+        window.app = this;
     },
     events: {}
 }, 'body');

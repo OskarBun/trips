@@ -36,7 +36,11 @@
         <div class="main">
             <user-panel user="{{ user }}" root="{{ base }}" trip="{{ trip }}"></user-panel>
 
-            <router-view></router-view keep-alive>
+            <router-view keep-alive></router-view>
+
+            <div class="notFound" v-if="!$route.matched">
+                <h1>404 not found</h1>
+            </div>
         </div>
 
         <!-- Loading Spinner -->

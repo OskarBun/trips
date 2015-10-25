@@ -2,7 +2,7 @@ import 'firebase';
 import VueFire from 'app/adapters/vue_adapter';
 
 class User extends VueFire {
-    constructor(url){
+    constructor(url, uid){
         super({
             data: function(){
                 return {
@@ -13,6 +13,7 @@ class User extends VueFire {
                 }
             }
         }, url);
+        this.uid = uid;
     }
 }
 

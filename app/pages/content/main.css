@@ -52,6 +52,28 @@
 	height: 100%;
 
 	background-color: #FFDE8D;
+	color: #fff;
+
+	cursor: pointer;
+}
+
+.ContentPage
+.section-handle
+.handle-icon {
+	position: absolute;
+	top: 50%;
+
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+
+.ContentPage
+.section-handle
+.handle-icon.flip {
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    	-ms-transform: rotate(180deg); /* IE 9 */
+    		transform: rotate(180deg);
 }
 
 .ContentPage

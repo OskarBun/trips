@@ -3,9 +3,17 @@
         <router-view trip="{{@ trip }}"></router-view>
     </div>
     <div class="map-container transition-base" v-style="centre_position">
-        <div class="section-handle section-handle-left" v-on="click:toggle_left_view"></div>
+        <div class="section-handle section-handle-left" v-on="click:toggle_left_view">
+        	<span class="handle-icon transition-base" v-class="flip:!left_view">
+        		<i class="fa fa-chevron-right"></i>
+        	</span>
+        </div>
         <map-panel url="{{@ trip_url }}"></map-panel>
-        <div class="section-handle section-handle-right" v-on="click:toggle_right_view"></div>
+        <div class="section-handle section-handle-right" v-on="click:toggle_right_view">
+        	<span class="handle-icon transition-base" v-class="flip:!right_view">
+        		<i class="fa fa-chevron-left"></i>
+        	</span>
+        </div>
     </div>
     <div class="side-container right-container transition-base" v-style="right: right_position">
         <search-panel></search-panel>

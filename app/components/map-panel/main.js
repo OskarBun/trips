@@ -135,6 +135,21 @@ function googleMap(vm, callback){
 						this.search_results.hilite(index);
 					}
 				}
+
+				resize(){
+	                var center = this.map.getCenter();
+					var resize_and_centre = (center) => {
+	                    googleApi.maps.event.trigger(this.map,'resize');
+	                    if(center) {
+	                    	this.map.panTo(center);
+	                    }
+	                };
+
+	                // easing
+					setTimeout(resize_and_centre,300);
+					setTimeout(resize_and_centre,600);
+	                setTimeout(resize_and_centre.bind(this,center),1000);
+				}
 			}
 	   		vm._map_container_ = new MapContainer(vm.$el);
 			callback();
@@ -186,6 +201,11 @@ Vue.component('map-panel', {
 			if(this._map_container_){
 				this._map_container_.hilite_search(e);
 			}
+		},
+		"map-container-resize": function(e){
+			if(this._map_container_){
+                this._map_container_.resize();
+            }
 		}
   	},
   	watch:{

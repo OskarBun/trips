@@ -130,24 +130,6 @@ input[type="password"]:focus, textarea:focus, select:focus {
   white-space:nowrap;
 }
 
-.main .content
-.trip-container,
-.main .content
-.search-container {
-  display: inline-block;
-  vertical-align: top;
-  width: 20%;
-  height: 100%;
-}
-
-.main .content
-.map-container {
-  display: inline-block;
-  vertical-align: top;
-  width: 60%;
-  height: 100%;
-}
-
 
 /* ---- Media Queries ---- */
 

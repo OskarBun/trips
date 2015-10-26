@@ -1,0 +1,13 @@
+<div class="ContentPage">
+    <div class="side-container left-container transition-base" v-style="left: left_position">
+        <router-view trip="{{@ trip }}"></router-view>
+    </div>
+    <div class="map-container transition-base" v-style="centre_position">
+        <div class="section-handle section-handle-left" v-on="click:toggle_left_view"></div>
+        <map-panel url="{{@ trip_url }}"></map-panel>
+        <div class="section-handle section-handle-right" v-on="click:toggle_right_view"></div>
+    </div>
+    <div class="side-container right-container transition-base" v-style="right: right_position">
+        <search-panel></search-panel>
+    </div>
+</div>

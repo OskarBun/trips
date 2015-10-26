@@ -9,7 +9,7 @@ import Idle from 'idle';
 import 'app/components/user-panel/main';
 import locations_panel from 'app/components/locations-panel/main';
 import trips_panel from 'app/components/trips-panel/main';
-import map_page from'app/pages/map/main';
+import map_page from'app/pages/content/main';
 import profile_page from 'app/pages/profile/main';
 import User from 'app/models/user';
 import Trip from 'app/models/trip';

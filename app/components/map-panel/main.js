@@ -7,6 +7,8 @@ import map_loader from "map";
 import location_marker_loader from "./location-markers";
 import search_markers_loader from "./search-markers";
 
+// Google maps style editor
+// https://snazzymaps.com/editorhttps://snazzymaps.com/editor
 
 function googleMap(vm, callback){
 	map_loader({

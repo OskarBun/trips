@@ -1,5 +1,3 @@
-import 'firebase';
-import Vue from 'vue';
 import VueFire from 'app/adapters/vue_adapter';
 
 export default class Location extends VueFire {

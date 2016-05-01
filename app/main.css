@@ -18,8 +18,8 @@
 
 /* ---- Font Imports ---- */
 /* Comment out if importing fonts from JS or from HTML */
-@import url(//fonts.googleapis.com/css?family=Work+Sans:400,200,700);
-@import url(//fonts.googleapis.com/css?family=Quicksand:400,700,300);
+/*@import url(//fonts.googleapis.com/css?family=Work+Sans:400,200,700);
+@import url(//fonts.googleapis.com/css?family=Quicksand:400,700,300);*/
 
 
 /* ---- General CSS ---- */
@@ -93,16 +93,16 @@ input[type="password"]:focus, textarea:focus, select:focus {
             transition: 1s;
 }
 
-/* ---- Scrollbar ---- */ 
+/* ---- Scrollbar ---- */
 
-::-webkit-scrollbar{ 
-  width: 5px; 
+::-webkit-scrollbar{
+  width: 5px;
   height: 5px;
 }
 
-::-webkit-scrollbar-thumb { 
-  background-color: #69AEBB; 
-  border-radius: 0; 
+::-webkit-scrollbar-thumb {
+  background-color: #69AEBB;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-track{

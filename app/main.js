@@ -106,6 +106,5 @@ router.start({
 
         this.loading = false;
         window.app = this;
-    },
-    events: {}
+    }
 }, 'body');

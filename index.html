@@ -21,10 +21,10 @@
         <!-- font imports -->
         <!-- Uncomment if build breaks font imports in CSS.
              This can happen due to the fact that some imports must be delared before any other CSS -->
-        <!-- <style type="text/css">
-            @import url(https://fonts.googleapis.com/css?family=Work+Sans:400,200,700);
-            @import url(https://fonts.googleapis.com/css?family=Quicksand:400,700,300);
-        </style> -->
+        <style type="text/css">
+            @import url(//fonts.googleapis.com/css?family=Work+Sans:400,200,700);
+            @import url(//fonts.googleapis.com/css?family=Quicksand:400,700,300);
+        </style>
 
         <!-- Loading State CSS -->
         <link rel="stylesheet" type="text/css" href="loading.css" />
@@ -58,6 +58,7 @@
         <script src="jspm_packages/system.js"></script>
         <script src="config.js"></script>
         <script type="text/javascript">
+            System.trace = true;
             System.import("app/main");
         </script>
     </body>

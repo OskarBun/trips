@@ -12,6 +12,7 @@ function calc_content_height() {
     return (panel.offsetHeight - head.offsetHeight - foot.offsetHeight) + 'px';
 }
 
+export let __hotReload = true;
 
 export default Vue.extend({
     data: function() {
@@ -58,26 +59,30 @@ export default Vue.extend({
 			e.srcElement[0].blur();
 		},
         show_location(key) {
-            this.location = key;
-            this.$root.$broadcast('show_location', key);
+            this.$route.router.go(`/${this.trip.uid}/${key}`);
         }
     },
     route: {
 		data(transition) {
-            var parsed = transition.to.params.path.split('/');
-            var key = parsed[0];
-            this.trip = new Trip(`${this.$root.base_url}trips/${key}/`, true, key, (snap)=>{
-                if(!snap.val()) this.close_trip();
-            });
-            this.$root.$broadcast("show_trip", this.trip);
+            var key, loc_key;
+            [key, loc_key] = transition.to.params.path.split('/');
+            if( !this.trip || (this.trip && this.trip.uid != key) ){
+                this.trip = new Trip(`${this.$root.base_url}trips/${key}/`, true, key, (snap)=>{
+                    if(!snap.val()) this.close_trip();
+                });
+                this.$root.$broadcast("show_trip", this.trip);
+            }
+            if(loc_key){
+                this.active_location = loc_key;
+                this.$root.$broadcast('show_location', loc_key);
+            }
             transition.next();
         },
         deactivate(transition) {
             this.trip = null;
             this.$root.$broadcast('hide_trip', this.trip);
             transition.next();
-        },
-        canReuse: false
+        }
 	},
     watch: {
         trip: function(value){

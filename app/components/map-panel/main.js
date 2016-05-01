@@ -147,6 +147,11 @@ function googleMap(vm, callback){
 	                    }
 	                };
 
+					var proj = this.map.getProjection()
+					var point = proj.fromLatLngToPoint(center);
+					point.x = point.x - 20;
+					var new_center = proj.fromPointToLatLng(point);
+
 	                // easing
 					setTimeout(resize_and_centre,300);
 					setTimeout(resize_and_centre,600);
